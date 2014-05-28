@@ -25,6 +25,33 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonCode", "CommonCode\CommonCode.csproj", "{DE40878E-CD0E-4A31-9B92-9E61BDE5066C}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs31
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = InstallationSmokeTest\\InstallationSmokeTest.csproj
+		SccProjectTopLevelParentUniqueName1 = SmokeTestTool.sln
+		SccProjectName1 = InstallationSmokeTest
+		SccLocalPath1 = InstallationSmokeTest
+		SccProjectUniqueName2 = ConfigurationTests\\ConfigurationTests.csproj
+		SccProjectName2 = ConfigurationTests
+		SccLocalPath2 = ConfigurationTests
+		SccProjectUniqueName3 = ConfigurationTests.Tests.Unit\\ConfigurationTests.Tests.Unit.csproj
+		SccProjectName3 = ConfigurationTests.Tests.Unit
+		SccLocalPath3 = ConfigurationTests.Tests.Unit
+		SccProjectUniqueName4 = TestConfiguration\\TestConfiguration.csproj
+		SccProjectTopLevelParentUniqueName4 = SmokeTestTool.sln
+		SccProjectName4 = TestConfiguration
+		SccLocalPath4 = TestConfiguration
+		SccProjectUniqueName5 = TestConfiguration.Tests.Unit\\TestConfiguration.Tests.Unit.csproj
+		SccProjectTopLevelParentUniqueName5 = SmokeTestTool.sln
+		SccProjectName5 = TestConfiguration.Tests.Unit
+		SccLocalPath5 = TestConfiguration.Tests.Unit
+		SccProjectUniqueName6 = CommonCode\\CommonCode.csproj
+		SccProjectName6 = CommonCode
+		SccLocalPath6 = CommonCode
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -103,8 +130,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{54C1E79C-11AB-41E8-8D13-53E7E9388CCB} = {AA20205E-963A-496F-94F6-9DED04C0F444}
 		{B10839C0-867E-47D9-9124-AA91C3E22051} = {AA20205E-963A-496F-94F6-9DED04C0F444}
+		{54C1E79C-11AB-41E8-8D13-53E7E9388CCB} = {AA20205E-963A-496F-94F6-9DED04C0F444}
 		{C6A78F81-6EDF-4EBF-9B21-196574F3F095} = {AA20205E-963A-496F-94F6-9DED04C0F444}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
