@@ -109,7 +109,7 @@ namespace TestConfiguration.Forms
         {
             string[] fileNames = e.Data.GetData(DataFormats.FileDrop) as string[];
 
-            foreach (var testSuite in fileNames.Select(s => GetConfigurationSuiteFromFile(s)))
+            foreach (var testSuite in fileNames.Select(GetConfigurationSuiteFromFile))
             {
                 LaunchNewTestEditor(((ConfigurationTestSuite)testSuite));
             }
@@ -146,6 +146,14 @@ namespace TestConfiguration.Forms
             {
                 Application.Exit();
             }
-        }        
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var about = new AboutDialog())
+            {
+                about.ShowDialog();
+            }
+        }
     }
 }
