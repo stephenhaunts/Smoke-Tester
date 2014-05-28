@@ -27,7 +27,9 @@ using ConfigurationTests;
 namespace TestConfiguration.Forms
 {
     public partial class Mdi : Form
-    {        
+    {
+        private bool _closingFlag;
+
         public Mdi()
         {
             InitializeComponent();
@@ -118,6 +120,31 @@ namespace TestConfiguration.Forms
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Link;
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Are you sure you want to exit?", @"Are you sure?", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                _closingFlag = true;
+                Application.Exit();
+            }
+                
+        }
+
+        private void Mdi_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (_closingFlag)
+            {
+                return;
+            }
+
+            if (MessageBox.Show(@"Are you sure you want to exit?", @"Are you sure?", MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
             }
         }        
     }

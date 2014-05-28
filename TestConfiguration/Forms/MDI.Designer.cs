@@ -193,6 +193,7 @@ namespace TestConfiguration.Forms
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(340, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // mnuHelp
             // 
@@ -218,6 +219,7 @@ namespace TestConfiguration.Forms
             this.ShowIcon = false;
             this.Text = "Test Configuration Tool";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mdi_FormClosed);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MDI_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MDI_DragEnter);
             this.tspMainTools.ResumeLayout(false);
