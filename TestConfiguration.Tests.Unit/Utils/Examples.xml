@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ConfigurationTestSuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tests>
+    <Test xsi:type="FolderExistsTest">
+      <TestName>Check System32 folder</TestName>
+      <Path>c:\Windows\System32</Path>
+      <ShouldExist>false</ShouldExist>
+    </Test>
+    <Test xsi:type="FileExistsTest">
+      <TestName>Example executable</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>Example.exe</Filename>
+    </Test>
+    <Test xsi:type="FileExistsTest">
+      <TestName>Example config</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>Example.exe.config</Filename>
+    </Test>
+    <Test xsi:type="XMLElementTest">
+      <TestName>Example config expected value</TestName>
+      <Filename>InstallationSmokeTest.exe.config</Filename>
+      <ExpectedValues>
+        <Attribute>
+          <Name>key</Name>
+          <Value>Setting</Value>
+        </Attribute>
+        <Attribute>
+          <Name>value</Name>
+          <Value>SettingValue</Value>
+        </Attribute>
+      </ExpectedValues>
+      <MaximumOccurrences>2147483647</MaximumOccurrences>
+      <MinimumOccurrences>1</MinimumOccurrences>
+      <XmlPath>/appSettings/add</XmlPath>
+    </Test>
+    <Test xsi:type="XMLElementTest">
+      <TestName>Example web.config expected value</TestName>
+      <Filename>web.config</Filename>
+      <ExpectedValues>
+        <Attribute>
+          <Name>key</Name>
+          <Value>Setting</Value>
+        </Attribute>
+        <Attribute>
+          <Name>value</Name>
+          <Value>SettingValue</Value>
+        </Attribute>
+      </ExpectedValues>
+      <MaximumOccurrences>2147483647</MaximumOccurrences>
+      <MinimumOccurrences>3</MinimumOccurrences>
+      <XmlPath>/appSettings/add</XmlPath>
+    </Test>
+    <Test xsi:type="AppSettingTest">
+      <TestName>Example AppSetting Test</TestName>
+      <Filename>MyProgram.exe.config</Filename>
+      <Key>UserId</Key>
+      <ExpectedValue>1234</ExpectedValue>
+      <CaseSensitive>false</CaseSensitive>
+    </Test>
+    <Test xsi:type="ConnectionStringTest">
+      <TestName>Example config connectionstring</TestName>
+      <Path>D:\Folder\Path\bin</Path>
+      <Filename>Example.exe.config</Filename>
+      <ConnectionStringName>PrimaryConnectionString</ConnectionStringName>
+      <StringSettings>
+        <ConnectionStringSetting>
+          <SettingName>Initial Catalog</SettingName>
+          <ExpectedValue>AmberLive</ExpectedValue>
+        </ConnectionStringSetting>
+      </StringSettings>
+      <CheckConnectivity>true</CheckConnectivity>
+    </Test>
+    <Test xsi:type="ConnectionStringTest">
+      <TestName>Example web.config connectionstring</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>web.config</Filename>
+      <StringSettings>
+        <ConnectionStringSetting>
+          <SettingName>Data Source</SettingName>
+          <ExpectedValue>UKDEVSQLWR02\SQL2008</ExpectedValue>
+        </ConnectionStringSetting>
+      </StringSettings>
+      <CheckConnectivity>false</CheckConnectivity>
+    </Test>
+    <Test xsi:type="EncryptedConnectionStringTest">
+      <TestName>Example config connectionstring</TestName>
+      <Path>D:\Folder\Path\bin</Path>
+      <Filename>Example.exe.config</Filename>
+      <ConnectionStringName>PrimaryConnectionString</ConnectionStringName>
+      <StringSettings>
+        <ConnectionStringSetting>
+          <SettingName>MultipleActiveResultSets</SettingName>
+          <ExpectedValue>True</ExpectedValue>
+        </ConnectionStringSetting>
+      </StringSettings>
+      <CheckConnectivity>true</CheckConnectivity>
+    </Test>
+    <Test xsi:type="ClientEndpointTest">
+      <TestName>Example Client Endpoint</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>Example.exe.config</Filename>
+      <EndpointName>IService_Client</EndpointName>
+      <ExpectedAddress>http://APPSVR01/AppService/AppService.svc</ExpectedAddress>
+      <ExpectedBehaviourConfiguration>ServiceBehaviourConfig</ExpectedBehaviourConfiguration>
+      <ExpectedBinding>IService_Binding</ExpectedBinding>
+      <ExpectedBindingConfiguration>ServiceBindingConfig</ExpectedBindingConfiguration>
+      <ExpectedContract>IService</ExpectedContract>
+      <CheckConnectivity>true</CheckConnectivity>
+      <ConnectionTimeout>30</ConnectionTimeout>
+    </Test>
+    <Test xsi:type="ClientEndpointTest">
+      <TestName>Example Client Endpoint 2</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>Example.exe.config</Filename>
+      <EndpointName>IService2_Client</EndpointName>
+      <ExpectedAddress>http://APPSVR01/AppService/OtherService.svc</ExpectedAddress>
+      <ExpectedContract>IService2</ExpectedContract>
+      <CheckConnectivity xsi:nil="true" />
+      <ConnectionTimeout xsi:nil="true" />
+    </Test>
+    <Test xsi:type="ServiceEndpointTest">
+      <TestName>Example Service Endpoint</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>Example.exe.config</Filename>
+      <EndpointName>IService</EndpointName>
+      <ExpectedAddress>net.msmq://APPSVR/private/queueName.svc</ExpectedAddress>
+      <ExpectedBinding>netMsmqBinding</ExpectedBinding>
+      <ExpectedBindingConfiguration>netMsmq</ExpectedBindingConfiguration>
+      <CheckConnectivity>true</CheckConnectivity>
+      <ConnectionTimeout>30</ConnectionTimeout>
+    </Test>
+    <Test xsi:type="ServiceEndpointTest">
+      <TestName>Example HTTP Endpoint 2</TestName>
+      <Path>D:\Folder\Path</Path>
+      <Filename>Example.exe.config</Filename>
+      <EndpointName>IService2_Client</EndpointName>
+      <ExpectedAddress>http://APPSVR01/AppService/OtherService.svc</ExpectedAddress>
+      <ExpectedContract>IService2</ExpectedContract>
+      <CheckConnectivity>false</CheckConnectivity>
+      <ConnectionTimeout xsi:nil="true" />
+    </Test>
+    <Test xsi:type="MinimumDiskSpaceTest">
+      <TestName>Check space on C:</TestName>
+      <Drive>C</Drive>
+      <RequiredMegabytes>123456</RequiredMegabytes>
+    </Test>
+    <Test xsi:type="MinimumDiskSpaceTest">
+      <TestName>Check space on D:</TestName>
+      <Drive>D</Drive>
+      <RequiredMegabytes>12</RequiredMegabytes>
+    </Test>
+    <Test xsi:type="EnvironmentVariableContainsTest">
+      <TestName>Path Example</TestName>
+      <Variable>PATH</Variable>
+      <ExpectedValue>C:\Windows</ExpectedValue>
+      <CaseSensitive>false</CaseSensitive>
+    </Test>
+    <Test xsi:type="ServiceExistsTest">
+      <ServiceName>Bob</ServiceName>
+    </Test>
+    <Test xsi:type="RegistryKeyTest">
+      <BaseKey>HKEY_CURRENT_CONFIG</BaseKey>
+      <Path>Software/Fonts</Path>
+      <ExpectedEntries>
+        <RegistryEntry>
+          <ValueName>LogPixels</ValueName>
+          <ExpectedValue xsi:type="xsd:int">60</ExpectedValue>
+        </RegistryEntry>
+      </ExpectedEntries>
+    </Test>
+    <Test xsi:type="RegistryKeyTest">
+      <BaseKey>HKEY_LOCAL_MACHINE</BaseKey>
+      <Path>Software/Microsoft/Windows/CurrentVersion/BITS</Path>
+      <ExpectedEntries>
+        <RegistryEntry>
+          <ValueName>IGDSercherDLL</ValueName>
+          <ExpectedValue xsi:type="xsd:string">bitsigd.dll</ExpectedValue>
+        </RegistryEntry>
+        <RegistryEntry>
+          <ValueName>JobInactivityTimeout</ValueName>
+          <ExpectedValue xsi:type="xsd:int">7776000</ExpectedValue>
+        </RegistryEntry>
+      </ExpectedEntries>
+    </Test>
+    <Test xsi:type="EnvironmentVariableEqualsTest">
+      <TestName>Machine Name Example</TestName>
+      <Variable>COMPUTERNAME</Variable>
+      <ExpectedValue>APPSVR01</ExpectedValue>
+    </Test>
+  </Tests>
+</ConfigurationTestSuite>
