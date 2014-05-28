@@ -50,19 +50,20 @@ namespace TestConfiguration.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mdi));
             this.imgLstMenuIcons = new System.Windows.Forms.ImageList(this.components);
             this.tspMainTools = new System.Windows.Forms.ToolStrip();
-            this.tsbNewConfiguration = new System.Windows.Forms.ToolStripButton();
-            this.tsbNewConfigurationWithTemplate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbOpenConfigurationFile = new System.Windows.Forms.ToolStripButton();
             this.mnuMainMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNewConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNewConfigurationWithTemplate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuOpenConfigurationFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbNewConfiguration = new System.Windows.Forms.ToolStripButton();
+            this.tsbNewConfigurationWithTemplate = new System.Windows.Forms.ToolStripButton();
+            this.tsbOpenConfigurationFile = new System.Windows.Forms.ToolStripButton();
+            this.mnuNewConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNewConfigurationWithTemplate = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpenConfigurationFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tspMainTools.SuspendLayout();
             this.mnuMainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -90,40 +91,10 @@ namespace TestConfiguration.Forms
             this.tspMainTools.TabIndex = 3;
             this.tspMainTools.Text = "toolStrip1";
             // 
-            // tsbNewConfiguration
-            // 
-            this.tsbNewConfiguration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbNewConfiguration.Image = global::TestConfiguration.Properties.Resources._10;
-            this.tsbNewConfiguration.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbNewConfiguration.Name = "tsbNewConfiguration";
-            this.tsbNewConfiguration.Size = new System.Drawing.Size(52, 52);
-            this.tsbNewConfiguration.Text = "New Configuration...";
-            this.tsbNewConfiguration.Click += new System.EventHandler(this.mnuNewConfiguration_Click);
-            // 
-            // tsbNewConfigurationWithTemplate
-            // 
-            this.tsbNewConfigurationWithTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbNewConfigurationWithTemplate.Image = global::TestConfiguration.Properties.Resources._09;
-            this.tsbNewConfigurationWithTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbNewConfigurationWithTemplate.Name = "tsbNewConfigurationWithTemplate";
-            this.tsbNewConfigurationWithTemplate.Size = new System.Drawing.Size(52, 52);
-            this.tsbNewConfigurationWithTemplate.Text = "New Configuration With Template...";
-            this.tsbNewConfigurationWithTemplate.Click += new System.EventHandler(this.mnuNewConfigurationWithTemplate_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
-            // 
-            // tsbOpenConfigurationFile
-            // 
-            this.tsbOpenConfigurationFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbOpenConfigurationFile.Image = global::TestConfiguration.Properties.Resources._11;
-            this.tsbOpenConfigurationFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbOpenConfigurationFile.Name = "tsbOpenConfigurationFile";
-            this.tsbOpenConfigurationFile.Size = new System.Drawing.Size(52, 52);
-            this.tsbOpenConfigurationFile.Text = "Open Configuration File...";
-            this.tsbOpenConfigurationFile.Click += new System.EventHandler(this.mnuOpenConfigurationFile_Click);
             // 
             // mnuMainMenu
             // 
@@ -149,6 +120,69 @@ namespace TestConfiguration.Forms
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
             this.mnuFile.Text = "File";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(337, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(337, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(340, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // mnuHelp
+            // 
+            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.mnuHelp.Name = "mnuHelp";
+            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
+            this.mnuHelp.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // tsbNewConfiguration
+            // 
+            this.tsbNewConfiguration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbNewConfiguration.Image = global::TestConfiguration.Properties.Resources._10;
+            this.tsbNewConfiguration.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbNewConfiguration.Name = "tsbNewConfiguration";
+            this.tsbNewConfiguration.Size = new System.Drawing.Size(52, 52);
+            this.tsbNewConfiguration.Text = "New Configuration...";
+            this.tsbNewConfiguration.Click += new System.EventHandler(this.mnuNewConfiguration_Click);
+            // 
+            // tsbNewConfigurationWithTemplate
+            // 
+            this.tsbNewConfigurationWithTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbNewConfigurationWithTemplate.Image = global::TestConfiguration.Properties.Resources._09;
+            this.tsbNewConfigurationWithTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbNewConfigurationWithTemplate.Name = "tsbNewConfigurationWithTemplate";
+            this.tsbNewConfigurationWithTemplate.Size = new System.Drawing.Size(52, 52);
+            this.tsbNewConfigurationWithTemplate.Text = "New Configuration With Template...";
+            this.tsbNewConfigurationWithTemplate.Click += new System.EventHandler(this.mnuNewConfigurationWithTemplate_Click);
+            // 
+            // tsbOpenConfigurationFile
+            // 
+            this.tsbOpenConfigurationFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbOpenConfigurationFile.Image = global::TestConfiguration.Properties.Resources._11;
+            this.tsbOpenConfigurationFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbOpenConfigurationFile.Name = "tsbOpenConfigurationFile";
+            this.tsbOpenConfigurationFile.Size = new System.Drawing.Size(52, 52);
+            this.tsbOpenConfigurationFile.Text = "Open Configuration File...";
+            this.tsbOpenConfigurationFile.Click += new System.EventHandler(this.mnuOpenConfigurationFile_Click);
+            // 
             // mnuNewConfiguration
             // 
             this.mnuNewConfiguration.Image = global::TestConfiguration.Properties.Resources._10;
@@ -168,11 +202,6 @@ namespace TestConfiguration.Forms
             this.mnuNewConfigurationWithTemplate.Text = "New Configuration With Template...";
             this.mnuNewConfigurationWithTemplate.Click += new System.EventHandler(this.mnuNewConfigurationWithTemplate_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(337, 6);
-            // 
             // mnuOpenConfigurationFile
             // 
             this.mnuOpenConfigurationFile.Image = global::TestConfiguration.Properties.Resources._11;
@@ -181,26 +210,6 @@ namespace TestConfiguration.Forms
             this.mnuOpenConfigurationFile.Size = new System.Drawing.Size(340, 22);
             this.mnuOpenConfigurationFile.Text = "Open Configuration File...";
             this.mnuOpenConfigurationFile.Click += new System.EventHandler(this.mnuOpenConfigurationFile_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(337, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(340, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // mnuHelp
-            // 
-            this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
-            this.mnuHelp.Text = "Help";
-            this.mnuHelp.Visible = false;
             // 
             // Mdi
             // 
@@ -213,10 +222,10 @@ namespace TestConfiguration.Forms
             this.Controls.Add(this.tspMainTools);
             this.Controls.Add(this.mnuMainMenu);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuMainMenu;
             this.Name = "Mdi";
-            this.ShowIcon = false;
             this.Text = "Test Configuration Tool";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mdi_FormClosed);
@@ -248,5 +257,6 @@ namespace TestConfiguration.Forms
         private System.Windows.Forms.ToolStripButton tsbOpenConfigurationFile;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
