@@ -16,31 +16,32 @@
 * 
 * Curator: Stephen Haunts
 */
-using ConfigurationTests;
-using ConfigurationTests.Tests;
-using Common.Xml;
+
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Common.Xml;
+using ConfigurationTests;
+using ConfigurationTests.Tests;
 
 namespace InstallationSmokeTest
 {
     internal class Program
     {
-        private const string RUN_OPERATION = "Run";
-        private const string CREATE_OPERATION = "Create";
-        private const string ABORT_OPERATION = "Abort";
-        private const string UNEXPECTED_RESPONSE_MESSAGE = "Unexpected response.";
-        private const string TEST_PASSED_MESSAGE = "OK!";
-        private const string OVERWRITE_PROMPT = "Overwrite {0}? [y/N] ";
-        private const ConsoleKey OVERWRITE_AFFIRMATIVE_KEY = ConsoleKey.Y;
-        private const string SMOKE_TEST_FILE_EXTENSION = ".xml";
-        private const string STANDARD_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
-        private const string STANDARD_NUMBER_FORMAT = "#,##0";
+        private const string RunOperation = "Run";
+        private const string CreateOperation = "Create";
+        private const string AbortOperation = "Abort";
+        private const string UnexpectedResponseMessage = "Unexpected response.";
+        private const string TestPassedMessage = "OK!";
+        private const string OverwritePrompt = "Overwrite {0}? [y/N] ";
+        private const ConsoleKey OverwriteAffirmativeKey = ConsoleKey.Y;
+        private const string SmokeTestFileExtension = ".xml";
+        private const string StandardDatetimeFormat = "dd/MM/yyyy HH:mm:ss";
+        private const string StandardNumberFormat = "#,##0";
 
-        private static string _OutputFile;
+        private static string _outputFile;
 
         internal static bool SmokeTestsPassed { get; private set; }
 
@@ -51,7 +52,7 @@ namespace InstallationSmokeTest
 
             try
             {
-                string operation = RUN_OPERATION;
+                string operation = RunOperation;
 
                 if (args.Length > 0)
                 {
@@ -59,9 +60,9 @@ namespace InstallationSmokeTest
                     operation = args[0];
                 }
 
-                string file = args.Length > 1 ? args[1] : SelectFile(operation == RUN_OPERATION);
+                string file = args.Length > 1 ? args[1] : SelectFile(operation == RunOperation);
 
-                _OutputFile = args.Length > 2 ? args[2] : null;
+                _outputFile = args.Length > 2 ? args[2] : null;
 
                 WriteLine();
                 WriteLine("Post-Deployment Smoke Test Tool");
@@ -71,17 +72,17 @@ namespace InstallationSmokeTest
                     return;
                 }
 
-                if (Path.GetExtension(file).ToLower() != SMOKE_TEST_FILE_EXTENSION)
+                if (Path.GetExtension(file).ToLower() != SmokeTestFileExtension)
                 {
-                    file += SMOKE_TEST_FILE_EXTENSION;
+                    file += SmokeTestFileExtension;
                 }
 
                 switch (operation)
                 {
-                    case CREATE_OPERATION:
+                    case CreateOperation:
                         CreateConfiguration(file);
                         break;
-                    case RUN_OPERATION:
+                    case RunOperation:
                         CheckConfiguration(file);
                         break;
                     default:
@@ -97,8 +98,8 @@ namespace InstallationSmokeTest
                 {
                     WriteLine("Message:" + ex.Message);
                     WriteLine("StackTrace: " + ex.StackTrace);
-                    
-                    if (runWithUi && _OutputFile != null)
+
+                    if (runWithUi && _outputFile != null)
                     {
                         Console.Write("Press any key to end . . .");
                         Console.ReadKey(true);
@@ -115,10 +116,10 @@ namespace InstallationSmokeTest
 
             Console.WriteLine("Usage:");
             Console.WriteLine();
-            Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, RUN_OPERATION);
+            Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, RunOperation);
             Console.WriteLine("\tRun the tests contained in the given filename.");
             Console.WriteLine();
-            Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, CREATE_OPERATION);
+            Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, CreateOperation);
             Console.WriteLine("\tCreate a new XML file with examples of the usage.");
             Console.WriteLine();
             Console.WriteLine("\tThe default mode is Run.");
@@ -128,18 +129,18 @@ namespace InstallationSmokeTest
 
         private static void CreateConfiguration(string file)
         {
-            var temp = Console.ForegroundColor;
+            ConsoleColor temp = Console.ForegroundColor;
 
             try
             {
                 if (File.Exists(file))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    WriteLine(OVERWRITE_PROMPT, file);
+                    WriteLine(OverwritePrompt, file);
                     Console.ForegroundColor = ConsoleColor.White;
-                    var overwrite = Console.ReadKey(true);
+                    ConsoleKeyInfo overwrite = Console.ReadKey(true);
 
-                    if (overwrite.Key != OVERWRITE_AFFIRMATIVE_KEY)
+                    if (overwrite.Key != OverwriteAffirmativeKey)
                     {
                         WriteLine("Not overwriting.");
                         return;
@@ -190,32 +191,22 @@ namespace InstallationSmokeTest
                 return;
             }
 
-            WriteLine("Running Tests: " + DateTime.Now.ToString(STANDARD_DATETIME_FORMAT));
+            WriteLine("Running Tests: " + DateTime.Now.ToString(StandardDatetimeFormat));
             WriteLine();
 
-            int successfulTests = 0;
-
-            foreach (Test test in info.Tests)
-            {
-                bool result = RunTest(test);
-
-                if (result)
-                {
-                    successfulTests++;
-                }
-            }
+            int successfulTests = info.Tests.Select(RunTest).Count(result => result);
 
             WriteLine();
-            WriteLine("Completed Tests: " + DateTime.Now.ToString(STANDARD_DATETIME_FORMAT));
+            WriteLine("Completed Tests: " + DateTime.Now.ToString(StandardDatetimeFormat));
             int totalTests = info.Tests.Count();
 
-            string totalTestsString = totalTests.ToString(STANDARD_NUMBER_FORMAT);
+            string totalTestsString = totalTests.ToString(StandardNumberFormat);
             int totalWidth = totalTestsString.Length;
             int failedTests = totalTests - successfulTests;
 
             WriteLine("Tests Run:    {0}", totalTestsString);
-            WriteLine("Tests Passed: {0}", successfulTests.ToString(STANDARD_NUMBER_FORMAT).PadLeft(totalWidth));
-            WriteLine("Tests Failed: {0}", failedTests.ToString(STANDARD_NUMBER_FORMAT).PadLeft(totalWidth));
+            WriteLine("Tests Passed: {0}", successfulTests.ToString(StandardNumberFormat).PadLeft(totalWidth));
+            WriteLine("Tests Failed: {0}", failedTests.ToString(StandardNumberFormat).PadLeft(totalWidth));
 
             if (failedTests > 0)
             {
@@ -229,7 +220,7 @@ namespace InstallationSmokeTest
 
             Environment.ExitCode = failedTests;
 
-            if (Environment.UserInteractive && _OutputFile == null)
+            if (Environment.UserInteractive && _outputFile == null)
             {
                 Console.WriteLine("Press any key to continue . . .");
                 Console.ReadKey(true);
@@ -238,27 +229,27 @@ namespace InstallationSmokeTest
 
         private static void WriteLine(string text = "", params object[] parameters)
         {
-            if (_OutputFile == null)
+            if (_outputFile == null)
             {
                 Console.WriteLine(text, parameters);
             }
             else
             {
-                File.AppendAllLines(_OutputFile, new[] {string.Format(text, parameters)});
+                File.AppendAllLines(_outputFile, new[] {string.Format(text, parameters)});
             }
         }
 
         private static bool RunTest(Test test)
         {
-            var temp = Console.ForegroundColor;
+            ConsoleColor temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.White;
-            WriteLine("{0}, {1}, {2}", test.GetType().Name, test.TestName, DateTime.Now.ToString(STANDARD_DATETIME_FORMAT));
+            WriteLine("{0}, {1}, {2}", test.GetType().Name, test.TestName, DateTime.Now.ToString(StandardDatetimeFormat));
 
             try
             {
                 test.Run();
                 Console.ForegroundColor = ConsoleColor.Green;
-                WriteLine("\t\t{0}", TEST_PASSED_MESSAGE);
+                WriteLine("\t\t{0}", TestPassedMessage);
 
                 return true;
             }
@@ -278,11 +269,14 @@ namespace InstallationSmokeTest
 
         private static string SelectFile(bool mustExist)
         {
-            string[] files = Directory.GetFiles(".", "*" + SMOKE_TEST_FILE_EXTENSION);
-            string[] suites = files.Select(f => Path.GetFileName(f).Replace(SMOKE_TEST_FILE_EXTENSION, "")).Where(f => f.ToUpper() != ABORT_OPERATION.ToUpper()).ToArray();
-        ChooseFile:
+            string[] files = Directory.GetFiles(".", "*" + SmokeTestFileExtension);
+            string[] suites =
+                files.Select(f => Path.GetFileName(f).Replace(SmokeTestFileExtension, ""))
+                    .Where(f => f.ToUpper() != AbortOperation.ToUpper())
+                    .ToArray();
+            ChooseFile:
 
-            PresentSelectionOptions(suites, ABORT_OPERATION);
+            PresentSelectionOptions(suites, AbortOperation);
             string input = GetInput().Trim();
 
             if (input == "?")
@@ -292,7 +286,7 @@ namespace InstallationSmokeTest
             }
 
             if (string.IsNullOrWhiteSpace(input) ||
-                input.Equals(ABORT_OPERATION, StringComparison.InvariantCultureIgnoreCase) || input == "0")
+                input.Equals(AbortOperation, StringComparison.InvariantCultureIgnoreCase) || input == "0")
             {
                 return null;
             }
@@ -301,7 +295,7 @@ namespace InstallationSmokeTest
 
             if (suites.Any(e => e == input))
             {
-                file = Path.Combine(".", string.Format("{0}{1}", input, SMOKE_TEST_FILE_EXTENSION));
+                file = Path.Combine(".", string.Format("{0}{1}", input, SmokeTestFileExtension));
             }
             else
             {
@@ -318,7 +312,7 @@ namespace InstallationSmokeTest
                 {
                     if (mustExist)
                     {
-                        DisplayError(UNEXPECTED_RESPONSE_MESSAGE);
+                        DisplayError(UnexpectedResponseMessage);
                         goto ChooseFile;
                     }
 
@@ -331,7 +325,7 @@ namespace InstallationSmokeTest
 
         private static void PresentSelectionOptions(string[] suites, string abort)
         {
-            var temp = Console.ForegroundColor;
+            ConsoleColor temp = Console.ForegroundColor;
 
             Console.WriteLine();
             Console.WriteLine("Choose a suite or type its name, or type 0 to {0} or ? for CLI help:", abort);
@@ -348,7 +342,7 @@ namespace InstallationSmokeTest
 
         private static void DisplayError(string errorMessage)
         {
-            var temp = Console.ForegroundColor;
+            ConsoleColor temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
             WriteLine(errorMessage);
 
@@ -357,7 +351,7 @@ namespace InstallationSmokeTest
 
         private static void DisplaySuccess(string message)
         {
-            var temp = Console.ForegroundColor;
+            ConsoleColor temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
             WriteLine(message);
 
@@ -366,7 +360,7 @@ namespace InstallationSmokeTest
 
         private static string GetInput()
         {
-            var temp = Console.ForegroundColor;
+            ConsoleColor temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("> ");
             Console.ForegroundColor = ConsoleColor.White;
