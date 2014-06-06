@@ -30,7 +30,7 @@ namespace TestConfiguration.Forms
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://www.stephenhaunts.com");
+            Process.Start("http://www.stephenhaunts.com/projects/post-deployment-smoke-tester/");
         }
     }
 }
