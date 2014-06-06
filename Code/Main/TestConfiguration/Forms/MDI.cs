@@ -68,16 +68,11 @@ namespace TestConfiguration.Forms
     
         private void OpenConfigurationFile()
         {
-            using (var dialog = new OpenFileDialog() { Filter = @"XML Configuration File |*.xml" })
+            using (var dialog = new OpenFileDialog { Filter = @"XML Configuration File |*.xml" })
             {
                 dialog.FileOk += (s, ce) =>
                 {
                     if (ce.Cancel)
-                    {
-                        return;                        
-                    }
-
-                    if (dialog == null)
                     {
                         return;                        
                     }
@@ -107,11 +102,13 @@ namespace TestConfiguration.Forms
 
         private void MDI_DragDrop(object sender, DragEventArgs e)
         {
-            string[] fileNames = e.Data.GetData(DataFormats.FileDrop) as string[];
+            var fileNames = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+            if (fileNames == null) return;
 
             foreach (var testSuite in fileNames.Select(GetConfigurationSuiteFromFile))
             {
-                LaunchNewTestEditor(((ConfigurationTestSuite)testSuite));
+                LaunchNewTestEditor((testSuite));
             }
         }
 

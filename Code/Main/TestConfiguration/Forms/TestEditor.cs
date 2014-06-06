@@ -16,33 +16,28 @@
 * 
 * Curator: Stephen Haunts
 */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using Common.Xml;
 using ConfigurationTests;
 using ConfigurationTests.Tests;
-using System.Reflection;
-using System.Configuration;
-using Common.Xml;
 
 namespace TestConfiguration.Forms
 {
     public partial class TestEditor : Form
-    {        
-        private enum MoveType
-        {
-            Up = -1,
-            Down = 1
-        }        
-        
+    {
         private ConfigurationTestSuite _configurationTestSuite;
-        private string _filename;        
-        
+        private string _filename;
+
         public TestEditor()
         {
             InitializeComponent();
@@ -59,12 +54,12 @@ namespace TestConfiguration.Forms
         {
             if (fromTemplate)
                 LoadTestsFromExamples();
-        }                
+        }
 
         private static IEnumerable<Type> GetTestTypes()
         {
-            IEnumerable<Type> testsTypes = typeof(Test).Assembly.GetTypes()
-                .Where(type => type.IsSubclassOf(typeof(Test)) && !type.IsAbstract);
+            IEnumerable<Type> testsTypes = typeof (Test).Assembly.GetTypes()
+                .Where(type => type.IsSubclassOf(typeof (Test)) && !type.IsAbstract);
 
             return testsTypes;
         }
@@ -72,16 +67,17 @@ namespace TestConfiguration.Forms
         private static IEnumerable<Type> GetPluginTestTypes()
         {
             string defaultPluginPath = Path.Combine(Application.StartupPath, "Plugins");
-            List<string> pluginPaths = new List<string>();
-            pluginPaths.Add(defaultPluginPath);
+            var pluginPaths = new List<string> {defaultPluginPath};
 
             string path = ConfigurationManager.AppSettings["CommaSeparatedPluginPaths"];
-            pluginPaths.AddRange((path ?? string.Empty).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList());
+            pluginPaths.AddRange(
+                (path ?? string.Empty).Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList());
 
-            List<Type> testsTypes = new List<Type>();
+            var testsTypes = new List<Type>();
             IEnumerable<string> paths = pluginPaths.Where(folder => folder.IsValidDirectory());
 
-            foreach (Assembly assembly in paths.SelectMany(folder => Directory.GetFiles(folder).Select(Assembly.LoadFile)))
+            foreach (
+                Assembly assembly in paths.SelectMany(folder => Directory.GetFiles(folder).Select(Assembly.LoadFile)))
             {
                 testsTypes.AddRange(
                     assembly.GetTypes().Where(type => type.IsSubclassOf(typeof (Test)) && !type.IsAbstract));
@@ -92,7 +88,7 @@ namespace TestConfiguration.Forms
 
         private static IEnumerable<Type> GetAllTestTypes()
         {
-            List<Type> testTypes = new List<Type>();
+            var testTypes = new List<Type>();
 
             testTypes.AddRange(GetTestTypes());
             testTypes.AddRange(GetPluginTestTypes());
@@ -121,7 +117,7 @@ namespace TestConfiguration.Forms
 
         private void CreateTestMenuItem(Type type)
         {
-            ToolStripMenuItem menuItem = new ToolStripMenuItem
+            var menuItem = new ToolStripMenuItem
             {
                 Text = type.Name,
                 Tag = type
@@ -135,7 +131,7 @@ namespace TestConfiguration.Forms
         {
             lstListOfTests.Items.Add(test);
 
-            ListViewItem listViewItem = new ListViewItem
+            var listViewItem = new ListViewItem
             {
                 ImageIndex = -1,
                 Tag = test,
@@ -155,15 +151,17 @@ namespace TestConfiguration.Forms
         private void UpdateUi()
         {
             int testCount = lstListOfTests.Items.Count;
-            lblTotalTestCount.Text = string.Format(CultureInfo.CurrentUICulture, "{0} Test{1}", testCount, (testCount > 0 ? "s" : ""));
+            lblTotalTestCount.Text = string.Format(CultureInfo.CurrentUICulture, "{0} Test{1}", testCount,
+                (testCount > 0 ? "s" : ""));
             string testFormat = lstListOfTests.SelectedItem != null ? " [{1}]" : "";
-            Text = string.Format(CultureInfo.CurrentUICulture, "Test Configurations Editor - {0}" + testFormat, txtTestName.Text, lstListOfTests.SelectedItem ?? "");
+            Text = string.Format(CultureInfo.CurrentUICulture, "Test Configurations Editor - {0}" + testFormat,
+                txtTestName.Text, lstListOfTests.SelectedItem ?? "");
         }
 
         private void UpdateSeletedItem()
         {
             lstListOfTests.BeginUpdate();
-            Test item = lstListOfTests.SelectedItem as Test;
+            var item = lstListOfTests.SelectedItem as Test;
             int index = lstListOfTests.Items.IndexOf(lstListOfTests.SelectedItem);
             lstListOfTests.Items[index] = item;
             lstListOfTests.EndUpdate();
@@ -219,13 +217,18 @@ namespace TestConfiguration.Forms
                 InitializeTestSuite();
             }
 
-            using (SaveFileDialog dialog = new SaveFileDialog { Title = @"Save Test Configuration File", Filter = @"XML Configuration File | *.xml" })
+            using (
+                var dialog = new SaveFileDialog
+                {
+                    Title = @"Save Test Configuration File",
+                    Filter = @"XML Configuration File | *.xml"
+                })
             {
                 dialog.FileOk += (s, e) =>
                 {
                     if (e.Cancel) return;
 
-                    _filename = ((SaveFileDialog)s).FileName;
+                    _filename = ((SaveFileDialog) s).FileName;
                     WriteXmlFile(_filename);
                 };
 
@@ -274,18 +277,18 @@ namespace TestConfiguration.Forms
 
         private static void RunTestFromListItem(ListViewItem item)
         {
-            Test test = item.Tag as Test;
+            var test = item.Tag as Test;
 
             try
             {
-                test.Run();
-                item.Text = "Pass";
+                if (test != null) test.Run();
+                item.Text = @"Pass";
                 item.ImageIndex = 0;
                 item.SubItems[2].Text = string.Empty;
             }
             catch (Exception e)
             {
-                item.Text = "Fail";
+                item.Text = @"Fail";
                 item.ImageIndex = 1;
                 item.SubItems[2].Text = string.Format(CultureInfo.CurrentUICulture, "{0} - {1}", e.Source, e.Message);
             }
@@ -297,12 +300,12 @@ namespace TestConfiguration.Forms
             {
                 object item = lstListOfTests.Items[selectedIndices[i]];
                 lstListOfTests.Items.RemoveAt(selectedIndices[i]);
-                lstListOfTests.Items.Insert(selectedIndices[i] + ((int)moveType), item);
+                lstListOfTests.Items.Insert(selectedIndices[i] + ((int) moveType), item);
                 lstListOfTests.SelectedItem = item;
 
                 ListViewItem lstItem = lvwListOfTest.Items[selectedIndices[i]];
                 lvwListOfTest.Items.RemoveAt(selectedIndices[i]);
-                lvwListOfTest.Items.Insert(selectedIndices[i] + ((int)moveType), lstItem);
+                lvwListOfTest.Items.Insert(selectedIndices[i] + ((int) moveType), lstItem);
             }
         }
 
@@ -324,8 +327,6 @@ namespace TestConfiguration.Forms
                         MoveSelectedItems(selectedIndices, MoveType.Down);
                     }
                     break;
-                default:
-                    break;
             }
         }
 
@@ -343,32 +344,30 @@ namespace TestConfiguration.Forms
 
             if (!(sender is ToolStripItem)) return GetSelectedIndicesBySender(lstListOfTests);
 
-            ToolStripItem item = sender as ToolStripItem;
+            var item = sender as ToolStripItem;
 
-            if (item.Owner is ContextMenuStrip)
-            {
-                return GetSelectedIndicesBySender(((ContextMenuStrip) item.Owner).SourceControl);
-            }
-
-            return GetSelectedIndicesBySender(lstListOfTests);
+            var strip = item.Owner as ContextMenuStrip;
+            return GetSelectedIndicesBySender(strip != null ? strip.SourceControl : lstListOfTests);
         }
 
         private static int[] GetSelectedIndexFromListControl(object sender)
         {
             IList listOfIndexes;
 
-            if (sender is ListBox)
+            var box = sender as ListBox;
+            if (box != null)
             {
-                listOfIndexes = ((ListBox) sender).SelectedIndices;
+                listOfIndexes = box.SelectedIndices;
             }
             else
             {
                 listOfIndexes = new List<int>();
             }
 
-            if (sender is ListView)
+            var view = sender as ListView;
+            if (view != null)
             {
-                listOfIndexes = ((ListView) sender).SelectedIndices;
+                listOfIndexes = view.SelectedIndices;
             }
 
             return listOfIndexes.Cast<int>().ToArray();
@@ -393,12 +392,13 @@ namespace TestConfiguration.Forms
                     AddTestToList(test);
                 }
             }
-        }        
-        
+        }
+
         private void TestEditor_Load(object sender, EventArgs e)
         {
             CreateTestMenus();
         }
+
         private void TestEditor_Shown(object sender, EventArgs e)
         {
             LoadTestsToList();
@@ -406,8 +406,8 @@ namespace TestConfiguration.Forms
 
         private void TestMenu_Click(object sender, EventArgs e)
         {
-            Type senderType = ((ToolStripItem)sender).Tag as Type;
-            Test test = Activator.CreateInstance(senderType) as Test;
+            var senderType = ((ToolStripItem) sender).Tag as Type;
+            var test = Activator.CreateInstance(senderType) as Test;
 
             AddTestToList(test);
         }
@@ -472,6 +472,7 @@ namespace TestConfiguration.Forms
                 }
             }
         }
+
         private void mnuRemoveTest_Click(object sender, EventArgs e)
         {
             int[] selectedIndices = GetSelectedIndicesBySender(sender);
@@ -510,9 +511,16 @@ namespace TestConfiguration.Forms
             SaveCurrentTestFile();
             RunTest();
         }
+
         private void mnuSaveAs_Click(object sender, EventArgs e)
         {
             SaveNewTestFile();
-        }                
+        }
+
+        private enum MoveType
+        {
+            Up = -1,
+            Down = 1
+        }
     }
 }

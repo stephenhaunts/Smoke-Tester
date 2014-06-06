@@ -98,9 +98,9 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(517, 108);
             this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Open Source Release : Stephen Haunts\r\n\r\nOriginal Author : Hugh Hulme\r\n\r\nContribut" +
-    "ors : Stephen Haunts, Jon-Paul Flood, Daniel Steele, Oliver Sintim-Aboagye, Mark" +
-    " Jones";
+            this.textBox1.Text = "Open Source Release : Stephen Haunts\r\n\r\nOriginal Author : Hugh Phoenix-Hulme\r\n\r\nC" +
+    "ontributors : Stephen Haunts, Jon-Paul Flood, Daniel Steele, Oliver Sintim-Aboag" +
+    "ye, Mark Jones";
             // 
             // AboutDialog
             // 
