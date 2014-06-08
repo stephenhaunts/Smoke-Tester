@@ -48,8 +48,7 @@ namespace Common.Security
 
             X509Certificate2Collection collection = store.Certificates;
 
-            foreach (
-                KeyValuePair<X509FindType, string> search in
+            foreach (KeyValuePair<X509FindType, string> search in
                     certificateInfo.Searches.Where(s => !string.IsNullOrWhiteSpace(s.Value)))
             {
                 collection = collection.Find(search.Key, search.Value, true);

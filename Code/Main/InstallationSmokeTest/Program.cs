@@ -269,15 +269,19 @@ namespace InstallationSmokeTest
 
         private static string SelectFile(bool mustExist)
         {
-            string[] files = Directory.GetFiles(".", "*" + SmokeTestFileExtension);
-            string[] suites =
-                files.Select(f => Path.GetFileName(f).Replace(SmokeTestFileExtension, ""))
+            var files = Directory.GetFiles(".", "*" + SmokeTestFileExtension);
+            var suites =
+                files.Select(f =>
+                {
+                    var fileName = Path.GetFileName(f);
+                    return fileName != null ? fileName.Replace(SmokeTestFileExtension, "") : null;
+                })
                     .Where(f => f.ToUpper() != AbortOperation.ToUpper())
                     .ToArray();
             ChooseFile:
 
             PresentSelectionOptions(suites, AbortOperation);
-            string input = GetInput().Trim();
+            var input = GetInput().Trim();
 
             if (input == "?")
             {

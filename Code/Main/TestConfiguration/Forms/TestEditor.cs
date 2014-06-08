@@ -433,9 +433,13 @@ namespace TestConfiguration.Forms
 
         private void btnMoveItem_Click(object sender, EventArgs e)
         {
-            string action = (sender as Control).Tag.ToString().ToLowerInvariant();
+            var control = sender as Control;
+            if (control != null)
+            {
+                string action = control.Tag.ToString().ToLowerInvariant();
 
-            MoveListItems(action);
+                MoveListItems(action);
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
