@@ -16,17 +16,19 @@
 * 
 * Curator: Stephen Haunts
 */
+
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.ServiceProcess;
+using System.Messaging;
 using Common.Boolean;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
-    public class MsmqInstalledTest : Test
+    public class MsmqLocalQueueInstalled : Test
     {
         private bool _shouldExist = true;
+        private string _queueName = @".\private$\TestQueue";
 
         [DefaultValue(true)]
         [Description("True to check if MSMQ exists")]
@@ -36,30 +38,34 @@ namespace ConfigurationTests.Tests
             set{_shouldExist = value;}
         }
 
-        public override void Run()
+        [MandatoryField]
+        [Description("The name of the local queue to check for")]
+        public string QueueName
         {
-            AssertState.Equal(ShouldExist, DoesMsmqExist(), string.Format("MSMQ is {0}present", ShouldExist.IfTrue("not ")));
+            get { return _queueName; }
+            set { _queueName = value; }
         }
 
-        private static bool DoesMsmqExist()
+        public override void Run()
         {
-            var services = ServiceController.GetServices().ToList();
+            AssertState.Equal(ShouldExist, IsQueueAvailable(_queueName), string.Format("MSMQ local queue {0} is {1}present", _queueName, ShouldExist.IfTrue("not ")));
+        }
 
-            var msQue = services.Find(o => o.ServiceName == "MSMQ");
-            if (msQue == null) return false;
-
-            return msQue.Status == ServiceControllerStatus.Running;
+        private static bool IsQueueAvailable(string queueName)
+        {
+            return MessageQueue.Exists(queueName);
         }
 
         public override List<Test> CreateExamples()
         {
                 return new List<Test>
                              {
-                                 new MsmqInstalledTest
+                                 new MsmqLocalQueueInstalled
                                      {
-                                         TestName = "Example MSMQ",                                        
+                                         TestName = "Example Queue",
+                                         QueueName = @".\private$\TestQueue",
                                          ShouldExist = true
-                                     }
+                                     }                              
                              };
         }
     }
