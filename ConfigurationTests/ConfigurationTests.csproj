@@ -64,6 +64,7 @@
     <Compile Include="Tests\ConnectionStringTest.cs" />
     <Compile Include="Tests\ASMXServiceSoapTest.cs" />
     <Compile Include="Tests\ConnectionStringTestBase.cs" />
+    <Compile Include="Tests\MSMQInstalledTest.cs" />
     <Compile Include="Tests\SqlConnectionStringTest.cs" />
     <Compile Include="Tests\SoapTest.cs" />
     <Compile Include="Tests\WCFServiceSoapTest.cs" />
