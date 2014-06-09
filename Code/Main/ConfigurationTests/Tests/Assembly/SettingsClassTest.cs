@@ -29,13 +29,13 @@ namespace ConfigurationTests.Tests
     public class SettingsClassTest : Test
     {
         [MandatoryField]
-        public string ClassName;
+        public string ClassName { get; set; }
         [MandatoryField]
-        public string AssemblyPath;
+        public string AssemblyPath { get; set; }
         [MandatoryField]
-        public string SettingName;
+        public string SettingName { get; set; }
         [MandatoryField]
-        public string ExpectedValue;
+        public string ExpectedValue { get; set; }
 
         public override void Run()
         {
