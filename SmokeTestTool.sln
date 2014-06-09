@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D956F1F1-DA3B-455E-887D-64F497C4FA8D}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
+		ReleaseNotes.txt = ReleaseNotes.txt
 		SmokeTestTool.vsmdi = SmokeTestTool.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
