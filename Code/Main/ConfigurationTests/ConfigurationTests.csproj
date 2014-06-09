@@ -62,6 +62,7 @@
     <Compile Include="Tests\File System\SHA256Checksum.cs" />
     <Compile Include="Tests\File System\SHA1Checksum.cs" />
     <Compile Include="Tests\File System\MD5Checksum.cs" />
+    <Compile Include="Tests\OS Tests\WindowsServiceStatusTest.cs" />
     <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
     <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />
     <Compile Include="Tests\File System\ConfigurationTest.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="Tests\OS Tests\RegistryKeyTest.cs" />
     <Compile Include="Tests\Web Services\ServiceBaseAddressTest.cs" />
     <Compile Include="Tests\Web Services\ServiceEndpointTest.cs" />
-    <Compile Include="Tests\OS Tests\ServiceExistsTest.cs" />
+    <Compile Include="Tests\OS Tests\WindowsServiceExistsTest.cs" />
     <Compile Include="Tests\Assembly\SettingsClassTest.cs" />
     <Compile Include="Tests\Test.cs" />
     <Compile Include="Tests\Xml\XMLElementContentTest.cs" />
