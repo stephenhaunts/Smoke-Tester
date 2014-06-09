@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
@@ -67,6 +68,7 @@
     <Compile Include="Tests\Networking\IISServiceStatus.cs" />
     <Compile Include="Tests\OS Tests\WindowsRemoteServiceExistsTest.cs" />
     <Compile Include="Tests\OS Tests\WindowsRemoteServiceStatusTest.cs" />
+    <Compile Include="Tests\OS Tests\UserInActiveDirectoryTest.cs" />
     <Compile Include="Tests\OS Tests\WindowsServiceStatusTest.cs" />
     <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
     <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />

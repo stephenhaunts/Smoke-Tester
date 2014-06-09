@@ -13,6 +13,8 @@ Version 0.02
 [X] - Added IISInstalled Test
 [X] - Added IISRunning Test
 [X] - Added IISVersion Test
+[X] - Added UserInActiveDirectory Test
+
 [X] - Change HTTPConnection Test now uses an enumerated set of return codes.
 
 Version 0.01
