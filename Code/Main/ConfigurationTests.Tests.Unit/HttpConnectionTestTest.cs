@@ -16,6 +16,8 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConfigurationTests.Tests.Unit
@@ -31,7 +33,7 @@ namespace ConfigurationTests.Tests.Unit
             {
                 TestName = "Http Connection Test",
                 UrlToTest = "http://www.moneyshop.tv",
-                ExpectedResponse = "200"
+                ExpectedResponse = HttpStatusCode.Accepted
             };
 
             httpConnTest.Run();
