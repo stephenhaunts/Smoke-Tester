@@ -26,7 +26,7 @@ namespace ConfigurationTests.Tests
     public class HttpConnectionTest : Test
     {
         public string UrlToTest { get; set; }
-        public string ExpectedResponse { get; set; }
+        public HttpStatusCode ExpectedResponse { get; set; }
 
         public override void Run()
         {
@@ -42,14 +42,13 @@ namespace ConfigurationTests.Tests
                 httpResponse = (HttpWebResponse)ex.Response;
             }
 
-            var status = (int)httpResponse.StatusCode;
-            AssertState.Equal(ExpectedResponse, status.ToString(CultureInfo.InvariantCulture), false, String.Format("The Http response was {0}. The Expected response is {1}", status, ExpectedResponse));
+            AssertState.Equal(ExpectedResponse.ToString(), httpResponse.StatusCode.ToString(), false, String.Format("The Http response was {0}. The Expected response is {1}", httpResponse.StatusCode, ExpectedResponse));
         }
 
         public override List<Test> CreateExamples()
         {
             return new List<Test>{
-                new HttpConnectionTest {UrlToTest="http://www.google.com", ExpectedResponse="200"}
+                new HttpConnectionTest {UrlToTest="http://www.google.com", ExpectedResponse= HttpStatusCode.OK}
             };
         }
     }
