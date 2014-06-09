@@ -17,46 +17,53 @@
 * Curator: Stephen Haunts
 */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using Common.Boolean;
 using System.ComponentModel;
+using ConfigurationTests.Attributes;
+using Microsoft.Win32;
 
 namespace ConfigurationTests.Tests
 {
-    public class IISInstalledTest : Test
-    {
-        private bool _shouldExist = true;
-
+    public class IISVersionTest : Test
+    {        
         [DefaultValue(true)]
-        [Description("True to check if MSMQ exists")]
-        public bool ShouldExist
-        {
-            get { return _shouldExist; }
-            set { _shouldExist = value; }
-        }
+        [Description("Version if IIS Installed")]
+        [MandatoryField]
+        public string Version { get; set; }
 
         public override void Run()
-        {
-            AssertState.Equal(ShouldExist, DoesIISExist(), string.Format("IIS is {0}present", ShouldExist.IfTrue("not ")));
+        {            
+            AssertState.Equal(Version, GetIisVersion().ToString());
         }
 
-        private static bool DoesIISExist()
+        public Version GetIisVersion()
         {
-            var services = ServiceController.GetServices().ToList();
+            using (RegistryKey componentsKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\InetStp", false))
+            {
+                if (componentsKey != null)
+                {
+                    var majorVersion = (int)componentsKey.GetValue("MajorVersion", -1);
+                    var minorVersion = (int)componentsKey.GetValue("MinorVersion", -1);
 
-            var iis = services.Find(o => o.ServiceName == "W3SVC");
-            if (iis == null) return false;
+                    if (majorVersion != -1 && minorVersion != -1)
+                    {
+                        return new Version(majorVersion, minorVersion);
+                    }
+                }
 
-            return true;
+                return new Version(0, 0);
+            }
         }
 
         public override List<Test> CreateExamples()
         {
            return new List<Test>
             {
-                new IISInstalledTest(){ShouldExist = true, TestName = "Check that the IIS Webserver is intalled."}
+                new IISVersionTest(){TestName = "Check the IIS version number."}
             };
         }
     }
