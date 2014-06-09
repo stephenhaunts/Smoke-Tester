@@ -1,0 +1,21 @@
+Version 0.02
+-------------
+
+[X] - Added MSMQInstalled Test
+[X] - Added MSMQLocalQueueExists Test
+[X] - Added MD5Checksum Test
+[X] - Added SHA1Checksum Test
+[X] - Added SHA256Checksum Test
+[X] - Added WindowsServiceExists Test
+[X] - Added WindowsServiceStatus Test
+[X] - Added WindowsRemoteServiceExists Test
+[X] - Added WindowsRemoteServiceStatus Test
+[X] - Added IISInstalled Test
+[X] - Added IISRunning Test
+[X] - Added IISVersion Test
+[X] - Change HTTPConnection Test now uses an enumerated set of return codes.
+
+Version 0.01
+-------------
+
+[X] - Initial release of Post Deployment Smoke Tester
