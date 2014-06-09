@@ -62,19 +62,11 @@
     <Compile Include="AppSettingTestTests.cs" />
     <Compile Include="AssemblyRegistrationTestTests.cs" />
     <Compile Include="CertificateExistsTestTests.cs" />
-    <Compile Include="ConnectionStringTestTests.cs" />
-    <Compile Include="ClientEndpointTestTests.cs" />
-    <Compile Include="ASMXServiceSoapTestTests.cs" />
-    <Compile Include="SqlConnectionStringTestTests.cs" />
-    <Compile Include="WCFServiceSoapTestTests.cs" />
-    <Compile Include="PlatformTestTest.cs" />
     <Compile Include="CreateAndLoadExamplesTests.cs" />
-    <Compile Include="HttpConnectionTestTest.cs" />
     <Compile Include="IoCResolutionTestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="COMClassTestTest.cs" />
     <Compile Include="RegistryTestTest.cs" />
-    <Compile Include="ServiceEndpointTestTests.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -96,22 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="ConnectionStringTest.exe" />
-    <Content Include="EmptyFileTest.exe" />
-    <Content Include="EmptyFileTest.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ServiceEndpointTest.exe" />
-    <Content Include="ServiceEndpointTest.exe.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ConnectionStringTest.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlConnectionStringTest.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

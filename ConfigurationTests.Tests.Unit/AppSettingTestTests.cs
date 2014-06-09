@@ -108,29 +108,7 @@ namespace ConfigurationTestUnitTests
                 Assert.IsTrue(ex.Message.StartsWith("File Not Found"));
             }
         }
-        
-        [TestMethod]
-        [DeploymentItem("EmptyFileTest.exe.config")]
-        [DeploymentItem("EmptyFileTest.exe")]
-        public void AppSettingTestEmptyFileTest()
-        {
-            string location = Assembly.GetExecutingAssembly().Location;
-            _AppSettingTest.Path = Path.GetDirectoryName(location);
-            _AppSettingTest.Filename = "EmptyFileTest.exe.config";
-            _AppSettingTest.Key = "Hello";
-            _AppSettingTest.ExpectedValue = "Everybody";
-
-            try
-            {
-                _AppSettingTest.Run();
-                throw new AssertFailedException("Expected exception was not thrown");
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                Assert.IsTrue(ex.Message.StartsWith("Root element is missing."));
-            }
-        }
-
+      
         [TestMethod]
         public void GivenAnAppSettingTheSettingShouldBeReturned()
         {
