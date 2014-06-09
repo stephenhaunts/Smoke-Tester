@@ -66,6 +66,7 @@
     <Compile Include="Tests\File System\MD5Checksum.cs" />
     <Compile Include="Tests\Networking\IISServiceStatus.cs" />
     <Compile Include="Tests\OS Tests\WindowsRemoteServiceExistsTest.cs" />
+    <Compile Include="Tests\OS Tests\WindowsRemoteServiceStatusTest.cs" />
     <Compile Include="Tests\OS Tests\WindowsServiceStatusTest.cs" />
     <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
     <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />
