@@ -18,6 +18,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 
 namespace ConfigurationTests.Tests
@@ -41,8 +42,8 @@ namespace ConfigurationTests.Tests
                 httpResponse = (HttpWebResponse)ex.Response;
             }
 
-            int status = (int)httpResponse.StatusCode;
-            AssertState.Equal(ExpectedResponse, status.ToString(), false, String.Format("The Http response was {0}. The Expected response is {1}", status, ExpectedResponse));
+            var status = (int)httpResponse.StatusCode;
+            AssertState.Equal(ExpectedResponse, status.ToString(CultureInfo.InvariantCulture), false, String.Format("The Http response was {0}. The Expected response is {1}", status, ExpectedResponse));
         }
 
         public override List<Test> CreateExamples()
