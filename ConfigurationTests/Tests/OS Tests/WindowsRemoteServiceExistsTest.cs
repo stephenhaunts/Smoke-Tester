@@ -25,16 +25,20 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
-    public class WindowsServiceExistsTest : Test
+    public class WindowsRemoteServiceExistsTest : Test
     {
         [Description("Name of service")]
         [MandatoryField]
         public string ServiceName { get; set; }
 
+        [Description("Machine name of remote windows service.")]
+        [MandatoryField]
+        public string MachineName { get; set; }
+
         public override void Run()
         {
-            var ctl = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == ServiceName);            
-            if (ctl == null) throw new AssertionException(string.Format("Service with name [{0}] was not found", ServiceName));
+            var ctl = ServiceController.GetServices(MachineName).FirstOrDefault(s => s.ServiceName == ServiceName);            
+            if (ctl == null) throw new AssertionException(string.Format("Service with name [{0}] was not found on {1}", ServiceName, MachineName));
         }
 
         public override List<Test> CreateExamples()
