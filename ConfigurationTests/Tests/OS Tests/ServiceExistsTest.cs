@@ -16,7 +16,10 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceProcess;
 using System.ComponentModel;
 
@@ -29,7 +32,9 @@ namespace ConfigurationTests.Tests
 
         public override void Run()
         {
-            if ((new ServiceController(ServiceName)) == null) throw new AssertionException(string.Format("Service with name [{0}] was not found", ServiceName));
+            var ctl = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == ServiceName);
+
+            if (ctl == null) throw new AssertionException(string.Format("Service with name [{0}] was not found", ServiceName));
         }
 
         public override List<Test> CreateExamples()

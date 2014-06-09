@@ -56,42 +56,42 @@
     <Compile Include="Attributes\MandatoryFieldAttribute.cs" />
     <Compile Include="ConfigurationTestSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\AppSettingTest.cs" />
-    <Compile Include="Tests\AssemblyRegistrationTest.cs" />
+    <Compile Include="Tests\Assembly\AppSettingTest.cs" />
+    <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
     <Compile Include="Tests\AssertState.cs" />
-    <Compile Include="Tests\BaseAddressTest.cs" />
-    <Compile Include="Tests\CertificateExistsTest.cs" />
-    <Compile Include="Tests\ConfigurationTest.cs" />
-    <Compile Include="Tests\ConnectionStringTest.cs" />
-    <Compile Include="Tests\ASMXServiceSoapTest.cs" />
-    <Compile Include="Tests\ConnectionStringTestBase.cs" />
-    <Compile Include="Tests\MSMQLocalQueueInstaled.cs" />
-    <Compile Include="Tests\MSMQInstalledTest.cs" />
-    <Compile Include="Tests\SqlConnectionStringTest.cs" />
-    <Compile Include="Tests\SoapTest.cs" />
-    <Compile Include="Tests\WCFServiceSoapTest.cs" />
-    <Compile Include="Tests\EndpointTest.cs" />
-    <Compile Include="Tests\EnvironmentVariableContainsTest.cs" />
-    <Compile Include="Tests\EnvironmentVariableEqualsTest.cs" />
-    <Compile Include="Tests\EnvironmentVariableTest.cs" />
-    <Compile Include="Tests\FileExistsTest.cs" />
-    <Compile Include="Tests\FileTest.cs" />
-    <Compile Include="Tests\FolderExistsTest.cs" />
-    <Compile Include="Tests\ClientEndpointTest.cs" />
-    <Compile Include="Tests\HttpConnectionTest.cs" />
-    <Compile Include="Tests\IoCResolutionTest.cs" />
-    <Compile Include="Tests\MinimumDiskSpaceTest.cs" />
-    <Compile Include="Tests\PlatformTest.cs" />
-    <Compile Include="Tests\COMClassTest.cs" />
-    <Compile Include="Tests\RegistryKeyTest.cs" />
-    <Compile Include="Tests\ServiceBaseAddressTest.cs" />
-    <Compile Include="Tests\ServiceEndpointTest.cs" />
-    <Compile Include="Tests\ServiceExistsTest.cs" />
-    <Compile Include="Tests\SettingsClassTest.cs" />
+    <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
+    <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />
+    <Compile Include="Tests\File System\ConfigurationTest.cs" />
+    <Compile Include="Tests\Database\ConnectionStringTest.cs" />
+    <Compile Include="Tests\Web Services\ASMXServiceSoapTest.cs" />
+    <Compile Include="Tests\Database\ConnectionStringTestBase.cs" />
+    <Compile Include="Tests\Message Queues\MSMQLocalQueueInstaled.cs" />
+    <Compile Include="Tests\Message Queues\MSMQInstalledTest.cs" />
+    <Compile Include="Tests\Database\SqlConnectionStringTest.cs" />
+    <Compile Include="Tests\Web Services\SoapTest.cs" />
+    <Compile Include="Tests\Web Services\WCFServiceSoapTest.cs" />
+    <Compile Include="Tests\Web Services\EndpointTest.cs" />
+    <Compile Include="Tests\OS Tests\EnvironmentVariableContainsTest.cs" />
+    <Compile Include="Tests\OS Tests\EnvironmentVariableEqualsTest.cs" />
+    <Compile Include="Tests\OS Tests\EnvironmentVariableTest.cs" />
+    <Compile Include="Tests\File System\FileExistsTest.cs" />
+    <Compile Include="Tests\File System\FileTest.cs" />
+    <Compile Include="Tests\File System\FolderExistsTest.cs" />
+    <Compile Include="Tests\Web Services\ClientEndpointTest.cs" />
+    <Compile Include="Tests\Internet\HttpConnectionTest.cs" />
+    <Compile Include="Tests\Assembly\IoCResolutionTest.cs" />
+    <Compile Include="Tests\File System\MinimumDiskSpaceTest.cs" />
+    <Compile Include="Tests\OS Tests\PlatformTest.cs" />
+    <Compile Include="Tests\OS Tests\COMClassTest.cs" />
+    <Compile Include="Tests\OS Tests\RegistryKeyTest.cs" />
+    <Compile Include="Tests\Web Services\ServiceBaseAddressTest.cs" />
+    <Compile Include="Tests\Web Services\ServiceEndpointTest.cs" />
+    <Compile Include="Tests\OS Tests\ServiceExistsTest.cs" />
+    <Compile Include="Tests\Assembly\SettingsClassTest.cs" />
     <Compile Include="Tests\Test.cs" />
-    <Compile Include="Tests\XMLElementContentTest.cs" />
-    <Compile Include="Tests\XMLElementTest.cs" />
-    <Compile Include="Tests\XMLElementTestBase.cs" />
+    <Compile Include="Tests\Xml\XMLElementContentTest.cs" />
+    <Compile Include="Tests\Xml\XMLElementTest.cs" />
+    <Compile Include="Tests\Xml\XMLElementTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonCode\CommonCode.csproj">
@@ -99,6 +99,7 @@
       <Name>CommonCode</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
