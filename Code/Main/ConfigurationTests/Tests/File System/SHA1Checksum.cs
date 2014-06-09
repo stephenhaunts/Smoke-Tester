@@ -26,34 +26,34 @@ using System.ComponentModel;
 
 namespace ConfigurationTests.Tests
 {
-    public class MD5Checksum : Test
+    public class SHA1Checksum : Test
     {        
         [MandatoryField]
         [Description("Filename to check")]
         public string Filename { get; set; }
 
         [MandatoryField]
-        [Description("MD5 Checksum")]
+        [Description("SHA1 Checksum")]
         public string Checksum { get; set; }
 
 
         public override void Run()
         {
-            using (var md5 = MD5.Create())
+            using (var stream = File.OpenRead(Filename))
             {
-                using (var stream = File.OpenRead(Filename))
-                {                    
-                    var actualChecksum = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
-                    AssertState.Equal(Checksum.ToLower(), actualChecksum);
-                }
-            }  
+                var sha = new SHA1Managed();
+                var checksum = sha.ComputeHash(stream);
+                var fileChecksum = BitConverter.ToString(checksum).Replace("-", string.Empty).ToLower();
+
+                AssertState.Equal(Checksum.ToLower(), fileChecksum);
+            }
         }
 
         public override List<Test> CreateExamples()
         {
            return new List<Test>
             {
-                new MD5Checksum{Checksum = "4563FD", Filename = @"c:\foo.txt", TestName = "Check file checksum"}
+                new SHA1Checksum{Checksum = "4563FD", Filename = @"c:\foo.txt", TestName = "Check file checksum"}
             };
         }
     }

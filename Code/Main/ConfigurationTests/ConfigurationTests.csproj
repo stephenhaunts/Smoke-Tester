@@ -59,6 +59,7 @@
     <Compile Include="Tests\Assembly\AppSettingTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
     <Compile Include="Tests\AssertState.cs" />
+    <Compile Include="Tests\File System\SHA1Checksum.cs" />
     <Compile Include="Tests\File System\MD5Checksum.cs" />
     <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
     <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />
