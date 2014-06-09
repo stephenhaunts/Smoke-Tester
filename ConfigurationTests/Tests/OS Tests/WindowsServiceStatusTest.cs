@@ -17,29 +17,40 @@
 * Curator: Stephen Haunts
 */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.ComponentModel;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
-    public class ServiceExistsTest : Test
+    public class WindowsServiceStatusTest : Test
     {
         [Description("Name of service")]
+        [MandatoryField]
         public string ServiceName { get; set; }
+
+        [Description("Expected Service Status")]
+        [MandatoryField]
+        public ServiceControllerStatus ServiceStatus { get; set; }
 
         public override void Run()
         {
             var ctl = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == ServiceName);
 
             if (ctl == null) throw new AssertionException(string.Format("Service with name [{0}] was not found", ServiceName));
+
+            AssertState.Equal(ServiceStatus, ctl.Status);
         }
 
         public override List<Test> CreateExamples()
         {
-            return new List<Test> { new ServiceExistsTest { ServiceName = "Bob" } };
+            return new List<Test> { new WindowsServiceStatusTest()
+            {
+                ServiceName = "Bob",
+                ServiceStatus = ServiceControllerStatus.Running
+            } };
         }
     }
 }
