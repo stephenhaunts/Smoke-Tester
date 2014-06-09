@@ -60,6 +60,7 @@
     <Compile Include="Tests\Assembly\AppSettingTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
     <Compile Include="Tests\AssertState.cs" />
+    <Compile Include="Tests\Networking\PingTest.cs" />
     <Compile Include="Tests\Networking\IISVersionTest.cs" />
     <Compile Include="Tests\Networking\IISInstalledTest.cs" />
     <Compile Include="Tests\File System\SHA256Checksum.cs" />
