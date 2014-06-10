@@ -28,6 +28,7 @@ namespace ConfigurationTests.Tests
         private bool _shouldExist = true;
 
         [DefaultValue(true)]
+        [Category("File Properties")]
         [Description("True to check if file exist")]
         public bool ShouldExist
         {

@@ -29,10 +29,12 @@ namespace ConfigurationTests.Tests
         private bool _shouldExist = true;
 
         [MandatoryField]
-        [Description("Directory of file")]
+        [Category("Folder Properties")]
+        [Description("Folder to Check")]
         public string Path { get; set; }
 
         [DefaultValue(true)]
+        [Category("Folder Properties")]
         [Description("True to check if file exist")]
         public bool ShouldExist 
         {

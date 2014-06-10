@@ -27,6 +27,7 @@ namespace ConfigurationTests.Tests
 
         [DefaultValue(".")]
         [Description("Directory of file")]
+        [Category("File Properties")]
         public string Path
         {
             get { return _path; }
@@ -34,6 +35,7 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("File Properties")]
         [Description("Name of file")]
         public string Filename { get; set; }
 

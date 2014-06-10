@@ -29,10 +29,12 @@ namespace ConfigurationTests.Tests
     public class SHA1Checksum : Test
     {        
         [MandatoryField]
+        [Category("Checksum Details")]
         [Description("Filename to check")]
         public string Filename { get; set; }
 
         [MandatoryField]
+        [Category("Checksum Details")]
         [Description("SHA1 Checksum")]
         public string Checksum { get; set; }
 

@@ -16,6 +16,8 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.ComponentModel;
 using ConfigurationTests.Attributes;
 using Common.Data;
 using System;
@@ -33,7 +35,7 @@ namespace ConfigurationTests.Tests
         {
             AppSettings = new List<AppSetting>();
         }
-
+        
         public class AppSetting
         {
             public string SettingName { get; set; }
@@ -45,6 +47,7 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("App Setting Properties")]
         public List<AppSetting> AppSettings { get; set; }
 
         protected override void CheckAssertions()
