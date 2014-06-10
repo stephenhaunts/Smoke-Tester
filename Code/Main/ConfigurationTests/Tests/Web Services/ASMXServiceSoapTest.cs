@@ -43,7 +43,7 @@ namespace ConfigurationTests.Tests
             soapRequest.Append("</s:Envelope>");
 
             var encodedSoapRequest = new UTF8Encoding();
-            byte[] bytesToWrite = encodedSoapRequest.GetBytes(soapRequest.ToString());
+            var bytesToWrite = encodedSoapRequest.GetBytes(soapRequest.ToString());
 
             var webRequest = (HttpWebRequest)HttpWebRequest.Create(ServiceAddress);
             webRequest.Timeout = (ConnectionTimeout ?? 10) * 1000;
@@ -52,7 +52,7 @@ namespace ConfigurationTests.Tests
             webRequest.ContentType = !string.IsNullOrWhiteSpace(ContentType) ? ContentType : DEFAULT_CONTENT_TYPE;
             webRequest.Headers.Add("SOAPAction", SoapRequestAction);
 
-            using (Stream newStream = webRequest.GetRequestStream())
+            using (var newStream = webRequest.GetRequestStream())
             {
                 newStream.Write(bytesToWrite, 0, bytesToWrite.Length);
                 newStream.Close();
@@ -84,7 +84,7 @@ namespace ConfigurationTests.Tests
             }
 
             var actualSoapResponse = new XmlDocument();
-            string responseFromServer = reader.ReadToEnd();
+            var responseFromServer = reader.ReadToEnd();
             actualSoapResponse.LoadXml(responseFromServer);
 
             if (!string.IsNullOrWhiteSpace(XPathNodesToBeRemoved))

@@ -84,9 +84,9 @@ namespace ConfigurationTests.Tests
         public override void Run()
         {
             if (!File.Exists(FullFilePath)) throw new AssertionException("File Not Found");
-            XmlDocument doc = knownDocuments[FullFilePath];
+            var doc = knownDocuments[FullFilePath];
 
-            List<XmlNode> nodeInstances = GetNodesWithName(XmlPath, doc);
+            var nodeInstances = GetNodesWithName(XmlPath, doc);
 
             if (nodeInstances.Count > MaximumOccurrences)
             {
@@ -104,7 +104,7 @@ namespace ConfigurationTests.Tests
                         MinimumOccurrences.pl("was", "were")));
             }
 
-            List<int> matchingAttributeCounts = nodeInstances.Select(GetMatchingAttributesCount).ToList();
+            var matchingAttributeCounts = nodeInstances.Select(GetMatchingAttributesCount).ToList();
 
             if (ExpectedValues.Count > 0 && matchingAttributeCounts.Count(c => c == ExpectedValues.Count) == 0)
             {
@@ -121,7 +121,7 @@ namespace ConfigurationTests.Tests
 
             foreach (XmlNode n in doc.ChildNodes)
             {
-                string nodePath = string.Format("{0}/{1}", path, n.Name);
+                var nodePath = string.Format("{0}/{1}", path, n.Name);
                 if (nodePath.EndsWith(xmlPath))
                 {
                     result.Add(n);

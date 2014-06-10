@@ -81,14 +81,13 @@ namespace ConfigurationTests.Tests
 
         private void ValidateAppSetting(AppSettingsSection appSettings, string appSettingName, bool isOptional = false)
         {
-            string appSettingIncludingConnectionStringName = string.Format("{0}{1}", ConnectionStringName, appSettingName);
+            var appSettingIncludingConnectionStringName = string.Format("{0}{1}", ConnectionStringName, appSettingName);
 
             var setting = appSettings.Settings[appSettingIncludingConnectionStringName];
 
             if (setting == null)
             {
-                throw new AssertionException(String.Format("AppSetting {0} not found in config",
-                    appSettingIncludingConnectionStringName));
+                throw new AssertionException(String.Format("AppSetting {0} not found in config", appSettingIncludingConnectionStringName));
             }
 
             if (isOptional)
@@ -100,8 +99,7 @@ namespace ConfigurationTests.Tests
 
             if (appSettingFound == null)
             {
-                throw new AssertionException(String.Format("AppSetting {0} not found in test",
-                    appSettingIncludingConnectionStringName));
+                throw new AssertionException(String.Format("AppSetting {0} not found in test", appSettingIncludingConnectionStringName));
             }
 
             AssertState.Equal(setting.Value, appSettingFound.ExpectedValue);

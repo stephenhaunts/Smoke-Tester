@@ -33,10 +33,10 @@ namespace ConfigurationTests.Tests
 
         public override void Run()
         {
-            ClientSection clientSection = (ClientSection)GetConfig().GetSection("system.serviceModel/client");
+            var clientSection = (ClientSection)GetConfig().GetSection("system.serviceModel/client");
 
-            ChannelEndpointElementCollection endpoints = clientSection.Endpoints;
-            ChannelEndpointElement endpoint = endpoints.OfType<ChannelEndpointElement>().FirstOrDefault(e => e.Name == EndpointName);
+            var endpoints = clientSection.Endpoints;
+            var endpoint = endpoints.OfType<ChannelEndpointElement>().FirstOrDefault(e => e.Name == EndpointName);
 
             if (endpoint == null)
             {
@@ -52,9 +52,9 @@ namespace ConfigurationTests.Tests
 
             if (CheckConnectivity.GetValueOrDefault())
             {
-                WebRequest request = WebRequest.Create(ExpectedAddress);
+                var request = WebRequest.Create(ExpectedAddress);
                 request.Timeout = (ConnectionTimeout ?? 10) * 1000;
-                HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse();
+                var webResponse = (HttpWebResponse)request.GetResponse();
                 AssertState.Equal(HttpStatusCode.OK, webResponse.StatusCode, "While attempting to check connectivity");
             }
         }

@@ -38,7 +38,6 @@ namespace ConfigurationTests.Tests
         [Description("SHA1 Checksum")]
         public string Checksum { get; set; }
 
-
         public override void Run()
         {
             using (var stream = File.OpenRead(Filename))

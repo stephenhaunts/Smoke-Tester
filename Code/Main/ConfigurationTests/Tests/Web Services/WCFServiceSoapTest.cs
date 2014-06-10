@@ -31,7 +31,7 @@ namespace ConfigurationTests.Tests
 
         public override void Run()
         {
-            StringBuilder soapRequest = new StringBuilder();
+            var soapRequest = new StringBuilder();
             soapRequest.Append("<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:a=\"http://www.w3.org/2005/08/addressing\">");
             soapRequest.Append("<s:Header>");
             soapRequest.Append(string.Concat("<a:Action s:mustUnderstand=\"1\">", SoapRequestAction, "</a:Action>"));
@@ -43,26 +43,26 @@ namespace ConfigurationTests.Tests
             soapRequest.Append("</s:Body>");
             soapRequest.Append("</s:Envelope>");
 
-            UTF8Encoding encodedSoapRequest = new UTF8Encoding();
-            byte[] bytesToWrite = encodedSoapRequest.GetBytes(soapRequest.ToString());
+            var encodedSoapRequest = new UTF8Encoding();
+            var bytesToWrite = encodedSoapRequest.GetBytes(soapRequest.ToString());
 
-            HttpWebRequest webRequest = (HttpWebRequest)HttpWebRequest.Create(ServiceAddress);
+            var webRequest = (HttpWebRequest)HttpWebRequest.Create(ServiceAddress);
             webRequest.Timeout = (ConnectionTimeout ?? 10) * 1000;
             webRequest.Method = !string.IsNullOrWhiteSpace(Method) ? Method : DEFAULT_METHOD;
             webRequest.ContentLength = bytesToWrite.Length;
             webRequest.ContentType = !string.IsNullOrWhiteSpace(ContentType) ? ContentType : DEFAULT_CONTENT_TYPE;
 
-            using (Stream newStream = webRequest.GetRequestStream())
+            using (var newStream = webRequest.GetRequestStream())
             {
                 newStream.Write(bytesToWrite, 0, bytesToWrite.Length);
                 newStream.Close();
             }
 
-            HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
-            Stream dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
+            var response = (HttpWebResponse)webRequest.GetResponse();
+            var dataStream = response.GetResponseStream();
+            var reader = new StreamReader(dataStream);
 
-            StringBuilder soapResponse = new StringBuilder();
+            var soapResponse = new StringBuilder();
             soapResponse.Append("<s:Envelope xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:a=\"http://www.w3.org/2005/08/addressing\">");
             soapResponse.Append("<s:Header>");
             soapResponse.Append(string.Concat("<a:Action s:mustUnderstand=\"1\">", ExpectedSoapResponseAction, "</a:Action>"));
@@ -72,30 +72,30 @@ namespace ConfigurationTests.Tests
             soapResponse.Append("</s:Body>");
             soapResponse.Append("</s:Envelope>");
 
-            XmlDocument expectedSoapResponse = new XmlDocument();
+            var expectedSoapResponse = new XmlDocument();
             expectedSoapResponse.LoadXml(soapResponse.ToString());
 
             if (!string.IsNullOrWhiteSpace(XPathNodesToBeRemoved))
             {
-                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(expectedSoapResponse.NameTable);
+                var namespaceManager = new XmlNamespaceManager(expectedSoapResponse.NameTable);
                 namespaceManager.AddNamespace("response", DefaultNamespace);
 
-                XmlNode root = expectedSoapResponse.DocumentElement;
-                XmlNode nodeToBeRemoved = root.SelectSingleNode(XPathNodesToBeRemoved, namespaceManager);
+                var root = expectedSoapResponse.DocumentElement;
+                var nodeToBeRemoved = root.SelectSingleNode(XPathNodesToBeRemoved, namespaceManager);
                 nodeToBeRemoved.ParentNode.RemoveChild(nodeToBeRemoved);
             }
 
-            XmlDocument actualSoapResponse = new XmlDocument();
-            string responseFromServer = reader.ReadToEnd();
+            var actualSoapResponse = new XmlDocument();
+            var responseFromServer = reader.ReadToEnd();
             actualSoapResponse.LoadXml(responseFromServer);
 
             if (!string.IsNullOrWhiteSpace(XPathNodesToBeRemoved))
             {
-                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(actualSoapResponse.NameTable);
+                var namespaceManager = new XmlNamespaceManager(actualSoapResponse.NameTable);
                 namespaceManager.AddNamespace("response", DefaultNamespace);
 
-                XmlNode root = actualSoapResponse.DocumentElement;
-                XmlNode nodeToBeRemoved = root.SelectSingleNode(XPathNodesToBeRemoved, namespaceManager);
+                var root = actualSoapResponse.DocumentElement;
+                var nodeToBeRemoved = root.SelectSingleNode(XPathNodesToBeRemoved, namespaceManager);
                 nodeToBeRemoved.ParentNode.RemoveChild(nodeToBeRemoved);
             }
 

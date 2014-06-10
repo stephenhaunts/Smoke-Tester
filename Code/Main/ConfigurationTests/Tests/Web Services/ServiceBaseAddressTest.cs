@@ -29,9 +29,9 @@ namespace ConfigurationTests.Tests
     {
         public override void Run()
         {
-            ServicesSection servicesSection = (ServicesSection)GetConfig().GetSection("system.serviceModel/services");
+            var servicesSection = (ServicesSection)GetConfig().GetSection("system.serviceModel/services");
 
-            ServiceElementCollection services = servicesSection.Services;
+            var services = servicesSection.Services;
 
             if (services.Count == 0)
             {
@@ -42,7 +42,7 @@ namespace ConfigurationTests.Tests
 
             foreach (ServiceElement se in services.OfType<ServiceElement>().Where(se=>se.Name==ServiceName))
             {
-                IEnumerable<BaseAddressElement> baseAddressElements = se.Host.BaseAddresses.OfType<BaseAddressElement>();
+                var baseAddressElements = se.Host.BaseAddresses.OfType<BaseAddressElement>();
                 baseAddress = baseAddressElements.FirstOrDefault(e => e.BaseAddress == ExpectedBaseAddressValue);
                 AssertState.NotNull(baseAddress, "Base address is incorrect or not present");
             }

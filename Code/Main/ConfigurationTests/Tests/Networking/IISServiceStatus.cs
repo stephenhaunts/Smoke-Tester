@@ -44,9 +44,10 @@ namespace ConfigurationTests.Tests
         public override List<Test> CreateExamples()
         {
             return new List<Test> { new IISServiceStatus()
-            {                
-                ServiceStatus = ServiceControllerStatus.Running
-            } };
+                {                
+                    ServiceStatus = ServiceControllerStatus.Running
+                } 
+            };
         }
     }
 }

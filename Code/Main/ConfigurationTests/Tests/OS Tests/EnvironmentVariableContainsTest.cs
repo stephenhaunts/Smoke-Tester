@@ -35,7 +35,7 @@ namespace ConfigurationTests.Tests
 
         public override void Run()
         {
-            string s = Environment.GetEnvironmentVariable(Variable) ?? string.Empty;
+            var s = Environment.GetEnvironmentVariable(Variable) ?? string.Empty;
 
             if (!CaseSensitive)
             {

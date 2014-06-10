@@ -37,14 +37,13 @@ namespace ConfigurationTests.Tests
 
         public override void Run()
         {
-            string elementValue = GetSettingElement();
-            AssertState.Equal(ExpectedValue, elementValue, CaseSensitive);
+            AssertState.Equal(ExpectedValue, GetSettingElement(), CaseSensitive);
         }
 
         protected internal string GetSettingElement()
         {
-            AppSettingsSection appSettingsSection = (AppSettingsSection)GetConfig().GetSection("appSettings");
-            KeyValueConfigurationElement element = appSettingsSection.Settings[Key];
+            var appSettingsSection = (AppSettingsSection)GetConfig().GetSection("appSettings");
+            var element = appSettingsSection.Settings[Key];
 
             if (element == null)
             {

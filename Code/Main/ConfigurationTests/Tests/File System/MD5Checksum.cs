@@ -38,7 +38,6 @@ namespace ConfigurationTests.Tests
         [Description("MD5 Checksum")]
         public string Checksum { get; set; }
 
-
         public override void Run()
         {
             using (var md5 = MD5.Create())

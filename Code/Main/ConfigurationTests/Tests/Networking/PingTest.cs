@@ -45,8 +45,7 @@ namespace ConfigurationTests.Tests
 
         public override void Run()
         {
-            bool result = WasSuccessful(PingHost(HostName));
-
+            var result = WasSuccessful(PingHost(HostName));
             AssertState.Equal(ShouldExist, result, string.Format("Host is {0}contactable.", ShouldExist.IfTrue("not ")));
         }
 
@@ -111,19 +110,9 @@ namespace ConfigurationTests.Tests
         }
 
         private static IPAddress GetIpFromHost(ref string host)
-        {            
-            var errMessage = string.Empty;
-           
-            IPAddress address = null;
-
-            try
-            {                
-                address = Dns.GetHostEntry(host).AddressList[0];
-            }
-            catch (SocketException ex)
-            {                
-                errMessage = string.Format("DNS Error: {0}", ex.Message);
-            }
+        {
+            var address = Dns.GetHostEntry(host).AddressList[0];
+            
             return address;
         }
 

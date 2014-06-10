@@ -35,53 +35,49 @@ namespace ConfigurationTests.Tests
         [MandatoryField]
         [Category("Web Service Properties")]
         public string ServiceName { get; set; }
-        private readonly Func<ServiceEndpointElement, string, bool> addressMatchPredicate = (a, e) => a.Address.ToString() == e;
-        private readonly Func<ServiceEndpointElement, string, bool> nameMatchPredicate = (a, e) => a.Name == e;
+        private readonly Func<ServiceEndpointElement, string, bool> _addressMatchPredicate = (a, e) => a.Address.ToString() == e;
+        private readonly Func<ServiceEndpointElement, string, bool> _nameMatchPredicate = (a, e) => a.Name == e;
 
         public override void Run()
         {
-            ServicesSection servicesSection = (ServicesSection)GetConfig().GetSection("system.serviceModel/services");
-
-            ServiceElementCollection services = servicesSection.Services;
+            var servicesSection = (ServicesSection)GetConfig().GetSection("system.serviceModel/services");
+            var services = servicesSection.Services;
 
             if (services.Count == 0)
             {
                 throw new AssertionException("No services section could be found.");
             }
 
-            bool serviceWasFound = false;
+            var serviceWasFound = false;
 
-            foreach (ServiceElement se in services)
+            foreach (ServiceElement se in services.Cast<ServiceElement>().Where(se => se.Name == ServiceName))
             {
-                if (se.Name == ServiceName)
+                serviceWasFound = true;
+
+                Func<ServiceEndpointElement, bool> predicate;
+
+                if (string.IsNullOrWhiteSpace(EndpointName))
                 {
-                    serviceWasFound = true;
-
-                    Func<ServiceEndpointElement, bool> predicate;
-
-                    if (string.IsNullOrWhiteSpace(EndpointName))
-                    {
-                        predicate = a => addressMatchPredicate(a, ExpectedAddress);
-                    }
-                    else
-                    {
-                        predicate = a => nameMatchPredicate(a, EndpointName);
-                    }
-
-                    ServiceEndpointElement endpoint = se.Endpoints.OfType<ServiceEndpointElement>().FirstOrDefault(predicate);
-
-                    if (endpoint == null)
-                    {
-                        throw new AssertionException(string.Format("Could not find an Endpoint for Service [{0}] with the specified properties", ServiceName));
-                    }
-
-                    AssertState.Equal(ExpectedAddress, endpoint.Address.ToString(), "Address is incorrect");
-                    AssertState.Equal(ExpectedBehaviourConfiguration, endpoint.BehaviorConfiguration, "BehaviourConfiguration is incorrect");
-                    AssertState.Equal(ExpectedBinding, endpoint.Binding, "Binding is incorrect");
-                    AssertState.Equal(ExpectedBindingConfiguration, endpoint.BindingConfiguration, "BindingConfiguration is incorrect");
-                    AssertState.Equal(ExpectedContract, endpoint.Contract, "Contract is incorrect");
-                    AssertState.Equal(ExpectedEndpointConfiguration, endpoint.EndpointConfiguration, "EndpointConfiguration is incorrect");
+                    predicate = a => _addressMatchPredicate(a, ExpectedAddress);
                 }
+                else
+                {
+                    predicate = a => _nameMatchPredicate(a, EndpointName);
+                }
+
+                var endpoint = se.Endpoints.OfType<ServiceEndpointElement>().FirstOrDefault(predicate);
+
+                if (endpoint == null)
+                {
+                    throw new AssertionException(string.Format("Could not find an Endpoint for Service [{0}] with the specified properties", ServiceName));
+                }
+
+                AssertState.Equal(ExpectedAddress, endpoint.Address.ToString(), "Address is incorrect");
+                AssertState.Equal(ExpectedBehaviourConfiguration, endpoint.BehaviorConfiguration, "BehaviourConfiguration is incorrect");
+                AssertState.Equal(ExpectedBinding, endpoint.Binding, "Binding is incorrect");
+                AssertState.Equal(ExpectedBindingConfiguration, endpoint.BindingConfiguration, "BindingConfiguration is incorrect");
+                AssertState.Equal(ExpectedContract, endpoint.Contract, "Contract is incorrect");
+                AssertState.Equal(ExpectedEndpointConfiguration, endpoint.EndpointConfiguration, "EndpointConfiguration is incorrect");
             }
 
             if (!serviceWasFound)
@@ -91,9 +87,9 @@ namespace ConfigurationTests.Tests
 
             if (CheckConnectivity.GetValueOrDefault())
             {
-                WebRequest request = WebRequest.Create(ExpectedAddress);
+                var request = WebRequest.Create(ExpectedAddress);
                 request.Timeout = (ConnectionTimeout ?? 10) * 1000;
-                HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse();
+                var webResponse = (HttpWebResponse)request.GetResponse();
                 AssertState.Equal(HttpStatusCode.OK, webResponse.StatusCode, "While attempting to check connectivity");
 
                 request.Abort();

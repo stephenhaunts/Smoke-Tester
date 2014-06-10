@@ -25,7 +25,7 @@ namespace ConfigurationTests.Tests
     {
         protected override void DoConnectivityCheck()
         {
-            using (SqlConnection sqlConnection = (new SqlConnection(ConnectionString)))
+            using (var sqlConnection = (new SqlConnection(ConnectionString)))
             {
                 sqlConnection.Open();
             }
