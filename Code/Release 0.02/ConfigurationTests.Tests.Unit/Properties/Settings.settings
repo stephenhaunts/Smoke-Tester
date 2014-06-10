@@ -1,0 +1,28 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConfigurationTests.Tests.Unit" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="StringSetting" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SettingValue</Value>
+    </Setting>
+    <Setting Name="BoolSetting" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ByteSetting" Type="System.Byte" Scope="Application">
+      <Value Profile="(Default)">123</Value>
+    </Setting>
+    <Setting Name="CharSetting" Type="System.Char" Scope="Application">
+      <Value Profile="(Default)">x</Value>
+    </Setting>
+    <Setting Name="UserStringSetting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ValueOfSetting</Value>
+    </Setting>
+    <Setting Name="ConnectionStringSetting" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;This is my Application connection string&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">This is my Application connection string</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
