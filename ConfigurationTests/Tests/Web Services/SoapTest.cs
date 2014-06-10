@@ -16,19 +16,41 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.ComponentModel;
+
 namespace ConfigurationTests.Tests
 {
     public abstract class SoapTest : ConfigurationTest
     {
+        [Category("Web Service Properties")]
         public string ServiceAddress { get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedSoapResponseBody { get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedSoapResponseAction { get; set; }
+
+        [Category("Web Service Properties")]
         public string SoapRequestBody { get; set; }
+
+        [Category("Web Service Properties")]
         public string SoapRequestAction { get; set; }
+
+        [Category("Web Service Properties")]
         public string DefaultNamespace { get; set; }
+
+        [Category("Web Service Properties")]
         public string XPathNodesToBeRemoved { get; set; }
+
+        [Category("Web Service Properties")]
         public int? ConnectionTimeout{ get; set; }
+
+        [Category("Web Service Properties")]
         public string ContentType { get; set; }
-        public string Method { get; set; }
+
+        [Category("Web Service Properties")]
+        public string Method { get; set; }        
     }
 }

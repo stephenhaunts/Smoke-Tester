@@ -28,10 +28,13 @@ namespace ConfigurationTests.Tests
     public class WindowsRemoteServiceExistsTest : Test
     {
         [Description("Name of service")]
+        [Category("Windows Servicess Properties")]
         [MandatoryField]
         public string ServiceName { get; set; }
 
         [Description("Machine name of remote windows service.")]
+        [Category("Windows Servicess Properties")]
+
         [MandatoryField]
         public string MachineName { get; set; }
 

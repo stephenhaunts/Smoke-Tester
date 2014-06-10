@@ -30,6 +30,7 @@ namespace ConfigurationTests.Tests
 
         [DefaultValue(true)]
         [Description("True to check if MSMQ exists")]
+        [Category("MSMQ Properties Properties")]
         public bool ShouldExist
         {
             get{return _shouldExist;}

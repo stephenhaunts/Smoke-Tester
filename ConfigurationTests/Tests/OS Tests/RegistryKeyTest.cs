@@ -28,6 +28,7 @@ namespace ConfigurationTests.Tests
     {
 
         [DefaultProperty("ValueName")]
+        [Category("Registry Properties")]
         public class RegistryEntry
         {
             public string ValueName { get; set; }
@@ -71,6 +72,7 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("Registry Properties")]
         public RegistryBaseKey BaseKey
         {
             get
@@ -84,6 +86,7 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("Registry Properties")]
         public string Path
         {
             get
@@ -97,6 +100,7 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("Registry Properties")]
         public List<RegistryEntry> ExpectedEntries
         {
             get

@@ -17,6 +17,7 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
+using System.ComponentModel;
 using ConfigurationTests.Attributes;
 
 using System;
@@ -36,23 +37,26 @@ namespace ConfigurationTests.Tests
     public class PlatformTest : Test
     {
         [MandatoryField]
+        [Category("Platform Properties")]
         public string AssemblyFilePath { get; set; }
+
         [MandatoryField]
+        [Category("Platform Properties")]
         public CpuArchitectures ExpectedCpuArchitecture { get; set; }
 
         public override void Run()
         {
             try
             {
-                CpuArchitectures ActualCpuArchitecture = GetPEArchitecture(AssemblyFilePath);
+                var actualCpuArchitecture = GetPEArchitecture(AssemblyFilePath);
 
-                if (ExpectedCpuArchitecture.ToString() != ActualCpuArchitecture.ToString())
+                if (ExpectedCpuArchitecture.ToString() != actualCpuArchitecture.ToString())
                 {
                     throw new AssertionException(
                         string.Format("{0} was expected to be compiled for {1} but was actually compiled for {2}",
                             AssemblyFilePath,
                             ExpectedCpuArchitecture,
-                            ActualCpuArchitecture));
+                            actualCpuArchitecture));
                 }
             }
             catch (BadImageFormatException)

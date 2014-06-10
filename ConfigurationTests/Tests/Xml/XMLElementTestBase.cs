@@ -37,6 +37,7 @@ namespace ConfigurationTests.Tests
                                                    });
 
         [DefaultValue(int.MaxValue)]
+        [Category("XML Element Properties")]
         public int MaximumOccurrences
         {
             get { return maximumOccurences; }
@@ -44,6 +45,7 @@ namespace ConfigurationTests.Tests
         }
 
         [DefaultValue(1)]
+        [Category("XML Element Properties")]
         public int MinimumOccurrences
         {
             get { return minimumOccurences; }
@@ -51,6 +53,7 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("XML Element Properties")]
         public string XmlPath { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace ConfigurationTests.Tests
         private List<Attribute> expectedValues = new List<Attribute>();
 
         [MandatoryField]
+        [Category("XML Element Properties")]
         public List<Attribute> ExpectedValues
         {
             get { return expectedValues; }

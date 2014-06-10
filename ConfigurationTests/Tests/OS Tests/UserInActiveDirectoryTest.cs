@@ -28,10 +28,12 @@ namespace ConfigurationTests.Tests
     {
         [Description("Username to check")]
         [MandatoryField]
+        [Category("Active Directory Properties")]
         public string UserName { get; set; }
 
 
         [Description("Domain to check against. Blank for default domain")]
+        [Category("Active Directory Properties")]
         public string Domain { get; set; }
 
         public override void Run()

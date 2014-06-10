@@ -26,9 +26,11 @@ namespace ConfigurationTests.Tests
     public class EnvironmentVariableContainsTest : EnvironmentVariableTest
     {
         [MandatoryField]
+        [Category("Environment Variable Properties")]
         public string ExpectedValue{ get; set; }
 
         [DefaultValue(false)]
+        [Category("Environment Variable Properties")]
         public bool CaseSensitive{ get; set; }
 
         public override void Run()

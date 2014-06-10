@@ -18,14 +18,22 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.ComponentModel;
 using System.Net;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
     public class HttpConnectionTest : Test
     {
+        [MandatoryField]
+        [Description("The URL to test.")]
+        [Category("HTTP Connection Properties")]
         public string UrlToTest { get; set; }
+
+        [MandatoryField]
+        [Description("The expected HTTP status code response.")]
+        [Category("HTTP Connection Properties")]
         public HttpStatusCode ExpectedResponse { get; set; }
 
         public override void Run()

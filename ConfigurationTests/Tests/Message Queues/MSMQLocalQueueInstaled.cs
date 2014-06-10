@@ -32,6 +32,7 @@ namespace ConfigurationTests.Tests
 
         [DefaultValue(true)]
         [Description("True to check if MSMQ exists")]
+        [Category("MSMQ Properties Properties")]
         public bool ShouldExist
         {
             get{return _shouldExist;}
@@ -39,7 +40,8 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
-        [Description("The name of the local queue to check for")]
+        [Description(@"The name of the local queue to check for, eg .\private$\TestQueue")]
+        [Category("MSMQ Properties Properties")]
         public string QueueName
         {
             get { return _queueName; }

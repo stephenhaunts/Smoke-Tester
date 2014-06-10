@@ -18,6 +18,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
@@ -25,6 +26,7 @@ namespace ConfigurationTests.Tests
     public class EnvironmentVariableEqualsTest : EnvironmentVariableTest
     {
         [MandatoryField]
+        [Category("Environment Variable Properties")]
         public string ExpectedValue{ get; set; }
 
         public override void Run()

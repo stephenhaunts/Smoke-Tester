@@ -18,6 +18,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.Configuration;
@@ -32,6 +33,7 @@ namespace ConfigurationTests.Tests
     public class ServiceEndpointTest : EndpointTest
     {
         [MandatoryField]
+        [Category("Web Service Properties")]
         public string ServiceName { get; set; }
         private readonly Func<ServiceEndpointElement, string, bool> addressMatchPredicate = (a, e) => a.Address.ToString() == e;
         private readonly Func<ServiceEndpointElement, string, bool> nameMatchPredicate = (a, e) => a.Name == e;

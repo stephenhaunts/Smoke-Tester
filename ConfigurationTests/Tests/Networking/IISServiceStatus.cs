@@ -29,6 +29,7 @@ namespace ConfigurationTests.Tests
     {
         [Description("Expected Service Status")]
         [MandatoryField]
+        [Category("IIS Properties")]
         public ServiceControllerStatus ServiceStatus { get; set; }
 
         public override void Run()

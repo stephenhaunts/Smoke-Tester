@@ -16,6 +16,8 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.ComponentModel;
 using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
@@ -23,7 +25,10 @@ namespace ConfigurationTests.Tests
     public abstract class BaseAddressTest : ConfigurationTest
     {
         [MandatoryField]
+        [Category("Web Service Properties")]
         public string ServiceName { get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedBaseAddressValue { get; set; }        
     }
 }

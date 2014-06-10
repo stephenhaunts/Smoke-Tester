@@ -16,18 +16,38 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.ComponentModel;
+
 namespace ConfigurationTests.Tests
 {
     public abstract class EndpointTest : ConfigurationTest
     {
+        [Category("Web Service Properties")]
         public virtual string EndpointName { get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedAddress { get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedBehaviourConfiguration{ get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedBinding{ get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedBindingConfiguration{ get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedContract{ get; set; }
+
+        [Category("Web Service Properties")]
         public string ExpectedEndpointConfiguration{ get; set; }
+
+        [Category("Web Service Properties")]
         public bool? CheckConnectivity{ get; set; }
+
+        [Category("Web Service Properties")]
         public int? ConnectionTimeout{ get; set; }
     }
 }

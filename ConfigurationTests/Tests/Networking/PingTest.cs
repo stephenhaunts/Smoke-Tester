@@ -28,13 +28,15 @@ namespace ConfigurationTests.Tests
 {
     public class PingTest : Test
     {
-        [Description("Host name to check.")]
+        [Description("Host name to check, eg www.google.com")]
+        [Category("Ping Properties")]
         public string HostName { get; set; }
 
         private bool _shouldExist = true;
 
         [DefaultValue(true)]
         [Description("Does host exist?")]
+        [Category("Ping Properties")]
         public bool ShouldExist
         {
             get { return _shouldExist; }
