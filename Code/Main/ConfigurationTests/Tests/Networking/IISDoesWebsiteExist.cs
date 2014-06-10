@@ -20,8 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
-using System.Linq;
-using System.ServiceProcess;
 using Common.Boolean;
 using System.ComponentModel;
 using ConfigurationTests.Attributes;
@@ -35,6 +33,7 @@ namespace ConfigurationTests.Tests
         [DefaultValue(true)]
         [MandatoryField]
         [Description("True to check if Website exists")]
+        [Category("IIS Properties")]
         public bool ShouldExist
         {
             get { return _shouldExist; }
@@ -44,10 +43,12 @@ namespace ConfigurationTests.Tests
         [DefaultValue("localhost")]
         [MandatoryField]
         [Description("Name of server that website lives, eg. localhost")]
+        [Category("IIS Properties")]
         public string ServerName { get; set; }
 
         [MandatoryField]
         [Description("Name of the website to check for.")]
+        [Category("IIS Properties")]
         public string WebsiteName { get; set; }
 
         public override void Run()

@@ -25,6 +25,7 @@ namespace ConfigurationTests.Tests
     {
         [MandatoryField]
         [Description("Name of variable")]
+        [Category("Environment Variable Properties")]
         public string Variable{ get; set; }
     }
 }

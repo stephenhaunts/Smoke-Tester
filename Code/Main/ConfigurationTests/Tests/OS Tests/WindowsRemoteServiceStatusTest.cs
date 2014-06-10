@@ -28,21 +28,23 @@ namespace ConfigurationTests.Tests
     public class WindowsRemoteServiceStatusTest : Test
     {
         [Description("Name of service")]
+        [Category("Windows Servicess Properties")]
         [MandatoryField]
         public string ServiceName { get; set; }
 
         [Description("Machine name of remote windows service.")]
+        [Category("Windows Servicess Properties")]
         [MandatoryField]
         public string MachineName { get; set; }
 
         [Description("Expected Service Status")]
+        [Category("Windows Servicess Properties")]
         [MandatoryField]
         public ServiceControllerStatus ServiceStatus { get; set; }
 
         public override void Run()
         {
             var ctl = ServiceController.GetServices(MachineName).FirstOrDefault(s => s.ServiceName == ServiceName);
-
             if (ctl == null) throw new AssertionException(string.Format("Service with name [{0}] was not found on {1}", ServiceName, MachineName));
 
             AssertState.Equal(ServiceStatus, ctl.Status);

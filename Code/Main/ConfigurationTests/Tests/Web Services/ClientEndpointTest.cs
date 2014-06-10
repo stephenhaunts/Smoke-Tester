@@ -17,6 +17,7 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.Configuration;
@@ -27,6 +28,7 @@ namespace ConfigurationTests.Tests
     public class ClientEndpointTest : EndpointTest
     {
         [MandatoryField]
+        [Category("Web Service Properties")]
         public override string EndpointName { get; set; }
 
         public override void Run()

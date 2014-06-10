@@ -17,6 +17,7 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
+using System.ComponentModel;
 using ConfigurationTests.Attributes;
 using System;
 
@@ -25,9 +26,11 @@ namespace ConfigurationTests.Tests
     public class COMClassTest : Test
     {
         [MandatoryField]
+        [Category("COM Class Properties")]
         public string ClassName { get; set; }
 
         [MandatoryField]
+        [Category("COM Class Properties")]
         public string DllName { get; set; }
 
         public override void Run()

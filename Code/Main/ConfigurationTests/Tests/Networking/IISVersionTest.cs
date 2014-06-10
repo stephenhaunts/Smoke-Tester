@@ -19,9 +19,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceProcess;
-using Common.Boolean;
 using System.ComponentModel;
 using ConfigurationTests.Attributes;
 using Microsoft.Win32;
@@ -31,7 +28,8 @@ namespace ConfigurationTests.Tests
     public class IISVersionTest : Test
     {        
         [DefaultValue(true)]
-        [Description("Version if IIS Installed")]
+        [Description("Version if IIS Installed, eg 7.5")]
+        [Category("IIS Properties")]
         [MandatoryField]
         public string Version { get; set; }
 
@@ -42,7 +40,7 @@ namespace ConfigurationTests.Tests
 
         public Version GetIisVersion()
         {
-            using (RegistryKey componentsKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\InetStp", false))
+            using (var componentsKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\InetStp", false))
             {
                 if (componentsKey != null)
                 {

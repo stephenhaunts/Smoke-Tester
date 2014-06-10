@@ -17,6 +17,7 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -28,6 +29,7 @@ namespace ConfigurationTests.Tests
     public class XMLElementContentTest : XMLElementTestBase
     {
         [MandatoryField]
+        [Category("XML Element Properties")]
         public string ExpectedValue { get; set; }
 
         public override List<Test> CreateExamples()
