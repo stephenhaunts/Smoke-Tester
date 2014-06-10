@@ -143,6 +143,7 @@ namespace TestConfiguration.Forms
             {
                 Application.Exit();
             }
+            
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
