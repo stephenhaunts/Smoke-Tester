@@ -46,7 +46,7 @@ namespace ConfigurationTests.Tests
 
         public override List<Test> CreateExamples()
         {
-            return new List<Test> { new WindowsServiceExistsTest() { ServiceName = "Bob" } };
+            return new List<Test> { new WindowsServiceExistsTest { ServiceName = "Bob" } };
         }
     }
 }

@@ -51,11 +51,11 @@ namespace ConfigurationTests.Tests
         {
             if (!File.Exists(FullFilePath)) throw new AssertionException("File Not Found");
 
-            XmlDocument doc = knownDocuments[FullFilePath];
+            var doc = knownDocuments[FullFilePath];
 
             IEnumerable<XmlNode> nodeInstances = GetNodesWithName(XmlPath, doc);
 
-            int nodeCount = nodeInstances.Count();
+            var nodeCount = nodeInstances.Count();
 
             if (nodeCount > MaximumOccurrences)
             {
@@ -73,11 +73,11 @@ namespace ConfigurationTests.Tests
                         MinimumOccurrences.pl("was", "were")));
             }
 
-            List<XmlNode> nodesWithMatchingAttributes = new List<XmlNode>();
+            var nodesWithMatchingAttributes = new List<XmlNode>();
             nodesWithMatchingAttributes.AddRange(nodeInstances);
             nodeInstances = nodeInstances.Where(n => n.InnerXml == ExpectedValue);
 
-            int nodesCount = nodeInstances.Count();
+            var nodesCount = nodeInstances.Count();
 
             if (nodesCount == 0)
             {
@@ -100,7 +100,7 @@ namespace ConfigurationTests.Tests
 
             foreach (XmlNode n in doc.ChildNodes)
             {
-                string nodePath = string.Format("{0}/{1}", path, n.Name);
+                var nodePath = string.Format("{0}/{1}", path, n.Name);
                 if (nodePath.EndsWith(xmlPath)) result.Add(n);
                 if (n.HasChildNodes) result.AddRange(GetNodesWithName(xmlPath, n, nodePath));
             }

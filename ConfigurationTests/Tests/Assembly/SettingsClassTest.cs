@@ -57,7 +57,7 @@ namespace ConfigurationTests.Tests
                 throw new AssertionException(string.Format("File Not Found: {0}", AssemblyPath));
             }
 
-            Type classType = assembly.GetTypes().FirstOrDefault(t => t.Name == ClassName);
+            var classType = assembly.GetTypes().FirstOrDefault(t => t.Name == ClassName);
 
             if (classType == null)
             {
@@ -70,31 +70,32 @@ namespace ConfigurationTests.Tests
                     ClassName));
             }
 
-            PropertyInfo propertyInfo = classType.GetProperty(SettingName);
+            var propertyInfo = classType.GetProperty(SettingName);
 
             if (propertyInfo == null)
             {
                 throw new AssertionException(string.Format("Setting Not Found: {0}", SettingName));
             }
 
-            object instance = Activator.CreateInstance(classType);
-            object value = propertyInfo.GetValue(instance, null);
+            var instance = Activator.CreateInstance(classType);
+            var value = propertyInfo.GetValue(instance, null);
 
             AssertState.Equal(ExpectedValue, value.ToString());
         }
 
         public override List<Test> CreateExamples()
         {
-            List<Test> examples = new List<Test>();
-
-            examples.Add(new SettingsClassTest
-                             {
-                                 TestName = "Example Settings Class Test",
-                                 AssemblyPath = "D:\\Services\\InstalledService\\bin\\MyAssembly.dll",
-                                 ClassName = "Settings",
-                                 SettingName = "OtherServiceURI",
-                                 ExpectedValue = "http://PRODSERVICESERVER/Services/Service.svc"
-                             });
+            var examples = new List<Test>
+            {
+                new SettingsClassTest
+                {
+                    TestName = "Example Settings Class Test",
+                    AssemblyPath = "D:\\Services\\InstalledService\\bin\\MyAssembly.dll",
+                    ClassName = "Settings",
+                    SettingName = "OtherServiceURI",
+                    ExpectedValue = "http://PRODSERVICESERVER/Services/Service.svc"
+                }
+            };
 
             return examples;
         }

@@ -55,6 +55,7 @@ namespace ConfigurationTests.Tests
 
         [Category("Connection String Properties")]
         protected string ConnectionString { get; set; }
+
         protected abstract void DoConnectivityCheck();
 
         protected virtual void CheckAssertions()
@@ -78,9 +79,9 @@ namespace ConfigurationTests.Tests
 
         protected void CheckConnectionString(string connectionString)
         {
-            DbConnectionStringBuilder dbConnection = new DbConnectionStringBuilder { ConnectionString = connectionString };
+            var dbConnection = new DbConnectionStringBuilder { ConnectionString = connectionString };
 
-            foreach (ConnectionStringSetting setting in StringSettings)
+            foreach (var setting in StringSettings)
             {
                 if (dbConnection.ContainsKey(setting.SettingName))
                 {
@@ -109,8 +110,8 @@ namespace ConfigurationTests.Tests
 
         protected ConnectionStringSettings GetConnectionStringSettings()
         {
-            ConnectionStringsSection connectionStrings = (ConnectionStringsSection)GetConfig().GetSection("connectionStrings");
-            ConnectionStringSettings connectionStringSettings = connectionStrings.ConnectionStrings[ConnectionStringName];
+            var connectionStrings = (ConnectionStringsSection)GetConfig().GetSection("connectionStrings");
+            var connectionStringSettings = connectionStrings.ConnectionStrings[ConnectionStringName];
 
             if (connectionStringSettings == null)
             {

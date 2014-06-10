@@ -24,10 +24,10 @@ namespace ConfigurationTests.Tests
 {
     public abstract class ConfigurationTest : FileTest
     {
-        private bool isWebConfig;
-        private string exePath;
+        private bool _isWebConfig;
+        private string _exePath;
 
-        private readonly CacheList<string, Configuration> configurationCache = new CacheList<string, Configuration>(ConfigurationManager.OpenExeConfiguration);
+        private readonly CacheList<string, Configuration> _configurationCache = new CacheList<string, Configuration>(ConfigurationManager.OpenExeConfiguration);
 
         protected Configuration GetConfig()
         {
@@ -36,25 +36,25 @@ namespace ConfigurationTests.Tests
                 throw new AssertionException(string.Format("File Not Found, {0}", FullFilePath));
             }
 
-            exePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(FullFilePath), System.IO.Path.GetFileNameWithoutExtension(FullFilePath));
+            _exePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(FullFilePath), System.IO.Path.GetFileNameWithoutExtension(FullFilePath));
 
-            isWebConfig = System.IO.Path.GetFileName(exePath).ToLower() == "web" && !File.Exists(exePath);
+            _isWebConfig = System.IO.Path.GetFileName(_exePath).ToLower() == "web" && !File.Exists(_exePath);
 
-            if (!isWebConfig && !File.Exists(exePath))
+            if (!_isWebConfig && !File.Exists(_exePath))
             {
-                throw new AssertionException(string.Format("Assembly Not Found, {0}", exePath));
+                throw new AssertionException(string.Format("Assembly Not Found, {0}", _exePath));
             }
 
-            if (isWebConfig)
+            if (_isWebConfig)
             {
-                File.Create(exePath).Close();
+                File.Create(_exePath).Close();
             }
 
-            Configuration configuration = configurationCache[exePath];
+            Configuration configuration = _configurationCache[_exePath];
 
-            if (isWebConfig)
+            if (_isWebConfig)
             {
-                File.Delete(exePath);
+                File.Delete(_exePath);
             }
 
             return configuration;

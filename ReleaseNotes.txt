@@ -16,8 +16,7 @@ Version 0.02
 [X] - Added IISDoesWebsiteExist Test
 [X] - Added UserInActiveDirectory Test
 [X] - Added a network Ping Test
-[ ] - Assembly version number Test
-
+[X] - Assembly version number Test
 [X] - Change HTTPConnection Test now uses an enumerated set of return codes.
 
 Version 0.01

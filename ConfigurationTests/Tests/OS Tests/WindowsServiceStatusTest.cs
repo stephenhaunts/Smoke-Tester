@@ -40,7 +40,6 @@ namespace ConfigurationTests.Tests
         public override void Run()
         {
             var ctl = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == ServiceName);
-
             if (ctl == null) throw new AssertionException(string.Format("Service with name [{0}] was not found", ServiceName));
 
             AssertState.Equal(ServiceStatus, ctl.Status);
@@ -48,7 +47,7 @@ namespace ConfigurationTests.Tests
 
         public override List<Test> CreateExamples()
         {
-            return new List<Test> { new WindowsServiceStatusTest()
+            return new List<Test> { new WindowsServiceStatusTest
             {
                 ServiceName = "Bob",
                 ServiceStatus = ServiceControllerStatus.Running

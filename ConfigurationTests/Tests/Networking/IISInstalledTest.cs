@@ -48,9 +48,7 @@ namespace ConfigurationTests.Tests
             var services = ServiceController.GetServices().ToList();
 
             var iis = services.Find(o => o.ServiceName == "W3SVC");
-            if (iis == null) return false;
-
-            return true;
+            return iis != null;
         }
 
         public override List<Test> CreateExamples()

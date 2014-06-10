@@ -25,7 +25,6 @@ using System.IO;
 
 namespace ConfigurationTests.Tests
 {
-
     public enum CpuArchitectures
     {
         Unknown,
@@ -48,7 +47,7 @@ namespace ConfigurationTests.Tests
         {
             try
             {
-                var actualCpuArchitecture = GetPEArchitecture(AssemblyFilePath);
+                var actualCpuArchitecture = GetPeArchitecture(AssemblyFilePath);
 
                 if (ExpectedCpuArchitecture.ToString() != actualCpuArchitecture.ToString())
                 {
@@ -65,26 +64,32 @@ namespace ConfigurationTests.Tests
             }
         }
 
-        public static CpuArchitectures GetPEArchitecture(string pFilePath)
+        public static CpuArchitectures GetPeArchitecture(string pFilePath)
         {
             ushort architecture = 0;
 
-            ushort[] coffHeader = new ushort[10];
+            var coffHeader = new ushort[10];
 
-            using (FileStream fStream = new FileStream(pFilePath, FileMode.Open, FileAccess.Read))
+            using (var fStream = new FileStream(pFilePath, FileMode.Open, FileAccess.Read))
             {
-                using (BinaryReader bReader = new BinaryReader(fStream))
+                using (var bReader = new BinaryReader(fStream))
                 {
                     if (bReader.ReadUInt16() == 23117) //check the MZ signature
                     {
                         fStream.Seek(0x3A, SeekOrigin.Current); // Go to the location of the location of the NT header
                         fStream.Seek(bReader.ReadUInt32(), SeekOrigin.Begin); // seek to the start of the NT header.
+
                         if (bReader.ReadUInt32() == 17744) //check the PE\0\0 signature.
                         {
                             for (int i = 0; i < 10; i++) // Read COFF Header
+                            {
                                 coffHeader[i] = bReader.ReadUInt16();
+                            }
+
                             if (coffHeader[8] > 0) // Read Optional Header
+                            {
                                 architecture = bReader.ReadUInt16();
+                            }
                         }
                     }
                 }

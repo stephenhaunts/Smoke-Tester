@@ -105,9 +105,7 @@ namespace ConfigurationTests.Tests
         {
             get
             {
-                if (_ExpectedEntries == null)
-                    _ExpectedEntries = new List<RegistryEntry>();
-                return _ExpectedEntries;
+                return _ExpectedEntries ?? (_ExpectedEntries = new List<RegistryEntry>());
             }
             set
             {
@@ -140,26 +138,27 @@ namespace ConfigurationTests.Tests
         {
             get
             {
-                if (key == null)
-                {
-                    key = baseKeys[BaseKey];
-                    string path = Path;
-                    if (!path.EndsWith("/")) path += "/";
+                if (key != null) return key;
 
-                    while (path.Length > 0)
-                    {
-                        string keyName = path.Substring(0, path.IndexOf('/'));
-                        key = key.OpenSubKey(keyName);
-                        path = path.Substring(path.IndexOf('/') + 1);
-                    }
+                key = baseKeys[BaseKey];
+                var path = Path;
+
+                if (!path.EndsWith("/")) path += "/";
+
+                while (path.Length > 0)
+                {
+                    var keyName = path.Substring(0, path.IndexOf('/'));
+                    key = key.OpenSubKey(keyName);
+                    path = path.Substring(path.IndexOf('/') + 1);
                 }
+
                 return key;
             }
         }
 
         public override void Run()
         {
-            foreach (RegistryEntry entry in ExpectedEntries)
+            foreach (var entry in ExpectedEntries)
             {
                 object actual = GetValue(entry.ValueName);
                 object expected = entry.ExpectedValue;

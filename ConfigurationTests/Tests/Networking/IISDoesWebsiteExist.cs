@@ -58,7 +58,7 @@ namespace ConfigurationTests.Tests
 
         public bool DoesWebsiteExist(string serverName, string websiteName)
         {
-            bool result = false;
+            var result = false;
 
             var w3Svc = new DirectoryEntry(string.Format("IIS://{0}/w3svc", serverName));
 

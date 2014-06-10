@@ -25,8 +25,8 @@ namespace ConfigurationTests.Tests
 {
     public abstract class XMLElementTestBase : FileTest
     {
-        protected int maximumOccurences = int.MaxValue;
-        protected int minimumOccurences = 1;
+        protected int MaximumOccurences = int.MaxValue;
+        protected int MinimumOccurences = 1;
 
         protected static readonly CacheList<string, XmlDocument> knownDocuments =
             new CacheList<string, XmlDocument>(s =>
@@ -40,16 +40,16 @@ namespace ConfigurationTests.Tests
         [Category("XML Element Properties")]
         public int MaximumOccurrences
         {
-            get { return maximumOccurences; }
-            set { maximumOccurences = value; }
+            get { return MaximumOccurences; }
+            set { MaximumOccurences = value; }
         }
 
         [DefaultValue(1)]
         [Category("XML Element Properties")]
         public int MinimumOccurrences
         {
-            get { return minimumOccurences; }
-            set { minimumOccurences = value; }
+            get { return MinimumOccurences; }
+            set { MinimumOccurences = value; }
         }
 
         [MandatoryField]

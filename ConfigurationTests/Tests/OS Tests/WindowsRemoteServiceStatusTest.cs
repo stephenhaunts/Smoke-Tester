@@ -52,7 +52,7 @@ namespace ConfigurationTests.Tests
 
         public override List<Test> CreateExamples()
         {
-            return new List<Test> { new WindowsRemoteServiceStatusTest()
+            return new List<Test> { new WindowsRemoteServiceStatusTest
             {
                 ServiceName = "Bob",
                 MachineName = "remotemcn",
