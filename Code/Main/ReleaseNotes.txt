@@ -13,8 +13,11 @@ Version 0.02
 [X] - Added IISInstalled Test
 [X] - Added IISRunning Test
 [X] - Added IISVersion Test
+[ ] - Added IISDoesWebsiteExist Test
 [X] - Added UserInActiveDirectory Test
 [X] - Added a network Ping Test
+[ ] - Add Remote Queue check
+[ ] - Assembly version number Test
 
 [X] - Change HTTPConnection Test now uses an enumerated set of return codes.
 

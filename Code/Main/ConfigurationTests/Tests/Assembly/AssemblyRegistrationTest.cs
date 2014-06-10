@@ -46,7 +46,7 @@ namespace ConfigurationTests.Tests
                         {
                             new AssemblyRegistrationTest
                                 {
-                                    DllName = "TMS_HyperString.dll",
+                                    DllName = "MyDll.dll",
                                     TestName = "Assembly Registration Example"
                                 }
                         };
