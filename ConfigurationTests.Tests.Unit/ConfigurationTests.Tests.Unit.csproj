@@ -63,7 +63,6 @@
     <Compile Include="AssemblyRegistrationTestTests.cs" />
     <Compile Include="CertificateExistsTestTests.cs" />
     <Compile Include="CreateAndLoadExamplesTests.cs" />
-    <Compile Include="IoCResolutionTestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="COMClassTestTest.cs" />
     <Compile Include="RegistryTestTest.cs" />

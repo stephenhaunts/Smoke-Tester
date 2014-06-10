@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.ServiceModel" />
@@ -60,6 +61,7 @@
     <Compile Include="Tests\Assembly\AppSettingTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
     <Compile Include="Tests\AssertState.cs" />
+    <Compile Include="Tests\Networking\IISDoesWebsiteExist.cs" />
     <Compile Include="Tests\Networking\PingTest.cs" />
     <Compile Include="Tests\Networking\IISVersionTest.cs" />
     <Compile Include="Tests\Networking\IISInstalledTest.cs" />
@@ -91,7 +93,6 @@
     <Compile Include="Tests\File System\FolderExistsTest.cs" />
     <Compile Include="Tests\Web Services\ClientEndpointTest.cs" />
     <Compile Include="Tests\Internet\HttpConnectionTest.cs" />
-    <Compile Include="Tests\Assembly\IoCResolutionTest.cs" />
     <Compile Include="Tests\File System\MinimumDiskSpaceTest.cs" />
     <Compile Include="Tests\OS Tests\PlatformTest.cs" />
     <Compile Include="Tests\OS Tests\COMClassTest.cs" />
