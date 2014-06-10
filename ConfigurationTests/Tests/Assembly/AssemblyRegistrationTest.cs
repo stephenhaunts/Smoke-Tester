@@ -16,6 +16,8 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.ComponentModel;
 using System.IO;
 using System.Collections.Generic;
 using ConfigurationTests.Attributes;
@@ -26,6 +28,7 @@ namespace ConfigurationTests.Tests
     public class AssemblyRegistrationTest : Test
     {
         [MandatoryField]
+        [Category("Assembly Properties")]
         public string DllName { get; set; }
 
         public override void Run()

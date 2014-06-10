@@ -18,6 +18,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -29,12 +30,19 @@ namespace ConfigurationTests.Tests
     public class SettingsClassTest : Test
     {
         [MandatoryField]
+        [Category("Class Properties")]
         public string ClassName { get; set; }
+
         [MandatoryField]
+        [Category("Class Properties")]
         public string AssemblyPath { get; set; }
+
         [MandatoryField]
+        [Category("Class Properties")]
         public string SettingName { get; set; }
+
         [MandatoryField]
+        [Category("Class Properties")]
         public string ExpectedValue { get; set; }
 
         public override void Run()

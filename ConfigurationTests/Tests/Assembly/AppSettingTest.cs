@@ -26,7 +26,10 @@ namespace ConfigurationTests.Tests
     public class AppSettingTest : ConfigurationTest
     {
         [MandatoryField]
+        [Category("App Settings Check")]
         public string Key { get; set; }
+
+        [Category("App Settings Check")]
         public string ExpectedValue { get; set; }
 
         [DefaultValue(false)]

@@ -75,7 +75,7 @@
     <Compile Include="Tests\OS Tests\WindowsServiceStatusTest.cs" />
     <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
     <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />
-    <Compile Include="Tests\File System\ConfigurationTest.cs" />
+    <Compile Include="Tests\ConfigurationTest.cs" />
     <Compile Include="Tests\Database\ConnectionStringTest.cs" />
     <Compile Include="Tests\Web Services\ASMXServiceSoapTest.cs" />
     <Compile Include="Tests\Database\ConnectionStringTestBase.cs" />

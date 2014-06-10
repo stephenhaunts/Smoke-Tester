@@ -16,6 +16,8 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System.ComponentModel;
 using ConfigurationTests.Attributes;
 using System.Collections.Generic;
 using System.Configuration;
@@ -41,12 +43,17 @@ namespace ConfigurationTests.Tests
         }
 
         [MandatoryField]
+        [Category("Connection String Properties")]
         public string ConnectionStringName { get; set; }
 
         [MandatoryField]
+        [Category("Connection String Properties")]
         public List<ConnectionStringSetting> StringSettings { get; set; }
 
+        [Category("Connection String Properties")]
         public bool CheckConnectivity { get; set; }
+
+        [Category("Connection String Properties")]
         protected string ConnectionString { get; set; }
         protected abstract void DoConnectivityCheck();
 

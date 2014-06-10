@@ -30,9 +30,11 @@ namespace ConfigurationTests.Tests
     {        
         [MandatoryField]
         [Description("Filename to check")]
+        [Category("Checksum Details")]
         public string Filename { get; set; }
 
         [MandatoryField]
+        [Category("Checksum Details")]
         [Description("MD5 Checksum")]
         public string Checksum { get; set; }
 

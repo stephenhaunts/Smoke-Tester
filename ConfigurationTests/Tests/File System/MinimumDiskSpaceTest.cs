@@ -17,6 +17,7 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using ConfigurationTests.Attributes;
 
@@ -25,15 +26,17 @@ namespace ConfigurationTests.Tests
     public class MinimumDiskSpaceTest : Test
     {
         [MandatoryField]
+        [Category("Drive Space Properties")]
         public string Drive { get; set; }
 
         [MandatoryField]
+        [Category("Drive Space Properties")]
         public long RequiredMegabytes { get; set; }
 
         public override void Run()
         {
-            DriveInfo d = new DriveInfo(Drive);
-            long actual = d.AvailableFreeSpace / 1024;
+            var d = new DriveInfo(Drive);
+            var actual = d.AvailableFreeSpace / 1024;
 
             if (actual < RequiredMegabytes)
             {

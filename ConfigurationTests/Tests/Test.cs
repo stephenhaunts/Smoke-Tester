@@ -22,7 +22,7 @@ using System.ComponentModel;
 
 namespace ConfigurationTests.Tests
 {
-    [DefaultProperty("TestName")] 
+    [DefaultProperty("TestName")]   
     public abstract class Test
     {
         public abstract void Run();
@@ -31,6 +31,7 @@ namespace ConfigurationTests.Tests
 
         [MandatoryField]
         [Description("Name of test")]
+        [Category("Common Test Properties")]
         public string TestName { get; set; }
 
         public override string ToString()
