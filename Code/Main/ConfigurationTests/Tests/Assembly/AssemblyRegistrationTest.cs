@@ -25,6 +25,7 @@ using System.Reflection;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Assembly)]
     public class AssemblyRegistrationTest : Test
     {
         [MandatoryField]

@@ -23,6 +23,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Assembly)]
     public class AppSettingTest : ConfigurationTest
     {
         [MandatoryField]

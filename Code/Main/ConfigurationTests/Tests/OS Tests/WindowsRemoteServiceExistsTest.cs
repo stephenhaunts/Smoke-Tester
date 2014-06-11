@@ -25,6 +25,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.OS)]
     public class WindowsRemoteServiceExistsTest : Test
     {
         [Description("Name of service")]

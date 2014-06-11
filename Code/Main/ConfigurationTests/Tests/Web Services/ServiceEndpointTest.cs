@@ -30,6 +30,7 @@ namespace ConfigurationTests.Tests
     /// <summary>
     /// Class used to test the endpoint of a WCF service as defined in the service's configuration file.
     /// </summary>
+    [TestCategory(Enums.TestCategory.Web_Services)]
     public class ServiceEndpointTest : EndpointTest
     {
         [MandatoryField]

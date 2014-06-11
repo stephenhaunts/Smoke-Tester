@@ -27,6 +27,7 @@ using System.Data;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Database)]
     public class SqlConnectionStringTest : ConnectionStringTestBase
     {
         private AppSettingsSection _appSettingSection;

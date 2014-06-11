@@ -26,6 +26,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Networking)]
     public class IISDoesWebsiteExist : Test
     {
         private bool _shouldExist = true;

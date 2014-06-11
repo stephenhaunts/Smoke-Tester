@@ -26,6 +26,7 @@ using Common.Text;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Xml)]
     public class XMLElementContentTest : XMLElementTestBase
     {
         [MandatoryField]

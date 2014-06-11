@@ -20,9 +20,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.ComponentModel;
 using Common.Boolean;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.File_System)]
     public class FileExistsTest : FileTest
     {
         private bool _shouldExist = true;

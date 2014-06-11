@@ -23,6 +23,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.File_System)]
     public class MinimumDiskSpaceTest : Test
     {
         [MandatoryField]

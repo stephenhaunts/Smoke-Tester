@@ -21,9 +21,11 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Web_Services)]
     public class WCFServiceSoapTest : SoapTest
     {
         private const string DEFAULT_CONTENT_TYPE = "application/soap+xml; charset=utf-8";

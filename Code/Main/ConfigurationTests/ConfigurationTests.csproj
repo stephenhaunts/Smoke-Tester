@@ -56,7 +56,9 @@
     <Compile Include="AssertionException.cs" />
     <Compile Include="Attributes\HiddenFromUiAttribute.cs" />
     <Compile Include="Attributes\MandatoryFieldAttribute.cs" />
+    <Compile Include="Attributes\TestCategoryAttribute.cs" />
     <Compile Include="ConfigurationTestSuite.cs" />
+    <Compile Include="Enums\TestCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Assembly\AppSettingTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyVersionTest.cs" />

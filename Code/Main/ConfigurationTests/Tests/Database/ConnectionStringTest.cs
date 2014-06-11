@@ -18,9 +18,11 @@
 */
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Database)]
     public class ConnectionStringTest : ConnectionStringTestBase
     {
         protected override void DoConnectivityCheck()

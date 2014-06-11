@@ -25,6 +25,7 @@ using Microsoft.Win32;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Networking)]
     public class IISVersionTest : Test
     {        
         [DefaultValue(true)]

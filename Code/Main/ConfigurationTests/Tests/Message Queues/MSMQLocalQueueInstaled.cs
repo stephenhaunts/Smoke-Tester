@@ -25,6 +25,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Message_Queues)]
     public class MsmqLocalQueueInstalled : Test
     {
         private bool _shouldExist = true;

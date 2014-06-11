@@ -20,6 +20,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
@@ -29,6 +30,8 @@ using System.Text;
 using System.Windows.Forms;
 using Common.Xml;
 using ConfigurationTests;
+using ConfigurationTests.Attributes;
+using ConfigurationTests.Enums;
 using ConfigurationTests.Tests;
 
 namespace TestConfiguration.Forms
@@ -109,22 +112,41 @@ namespace TestConfiguration.Forms
 
         private void CreateTestMenus()
         {
-            foreach (Type type in GetAllTestTypes().OrderBy(c => c.Name))
+            var testCategories = Enum.GetNames(typeof(TestCategory));
+            foreach (var testCategory in testCategories)
             {
+                var menuItem = new ToolStripMenuItem
+                {
+                    Text = testCategory.Replace('_', ' '),
+                    Name = testCategory
+                };
+                tsbTests.DropDownItems.Add(menuItem);
+            }
+
+            foreach (Type type in GetAllTestTypes().OrderBy(c => c.Name))
+            {                        
                 CreateTestMenuItem(type);
             }
         }
 
         private void CreateTestMenuItem(Type type)
         {
-            var menuItem = new ToolStripMenuItem
+            var attribute = System.Attribute.GetCustomAttribute(type, typeof(TestCategoryAttribute));
+            var testCategoryAttrybute = attribute as TestCategoryAttribute;
+            if (testCategoryAttrybute != null)
             {
-                Text = type.Name,
-                Tag = type
-            };
+                ToolStripMenuItem categoryMenuItem = tsbTests.DropDownItems[testCategoryAttrybute.TestCatgory.ToString()] as ToolStripMenuItem;
 
-            menuItem.Click += TestMenu_Click;
-            tsbTests.DropDownItems.Add(menuItem);
+                var menuItem = new ToolStripMenuItem
+                {
+                    Text = type.Name,
+                    Tag = type
+                };
+
+                menuItem.Click += TestMenu_Click;
+                tsbTests.DropDownItems.Add(menuItem);
+                categoryMenuItem.DropDownItems.Add(menuItem);
+            }
         }
 
         private void AddTestToList(Test test)

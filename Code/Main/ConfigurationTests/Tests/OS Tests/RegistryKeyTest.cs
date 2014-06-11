@@ -24,6 +24,7 @@ using System;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.OS)]
     public class RegistryKeyTest : Test
     {
 

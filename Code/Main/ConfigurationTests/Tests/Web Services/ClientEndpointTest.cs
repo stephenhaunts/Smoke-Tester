@@ -25,6 +25,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Web_Services)]
     public class ClientEndpointTest : EndpointTest
     {
         [MandatoryField]

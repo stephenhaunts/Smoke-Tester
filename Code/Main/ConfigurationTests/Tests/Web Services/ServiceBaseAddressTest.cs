@@ -19,12 +19,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Configuration;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
     /// <summary>
     /// Class used to test the base address of a WCF service as defined in the service's configuration file.
     /// </summary>
+    [TestCategory(Enums.TestCategory.Web_Services)]
     public class ServiceBaseAddressTest : BaseAddressTest
     {
         public override void Run()
