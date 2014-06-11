@@ -23,9 +23,11 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.ComponentModel;
 using Common.Boolean;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Networking)]
     public class PingTest : Test
     {
         [Description("Host name to check, eg www.google.com")]

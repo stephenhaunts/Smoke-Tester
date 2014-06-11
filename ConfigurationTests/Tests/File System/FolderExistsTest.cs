@@ -24,6 +24,7 @@ using Common.Boolean;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.File_System)]
     public class FolderExistsTest : Test
     {
         private bool _shouldExist = true;

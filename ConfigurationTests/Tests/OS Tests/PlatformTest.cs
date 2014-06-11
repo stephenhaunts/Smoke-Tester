@@ -33,6 +33,7 @@ namespace ConfigurationTests.Tests
         AnyCpu
     }
 
+    [TestCategory(Enums.TestCategory.OS)]
     public class PlatformTest : Test
     {
         [MandatoryField]

@@ -26,6 +26,7 @@ using System.ComponentModel;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.File_System)]
     public class MD5Checksum : Test
     {        
         [MandatoryField]

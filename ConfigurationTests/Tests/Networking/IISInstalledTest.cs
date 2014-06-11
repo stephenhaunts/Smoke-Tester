@@ -22,9 +22,11 @@ using System.Linq;
 using System.ServiceProcess;
 using Common.Boolean;
 using System.ComponentModel;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Networking)]
     public class IISInstalledTest : Test
     {
         private bool _shouldExist = true;

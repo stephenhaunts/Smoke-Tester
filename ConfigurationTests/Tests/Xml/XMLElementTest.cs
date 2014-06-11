@@ -26,6 +26,7 @@ using Common.Text;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Xml)]
     public class XMLElementTest : XMLElementTestBase
     {
         private List<Attribute> expectedValues = new List<Attribute>();

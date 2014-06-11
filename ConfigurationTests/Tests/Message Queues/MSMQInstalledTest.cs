@@ -21,9 +21,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.ServiceProcess;
 using Common.Boolean;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Message_Queues)]
     public class MsmqInstalledTest : Test
     {
         private bool _shouldExist = true;

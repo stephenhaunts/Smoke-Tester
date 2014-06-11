@@ -21,6 +21,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
@@ -28,6 +29,7 @@ namespace ConfigurationTests.Tests
     /// <summary>
     /// Class used to test the soap response of a ASMX service.
     /// </summary>
+    [TestCategory(Enums.TestCategory.Web_Services)]
     public class ASMXServiceSoapTest : SoapTest
     {
         private const string DEFAULT_CONTENT_TYPE = "text/xml; charset=utf-8";

@@ -20,10 +20,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using Common.Security;
+using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
-    public class CertificateExistsTest:Test
+    [TestCategory(Enums.TestCategory.OS)]
+    public class CertificateExistsTest : Test
     {
         [Description("The store to get the certificate from")]
         [Category("Certificate Store Properties")]

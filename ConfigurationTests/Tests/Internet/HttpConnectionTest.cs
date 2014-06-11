@@ -24,6 +24,7 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    [TestCategory(Enums.TestCategory.Internet)]
     public class HttpConnectionTest : Test
     {
         [MandatoryField]
