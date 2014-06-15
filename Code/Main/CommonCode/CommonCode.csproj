@@ -64,6 +64,8 @@
     <Compile Include="Reflection\FastMethodReflection.cs" />
     <Compile Include="Reflection\PropertyAccessor.cs" />
     <Compile Include="Reflection\ReflectionExtensionMethods.cs" />
+    <Compile Include="ReportWriter\ReportBuilder.cs" />
+    <Compile Include="ReportWriter\ReportEntry.cs" />
     <Compile Include="Security\CertificateException.cs" />
     <Compile Include="Security\CertificateInfo.cs" />
     <Compile Include="Security\CertificateNotFoundException.cs" />
