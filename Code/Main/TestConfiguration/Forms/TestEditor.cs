@@ -20,7 +20,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
@@ -29,6 +28,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Common.Xml;
+using CommonCode.ReportWriter;
 using ConfigurationTests;
 using ConfigurationTests.Attributes;
 using ConfigurationTests.Enums;
@@ -40,10 +40,12 @@ namespace TestConfiguration.Forms
     {
         private ConfigurationTestSuite _configurationTestSuite;
         private string _filename;
+        private static ReportBuilder _reportBuilder;
 
         public TestEditor()
         {
             InitializeComponent();
+            _reportBuilder = new ReportBuilder();
         }
 
         public TestEditor(ConfigurationTestSuite configurationTestSuite)
@@ -268,6 +270,7 @@ namespace TestConfiguration.Forms
         private void RunTest()
         {
             SwitchToTestRunView();
+            _reportBuilder.ClearEntries();
 
             foreach (ListViewItem item in lvwListOfTest.Items)
             {
@@ -280,6 +283,7 @@ namespace TestConfiguration.Forms
         private void RunSelectedTests(int[] selectedIndices)
         {
             SwitchToTestRunView();
+            _reportBuilder.ClearEntries();
 
             for (int i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
             {
@@ -300,19 +304,30 @@ namespace TestConfiguration.Forms
         private static void RunTestFromListItem(ListViewItem item)
         {
             var test = item.Tag as Test;
+            var startTime = DateTime.Now;
+            DateTime stopTime;
 
             try
             {
+
                 if (test != null) test.Run();
+                stopTime = DateTime.Now;
                 item.Text = @"Pass";
                 item.ImageIndex = 0;
                 item.SubItems[2].Text = string.Empty;
+
+                var entry = new ReportEntry {TestName = test.TestName, Result = true, TestStartTime = startTime, TestStopTime = stopTime};
+                _reportBuilder.AddEntry(entry);
             }
             catch (Exception e)
             {
+                stopTime = DateTime.Now;
                 item.Text = @"Fail";
                 item.ImageIndex = 1;
                 item.SubItems[2].Text = string.Format(CultureInfo.CurrentUICulture, "{0} - {1}", e.Source, e.Message);
+
+                var entry = new ReportEntry { TestName = test.TestName, Result = false, ErrorMessage = e.Message, TestStartTime = startTime, TestStopTime = stopTime };
+                _reportBuilder.AddEntry(entry);
             }
         }
 

@@ -39,5 +39,10 @@ namespace CommonCode.ReportWriter
 
             _reportEntries.Add(entry);
         }
+
+        public void ClearEntries()
+        {
+            _reportEntries.Clear();
+        }
     }
 }
