@@ -576,12 +576,22 @@ namespace TestConfiguration.Forms
 
         private void tsbWriteTestReport2_Click(object sender, EventArgs e)
         {
-
+            GenerateReport();
         }
 
         private void tsbWriteTestReport_Click(object sender, EventArgs e)
         {
+            GenerateReport();
+        }
 
+        private static void GenerateReport()
+        {
+            using (var reportWriter = new ReportWriter())
+            {
+                if (reportWriter.ShowDialog() == DialogResult.OK)
+                {
+                }
+            }
         }
     }
 }
