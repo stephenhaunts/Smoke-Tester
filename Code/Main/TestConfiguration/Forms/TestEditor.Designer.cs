@@ -103,6 +103,8 @@ namespace TestConfiguration.Forms
             this.tsbRunAllTests02 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.tsbWriteTestReport2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tspConfiguration.SuspendLayout();
             this.cntxtMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -416,7 +418,9 @@ namespace TestConfiguration.Forms
             this.tsbRunAllTests02,
             this.toolStripSeparator4,
             this.toolStripButton1,
-            this.toolStripButton2});
+            this.toolStripButton2,
+            this.toolStripSeparator6,
+            this.tsbWriteTestReport2});
             this.tspTestRun.Location = new System.Drawing.Point(3, 3);
             this.tspTestRun.Name = "tspTestRun";
             this.tspTestRun.Size = new System.Drawing.Size(858, 25);
@@ -449,9 +453,9 @@ namespace TestConfiguration.Forms
             this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.btnMoveDown.Image = global::TestConfiguration.Properties.Resources._15;
-            this.btnMoveDown.Location = new System.Drawing.Point(321, 145);
+            this.btnMoveDown.Location = new System.Drawing.Point(324, 127);
             this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(34, 33);
+            this.btnMoveDown.Size = new System.Drawing.Size(24, 23);
             this.btnMoveDown.TabIndex = 7;
             this.btnMoveDown.Tag = "down";
             this.btnMoveDown.Text = "q";
@@ -463,9 +467,9 @@ namespace TestConfiguration.Forms
             this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.btnMoveUp.Image = global::TestConfiguration.Properties.Resources._16;
-            this.btnMoveUp.Location = new System.Drawing.Point(321, 96);
+            this.btnMoveUp.Location = new System.Drawing.Point(324, 96);
             this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(34, 33);
+            this.btnMoveUp.Size = new System.Drawing.Size(24, 23);
             this.btnMoveUp.TabIndex = 6;
             this.btnMoveUp.Tag = "up";
             this.btnMoveUp.Text = "p";
@@ -619,7 +623,8 @@ namespace TestConfiguration.Forms
             this.tsbWriteTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWriteTestReport.Name = "tsbWriteTestReport";
             this.tsbWriteTestReport.Size = new System.Drawing.Size(23, 22);
-            this.tsbWriteTestReport.Text = "toolStripButton3";
+            this.tsbWriteTestReport.Text = "Write Out Test Report";
+            this.tsbWriteTestReport.Click += new System.EventHandler(this.tsbWriteTestReport_Click);
             // 
             // tsbRunSelectedTest02
             // 
@@ -660,6 +665,21 @@ namespace TestConfiguration.Forms
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "Remove All Tests";
             this.toolStripButton2.Click += new System.EventHandler(this.mnuRemoveAllTests_Click);
+            // 
+            // tsbWriteTestReport2
+            // 
+            this.tsbWriteTestReport2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbWriteTestReport2.Image = ((System.Drawing.Image)(resources.GetObject("tsbWriteTestReport2.Image")));
+            this.tsbWriteTestReport2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbWriteTestReport2.Name = "tsbWriteTestReport2";
+            this.tsbWriteTestReport2.Size = new System.Drawing.Size(23, 22);
+            this.tsbWriteTestReport2.Text = "Write Out Test Report";
+            this.tsbWriteTestReport2.Click += new System.EventHandler(this.tsbWriteTestReport2_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // TestEditor
             // 
@@ -759,5 +779,7 @@ namespace TestConfiguration.Forms
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbWriteTestReport;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton tsbWriteTestReport2;
     }
 }
