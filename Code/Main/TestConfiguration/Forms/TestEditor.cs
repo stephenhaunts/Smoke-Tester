@@ -38,9 +38,9 @@ namespace TestConfiguration.Forms
 {
     public partial class TestEditor : Form
     {
+        private static ReportBuilder _reportBuilder;
         private ConfigurationTestSuite _configurationTestSuite;
         private string _filename;
-        private static ReportBuilder _reportBuilder;
 
         public TestEditor()
         {
@@ -71,18 +71,17 @@ namespace TestConfiguration.Forms
 
         private static IEnumerable<Type> GetPluginTestTypes()
         {
-            string defaultPluginPath = Path.Combine(Application.StartupPath, "Plugins");
+            var defaultPluginPath = Path.Combine(Application.StartupPath, "Plugins");
             var pluginPaths = new List<string> {defaultPluginPath};
 
-            string path = ConfigurationManager.AppSettings["CommaSeparatedPluginPaths"];
+            var path = ConfigurationManager.AppSettings["CommaSeparatedPluginPaths"];
             pluginPaths.AddRange(
                 (path ?? string.Empty).Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList());
 
             var testsTypes = new List<Type>();
-            IEnumerable<string> paths = pluginPaths.Where(folder => folder.IsValidDirectory());
+            var paths = pluginPaths.Where(folder => folder.IsValidDirectory());
 
-            foreach (
-                Assembly assembly in paths.SelectMany(folder => Directory.GetFiles(folder).Select(Assembly.LoadFile)))
+            foreach (var assembly in paths.SelectMany(folder => Directory.GetFiles(folder).Select(Assembly.LoadFile)))
             {
                 testsTypes.AddRange(
                     assembly.GetTypes().Where(type => type.IsSubclassOf(typeof (Test)) && !type.IsAbstract));
@@ -104,9 +103,9 @@ namespace TestConfiguration.Forms
         private void LoadTestsFromExamples()
         {
             _configurationTestSuite = new ConfigurationTestSuite();
-            IEnumerable<Type> testTypes = GetAllTestTypes();
+            var testTypes = GetAllTestTypes();
 
-            foreach (Test test in testTypes.OrderBy(c => c.Name).Select(type => Activator.CreateInstance(type) as Test))
+            foreach (var test in testTypes.OrderBy(c => c.Name).Select(type => Activator.CreateInstance(type) as Test))
             {
                 _configurationTestSuite.Tests.AddRange(test.CreateExamples());
             }
@@ -114,41 +113,42 @@ namespace TestConfiguration.Forms
 
         private void CreateTestMenus()
         {
-            var testCategories = Enum.GetNames(typeof(TestCategory));
-            foreach (var testCategory in testCategories)
+            var testCategories = Enum.GetNames(typeof (TestCategory));
+
+            foreach (var menuItem in testCategories.Select(testCategory => new ToolStripMenuItem
             {
-                var menuItem = new ToolStripMenuItem
-                {
-                    Text = testCategory.Replace('_', ' '),
-                    Name = testCategory
-                };
+                Text = testCategory.Replace('_', ' '),
+                Name = testCategory
+            }))
+            {
                 tsbTests.DropDownItems.Add(menuItem);
             }
 
-            foreach (Type type in GetAllTestTypes().OrderBy(c => c.Name))
-            {                        
+            foreach (var type in GetAllTestTypes().OrderBy(c => c.Name))
+            {
                 CreateTestMenuItem(type);
             }
         }
 
         private void CreateTestMenuItem(Type type)
         {
-            var attribute = System.Attribute.GetCustomAttribute(type, typeof(TestCategoryAttribute));
+            var attribute = Attribute.GetCustomAttribute(type, typeof (TestCategoryAttribute));
             var testCategoryAttrybute = attribute as TestCategoryAttribute;
-            if (testCategoryAttrybute != null)
+
+            if (testCategoryAttrybute == null) return;
+
+            var categoryMenuItem =
+                tsbTests.DropDownItems[testCategoryAttrybute.TestCatgory.ToString()] as ToolStripMenuItem;
+
+            var menuItem = new ToolStripMenuItem
             {
-                ToolStripMenuItem categoryMenuItem = tsbTests.DropDownItems[testCategoryAttrybute.TestCatgory.ToString()] as ToolStripMenuItem;
+                Text = type.Name,
+                Tag = type
+            };
 
-                var menuItem = new ToolStripMenuItem
-                {
-                    Text = type.Name,
-                    Tag = type
-                };
-
-                menuItem.Click += TestMenu_Click;
-                tsbTests.DropDownItems.Add(menuItem);
-                categoryMenuItem.DropDownItems.Add(menuItem);
-            }
+            menuItem.Click += TestMenu_Click;
+            tsbTests.DropDownItems.Add(menuItem);
+            categoryMenuItem.DropDownItems.Add(menuItem);
         }
 
         private void AddTestToList(Test test)
@@ -174,10 +174,11 @@ namespace TestConfiguration.Forms
 
         private void UpdateUi()
         {
-            int testCount = lstListOfTests.Items.Count;
+            var testCount = lstListOfTests.Items.Count;
             lblTotalTestCount.Text = string.Format(CultureInfo.CurrentUICulture, "{0} Test{1}", testCount,
                 (testCount > 0 ? "s" : ""));
-            string testFormat = lstListOfTests.SelectedItem != null ? " [{1}]" : "";
+
+            var testFormat = lstListOfTests.SelectedItem != null ? " [{1}]" : "";
             Text = string.Format(CultureInfo.CurrentUICulture, "Test Configurations Editor - {0}" + testFormat,
                 txtTestName.Text, lstListOfTests.SelectedItem ?? "");
         }
@@ -186,7 +187,7 @@ namespace TestConfiguration.Forms
         {
             lstListOfTests.BeginUpdate();
             var item = lstListOfTests.SelectedItem as Test;
-            int index = lstListOfTests.Items.IndexOf(lstListOfTests.SelectedItem);
+            var index = lstListOfTests.Items.IndexOf(lstListOfTests.SelectedItem);
             lstListOfTests.Items[index] = item;
             lstListOfTests.EndUpdate();
 
@@ -195,7 +196,7 @@ namespace TestConfiguration.Forms
 
         private void RemoveTestsFromList(int[] selectedIndices)
         {
-            for (int i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
+            for (var i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
             {
                 lstListOfTests.Items.RemoveAt(selectedIndices[i]);
                 lvwListOfTest.Items.RemoveAt(selectedIndices[i]);
@@ -241,8 +242,7 @@ namespace TestConfiguration.Forms
                 InitializeTestSuite();
             }
 
-            using (
-                var dialog = new SaveFileDialog
+            using (var dialog = new SaveFileDialog
                 {
                     Title = @"Save Test Configuration File",
                     Filter = @"XML Configuration File | *.xml"
@@ -262,7 +262,7 @@ namespace TestConfiguration.Forms
 
         private void WriteXmlFile(string fileName)
         {
-            string xmlString = _configurationTestSuite.ToXmlString();
+            var xmlString = _configurationTestSuite.ToXmlString();
 
             File.WriteAllText(fileName, xmlString, Encoding.Unicode);
         }
@@ -285,7 +285,7 @@ namespace TestConfiguration.Forms
             SwitchToTestRunView();
             _reportBuilder.ClearEntries();
 
-            for (int i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
+            for (var i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
             {
                 RunTestFromListItem(lvwListOfTest.Items[selectedIndices[i]]);
             }
@@ -304,19 +304,25 @@ namespace TestConfiguration.Forms
         private static void RunTestFromListItem(ListViewItem item)
         {
             var test = item.Tag as Test;
-            var startTime = DateTime.Now;
+            DateTime startTime = DateTime.Now;
             DateTime stopTime;
 
             try
             {
-
                 if (test != null) test.Run();
                 stopTime = DateTime.Now;
                 item.Text = @"Pass";
                 item.ImageIndex = 0;
                 item.SubItems[2].Text = string.Empty;
 
-                var entry = new ReportEntry {TestName = test.TestName, Result = true, TestStartTime = startTime, TestStopTime = stopTime};
+                var entry = new ReportEntry
+                {
+                    TestName = test.TestName,
+                    Result = true,
+                    TestStartTime = startTime,
+                    TestStopTime = stopTime
+                };
+
                 _reportBuilder.AddEntry(entry);
             }
             catch (Exception e)
@@ -326,7 +332,14 @@ namespace TestConfiguration.Forms
                 item.ImageIndex = 1;
                 item.SubItems[2].Text = string.Format(CultureInfo.CurrentUICulture, "{0} - {1}", e.Source, e.Message);
 
-                var entry = new ReportEntry { TestName = test.TestName, Result = false, ErrorMessage = e.Message, TestStartTime = startTime, TestStopTime = stopTime };
+                var entry = new ReportEntry
+                {
+                    TestName = test.TestName,
+                    Result = false,
+                    ErrorMessage = e.Message,
+                    TestStartTime = startTime,
+                    TestStopTime = stopTime
+                };
                 _reportBuilder.AddEntry(entry);
             }
         }
@@ -335,12 +348,12 @@ namespace TestConfiguration.Forms
         {
             for (int i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
             {
-                object item = lstListOfTests.Items[selectedIndices[i]];
+                var item = lstListOfTests.Items[selectedIndices[i]];
                 lstListOfTests.Items.RemoveAt(selectedIndices[i]);
                 lstListOfTests.Items.Insert(selectedIndices[i] + ((int) moveType), item);
                 lstListOfTests.SelectedItem = item;
 
-                ListViewItem lstItem = lvwListOfTest.Items[selectedIndices[i]];
+                var lstItem = lvwListOfTest.Items[selectedIndices[i]];
                 lvwListOfTest.Items.RemoveAt(selectedIndices[i]);
                 lvwListOfTest.Items.Insert(selectedIndices[i] + ((int) moveType), lstItem);
             }
@@ -348,7 +361,7 @@ namespace TestConfiguration.Forms
 
         private void MoveListItems(string action)
         {
-            int[] selectedIndices = GetSelectedIndices();
+            var selectedIndices = GetSelectedIndices();
 
             switch (action)
             {
@@ -432,12 +445,11 @@ namespace TestConfiguration.Forms
 
         private void LoadTestsToList()
         {
-            if (_configurationTestSuite != null)
+            if (_configurationTestSuite == null) return;
+
+            foreach (Test test in _configurationTestSuite.Tests)
             {
-                foreach (Test test in _configurationTestSuite.Tests)
-                {
-                    AddTestToList(test);
-                }
+                AddTestToList(test);
             }
         }
 
@@ -481,12 +493,10 @@ namespace TestConfiguration.Forms
         private void btnMoveItem_Click(object sender, EventArgs e)
         {
             var control = sender as Control;
-            if (control != null)
-            {
-                string action = control.Tag.ToString().ToLowerInvariant();
+            if (control == null) return;
 
-                MoveListItems(action);
-            }
+            var action = control.Tag.ToString().ToLowerInvariant();
+            MoveListItems(action);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -515,18 +525,17 @@ namespace TestConfiguration.Forms
 
         private void pgTestConfiguration_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            if (e.ChangedItem.Label != null)
+            if (e.ChangedItem.Label == null) return;
+
+            if (e.ChangedItem.Label == "TestName")
             {
-                if (e.ChangedItem.Label == "TestName")
-                {
-                    UpdateSeletedItem();
-                }
+                UpdateSeletedItem();
             }
         }
 
         private void mnuRemoveTest_Click(object sender, EventArgs e)
         {
-            int[] selectedIndices = GetSelectedIndicesBySender(sender);
+            var selectedIndices = GetSelectedIndicesBySender(sender);
 
             RemoveTestsFromList(selectedIndices);
         }
@@ -542,13 +551,13 @@ namespace TestConfiguration.Forms
 
             if (toolStripMenuItem == null) return;
 
-            string action = toolStripMenuItem.Tag.ToString().ToLowerInvariant();
+            var action = toolStripMenuItem.Tag.ToString().ToLowerInvariant();
             MoveListItems(action);
         }
 
         private void mnuRunSelectedTest_Click(object sender, EventArgs e)
         {
-            int[] selectedIndices = GetSelectedIndicesBySender(sender);
+            var selectedIndices = GetSelectedIndicesBySender(sender);
             RunSelectedTests(selectedIndices);
         }
 
@@ -566,12 +575,6 @@ namespace TestConfiguration.Forms
         private void mnuSaveAs_Click(object sender, EventArgs e)
         {
             SaveNewTestFile();
-        }
-
-        private enum MoveType
-        {
-            Up = -1,
-            Down = 1
         }
 
         private void tsbWriteTestReport2_Click(object sender, EventArgs e)
@@ -592,6 +595,12 @@ namespace TestConfiguration.Forms
                 {
                 }
             }
+        }
+
+        private enum MoveType
+        {
+            Up = -1,
+            Down = 1
         }
     }
 }
