@@ -353,12 +353,22 @@ namespace TestConfiguration.Forms
             switch (action)
             {
                 case "up":
+                    if (selectedIndices.Length == 0)
+                    {
+                        break;
+                    }
+
                     if (selectedIndices[0] != 0)
                     {
                         MoveSelectedItems(selectedIndices, MoveType.Up);
                     }
                     break;
                 case "down":
+                    if (selectedIndices.Length == 0)
+                    {
+                        break;
+                    }
+
                     if (selectedIndices[selectedIndices.Length - 1] != lstListOfTests.Items.Count - 1)
                     {
                         MoveSelectedItems(selectedIndices, MoveType.Down);
@@ -562,6 +572,16 @@ namespace TestConfiguration.Forms
         {
             Up = -1,
             Down = 1
+        }
+
+        private void tsbWriteTestReport2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbWriteTestReport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
