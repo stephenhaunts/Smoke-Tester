@@ -1,3 +1,11 @@
+Version 0.03
+-------------
+
+[X] - Added a new TestCategoryAttribute to each test. This means in the UI, instead of getting a large list of tests to
+      choose from, they are now displayed in a set of categorised folders. This is to aid usability.
+[ ] - Add a test report writer to the UI and Command line app. This allows you to automatically output a test report in
+      XML, CSV and HTML.
+
 Version 0.02
 -------------
 

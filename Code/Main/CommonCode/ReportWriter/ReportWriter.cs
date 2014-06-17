@@ -19,7 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using CommonCode.ReportWriter.ReportTypes;
 
 namespace CommonCode.ReportWriter
 {
@@ -37,6 +37,29 @@ namespace CommonCode.ReportWriter
                 throw new InvalidOperationException("entries");
             }
 
+            IReportType reportWriter = null;
+
+            switch (reportType)
+            {
+                case ReportType.CsvReport:
+                    reportWriter = new CsvReport();
+                    break;
+
+                case ReportType.HtmlReport:
+                    reportWriter = new HtmlReport();
+                    break;
+
+                case ReportType.XmlReport:
+                    reportWriter = new XmlReport();
+                    break;
+            }
+
+            if (reportWriter == null)
+            {
+                throw new ArgumentNullException("reportWriter");
+            }
+
+            reportWriter.WriteReport(fileName, entries);
         }
     }
 }

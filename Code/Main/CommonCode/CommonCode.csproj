@@ -64,9 +64,13 @@
     <Compile Include="Reflection\FastMethodReflection.cs" />
     <Compile Include="Reflection\PropertyAccessor.cs" />
     <Compile Include="Reflection\ReflectionExtensionMethods.cs" />
+    <Compile Include="ReportWriter\ReportTypes\IReportType.cs" />
     <Compile Include="ReportWriter\ReportBuilder.cs" />
     <Compile Include="ReportWriter\ReportEntry.cs" />
     <Compile Include="ReportWriter\ReportType.cs" />
+    <Compile Include="ReportWriter\ReportTypes\CsvReport.cs" />
+    <Compile Include="ReportWriter\ReportTypes\HtmlReport.cs" />
+    <Compile Include="ReportWriter\ReportTypes\XmlReport.cs" />
     <Compile Include="ReportWriter\ReportWriter.cs" />
     <Compile Include="Security\CertificateException.cs" />
     <Compile Include="Security\CertificateInfo.cs" />
