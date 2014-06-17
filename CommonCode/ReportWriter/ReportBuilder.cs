@@ -21,13 +21,15 @@ using System.Collections.Generic;
 
 namespace CommonCode.ReportWriter
 {
-    public class ReportBuilder
+    public sealed class ReportBuilder
     {
         private readonly List<ReportEntry> _reportEntries;
+        private readonly ReportWriter _reportWriter;
 
         public ReportBuilder()
         {
             _reportEntries = new List<ReportEntry>();
+            _reportWriter = new ReportWriter();
         }
 
         public void AddEntry(ReportEntry entry)
@@ -43,6 +45,16 @@ namespace CommonCode.ReportWriter
         public void ClearEntries()
         {
             _reportEntries.Clear();
+        }
+
+        public void WriteReport(string fileName, ReportType reportType)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException("fileName");
+            }
+
+            _reportWriter.WriterReport(fileName, reportType, _reportEntries);
         }
     }
 }

@@ -16,16 +16,27 @@
 * 
 * Curator: Stephen Haunts
 */
+
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CommonCode.ReportWriter
 {
-    public sealed class ReportEntry
+    public sealed class ReportWriter
     {
-        public string TestName { get; set; }
-        public bool Result { get; set; }
-        public string ErrorMessage { get; set; }
-        public DateTime TestStartTime { get; set; }
-        public DateTime TestStopTime { get; set; }
+        public void WriterReport(string fileName, ReportType reportType, List<ReportEntry> entries)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException("fileName");
+            }
+
+            if (entries.Count == 0)
+            {
+                throw new InvalidOperationException("entries");
+            }
+
+        }
     }
 }
