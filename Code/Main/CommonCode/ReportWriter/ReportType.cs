@@ -16,16 +16,12 @@
 * 
 * Curator: Stephen Haunts
 */
-using System;
-
 namespace CommonCode.ReportWriter
 {
-    public sealed class ReportEntry
+    public enum ReportType
     {
-        public string TestName { get; set; }
-        public bool Result { get; set; }
-        public string ErrorMessage { get; set; }
-        public DateTime TestStartTime { get; set; }
-        public DateTime TestStopTime { get; set; }
+        XmlReport = 0,
+        CsvReport =  1,
+        HtmlReport = 2
     }
 }
