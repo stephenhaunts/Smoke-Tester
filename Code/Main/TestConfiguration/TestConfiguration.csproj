@@ -194,6 +194,7 @@
     <None Include="Resources\07.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Icons\Report.png" />
     <Content Include="Icons\Traffic Lights 16x16.ico" />
     <Content Include="Icons\Traffic Lights.ico" />
     <Content Include="Icons\Traffic Lights.png" />
