@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.reportTypeGroupBox = new System.Windows.Forms.GroupBox();
-            this.csvReport = new System.Windows.Forms.RadioButton();
-            this.xmlReport = new System.Windows.Forms.RadioButton();
             this.htmlReport = new System.Windows.Forms.RadioButton();
+            this.xmlReport = new System.Windows.Forms.RadioButton();
+            this.csvReport = new System.Windows.Forms.RadioButton();
             this.fileName = new System.Windows.Forms.TextBox();
             this.chooseFilename = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
@@ -52,16 +52,16 @@
             this.reportTypeGroupBox.TabStop = false;
             this.reportTypeGroupBox.Text = "Report Type";
             // 
-            // csvReport
+            // htmlReport
             // 
-            this.csvReport.AutoSize = true;
-            this.csvReport.Location = new System.Drawing.Point(15, 19);
-            this.csvReport.Name = "csvReport";
-            this.csvReport.Size = new System.Drawing.Size(81, 17);
-            this.csvReport.TabIndex = 0;
-            this.csvReport.TabStop = true;
-            this.csvReport.Text = "CSV Report";
-            this.csvReport.UseVisualStyleBackColor = true;
+            this.htmlReport.AutoSize = true;
+            this.htmlReport.Location = new System.Drawing.Point(260, 19);
+            this.htmlReport.Name = "htmlReport";
+            this.htmlReport.Size = new System.Drawing.Size(90, 17);
+            this.htmlReport.TabIndex = 2;
+            this.htmlReport.TabStop = true;
+            this.htmlReport.Text = "HTML Report";
+            this.htmlReport.UseVisualStyleBackColor = true;
             // 
             // xmlReport
             // 
@@ -74,16 +74,16 @@
             this.xmlReport.Text = "XML Report";
             this.xmlReport.UseVisualStyleBackColor = true;
             // 
-            // htmlReport
+            // csvReport
             // 
-            this.htmlReport.AutoSize = true;
-            this.htmlReport.Location = new System.Drawing.Point(260, 19);
-            this.htmlReport.Name = "htmlReport";
-            this.htmlReport.Size = new System.Drawing.Size(90, 17);
-            this.htmlReport.TabIndex = 2;
-            this.htmlReport.TabStop = true;
-            this.htmlReport.Text = "HTML Report";
-            this.htmlReport.UseVisualStyleBackColor = true;
+            this.csvReport.AutoSize = true;
+            this.csvReport.Location = new System.Drawing.Point(15, 19);
+            this.csvReport.Name = "csvReport";
+            this.csvReport.Size = new System.Drawing.Size(81, 17);
+            this.csvReport.TabIndex = 0;
+            this.csvReport.TabStop = true;
+            this.csvReport.Text = "CSV Report";
+            this.csvReport.UseVisualStyleBackColor = true;
             // 
             // fileName
             // 
@@ -91,6 +91,7 @@
             this.fileName.Name = "fileName";
             this.fileName.Size = new System.Drawing.Size(320, 20);
             this.fileName.TabIndex = 1;
+            this.fileName.TextChanged += new System.EventHandler(this.fileName_TextChanged);
             // 
             // chooseFilename
             // 

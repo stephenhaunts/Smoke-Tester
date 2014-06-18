@@ -205,6 +205,11 @@ namespace TestConfiguration.Forms
 
         private void RemoveAllTestsFromList()
         {
+            if (_configurationTestSuite == null)
+            {
+                return;
+            }
+
             lstListOfTests.Items.Clear();
             lvwListOfTest.Items.Clear();
             _configurationTestSuite.Tests = null;
@@ -587,9 +592,25 @@ namespace TestConfiguration.Forms
             GenerateReport();
         }
 
-        private static void GenerateReport()
+        private void GenerateReport()
         {
-            using (var reportWriter = new ReportWriter())
+            if (lstListOfTests.Items.Count == 0)
+            {
+                MessageBox.Show(@"There are no tests to generate a report for.", @"Can not generate report.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            if (_reportBuilder.CountEnties == 0)
+            {
+                MessageBox.Show(@"You must run your test(s) before you can generate a report.", @"No test results to report.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            using (var reportWriter = new ReportWriter(_reportBuilder))
             {
                 if (reportWriter.ShowDialog() == DialogResult.OK)
                 {
