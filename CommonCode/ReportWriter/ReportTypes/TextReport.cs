@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 namespace CommonCode.ReportWriter.ReportTypes
 {
-    public class HtmlReport : IReportType
+    public class TextReport : IReportType
    {
         public void WriteReport(string fileName, List<ReportEntry> reportEntries)
         {            

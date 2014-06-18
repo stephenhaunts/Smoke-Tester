@@ -45,8 +45,8 @@ namespace CommonCode.ReportWriter
                     reportWriter = new CsvReport();
                     break;
 
-                case ReportType.HtmlReport:
-                    reportWriter = new HtmlReport();
+                case ReportType.TextReport:
+                    reportWriter = new TextReport();
                     break;
 
                 case ReportType.XmlReport:

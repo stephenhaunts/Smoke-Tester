@@ -22,6 +22,6 @@ namespace CommonCode.ReportWriter
     {
         XmlReport = 0,
         CsvReport =  1,
-        HtmlReport = 2
+        TextReport = 2
     }
 }
