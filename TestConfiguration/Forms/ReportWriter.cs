@@ -26,7 +26,7 @@ namespace TestConfiguration.Forms
 {
     public partial class ReportWriter : Form
     {
-        private ReportBuilder _builder;
+        private readonly ReportBuilder _builder;
 
         public ReportWriter(ReportBuilder builder)
         {
@@ -43,23 +43,36 @@ namespace TestConfiguration.Forms
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            var fileFriendlyDate = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace("/", "").Replace(" ", "-").Replace(":", "");
-            var fullFileName = Path.GetFullPath(fileName.Text + @"\" + fileFriendlyDate);
+            try
+            {
+                var fileFriendlyDate =
+                    DateTime.Now.ToString(CultureInfo.InvariantCulture)
+                        .Replace("/", "")
+                        .Replace(" ", "-")
+                        .Replace(":", "");
 
-            if (csvReport.Checked)
-            {
-                fullFileName = Path.GetFullPath(fullFileName + ".csv");
-                _builder.WriteReport(fullFileName, ReportType.CsvReport);
+                var fullFileName = Path.GetFullPath(fileName.Text + @"\" + fileFriendlyDate);
+
+                if (csvReport.Checked)
+                {
+                    fullFileName = Path.GetFullPath(fullFileName + ".csv");
+                    _builder.WriteReport(fullFileName, ReportType.CsvReport);
+                }
+                else if (xmlReport.Checked)
+                {
+                    fullFileName = Path.GetFullPath(fullFileName + ".xml");
+                    _builder.WriteReport(fullFileName, ReportType.XmlReport);
+                }
+                else if (htmlReport.Checked)
+                {
+                    fullFileName = Path.GetFullPath(fullFileName + ".html");
+                    _builder.WriteReport(fullFileName, ReportType.HtmlReport);
+                }
             }
-            else if (xmlReport.Checked)
+            catch
             {
-                fullFileName = Path.GetFullPath(fullFileName + ".xml");
-                _builder.WriteReport(fullFileName, ReportType.XmlReport);
-            }
-            else if (htmlReport.Checked)
-            {
-                fullFileName = Path.GetFullPath(fullFileName + ".html");
-                _builder.WriteReport(fullFileName, ReportType.HtmlReport);
+                MessageBox.Show(@"There was an error writing the report file.", @"Error writing report.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
