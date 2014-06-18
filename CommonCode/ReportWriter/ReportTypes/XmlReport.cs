@@ -17,13 +17,39 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace CommonCode.ReportWriter.ReportTypes
 {
     public class XmlReport : IReportType
    {
         public void WriteReport(string fileName, List<ReportEntry> reportEntries)
-        {            
+        {
+            var root = new XDocument();
+
+            var tests = new XElement("Tests");
+
+            root.Add(tests);            
+
+            foreach (var entry in reportEntries)
+            {
+                var test = new XElement("Test1");
+                var attribute = new XAttribute("TestName", entry.TestName);
+                var attribute2 = new XAttribute("Result", entry.Result);
+                var attribute3 = new XAttribute("StartTime", entry.TestStartTime);
+                var attribute4 = new XAttribute("StopTime", entry.TestStopTime);
+
+                test.Add(attribute);
+                test.Add(attribute2);
+                test.Add(attribute3);
+                test.Add(attribute4);
+
+                tests.Add(test);
+            }                        
+           
+            root.Save(fileName);
         }
     }
 }
