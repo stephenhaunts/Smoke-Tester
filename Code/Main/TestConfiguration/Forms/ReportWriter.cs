@@ -63,10 +63,10 @@ namespace TestConfiguration.Forms
                     fullFileName = Path.GetFullPath(fullFileName + ".xml");
                     _builder.WriteReport(fullFileName, ReportType.XmlReport);
                 }
-                else if (htmlReport.Checked)
+                else if (textReport.Checked)
                 {
-                    fullFileName = Path.GetFullPath(fullFileName + ".html");
-                    _builder.WriteReport(fullFileName, ReportType.HtmlReport);
+                    fullFileName = Path.GetFullPath(fullFileName + ".txt");
+                    _builder.WriteReport(fullFileName, ReportType.TextReport);
                 }
             }
             catch

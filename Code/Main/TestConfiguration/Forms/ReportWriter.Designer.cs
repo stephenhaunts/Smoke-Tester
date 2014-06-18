@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.reportTypeGroupBox = new System.Windows.Forms.GroupBox();
-            this.htmlReport = new System.Windows.Forms.RadioButton();
+            this.textReport = new System.Windows.Forms.RadioButton();
             this.xmlReport = new System.Windows.Forms.RadioButton();
             this.csvReport = new System.Windows.Forms.RadioButton();
             this.fileName = new System.Windows.Forms.TextBox();
@@ -42,7 +42,7 @@
             // 
             // reportTypeGroupBox
             // 
-            this.reportTypeGroupBox.Controls.Add(this.htmlReport);
+            this.reportTypeGroupBox.Controls.Add(this.textReport);
             this.reportTypeGroupBox.Controls.Add(this.xmlReport);
             this.reportTypeGroupBox.Controls.Add(this.csvReport);
             this.reportTypeGroupBox.Location = new System.Drawing.Point(12, 12);
@@ -52,16 +52,16 @@
             this.reportTypeGroupBox.TabStop = false;
             this.reportTypeGroupBox.Text = "Report Type";
             // 
-            // htmlReport
+            // textReport
             // 
-            this.htmlReport.AutoSize = true;
-            this.htmlReport.Location = new System.Drawing.Point(260, 19);
-            this.htmlReport.Name = "htmlReport";
-            this.htmlReport.Size = new System.Drawing.Size(90, 17);
-            this.htmlReport.TabIndex = 2;
-            this.htmlReport.TabStop = true;
-            this.htmlReport.Text = "HTML Report";
-            this.htmlReport.UseVisualStyleBackColor = true;
+            this.textReport.AutoSize = true;
+            this.textReport.Location = new System.Drawing.Point(260, 19);
+            this.textReport.Name = "textReport";
+            this.textReport.Size = new System.Drawing.Size(81, 17);
+            this.textReport.TabIndex = 2;
+            this.textReport.TabStop = true;
+            this.textReport.Text = "Text Report";
+            this.textReport.UseVisualStyleBackColor = true;
             // 
             // xmlReport
             // 
@@ -157,7 +157,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox reportTypeGroupBox;
-        private System.Windows.Forms.RadioButton htmlReport;
+        private System.Windows.Forms.RadioButton textReport;
         private System.Windows.Forms.RadioButton xmlReport;
         private System.Windows.Forms.RadioButton csvReport;
         private System.Windows.Forms.TextBox fileName;

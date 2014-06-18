@@ -69,7 +69,7 @@
     <Compile Include="ReportWriter\ReportEntry.cs" />
     <Compile Include="ReportWriter\ReportType.cs" />
     <Compile Include="ReportWriter\ReportTypes\CsvReport.cs" />
-    <Compile Include="ReportWriter\ReportTypes\HtmlReport.cs" />
+    <Compile Include="ReportWriter\ReportTypes\TextReport.cs" />
     <Compile Include="ReportWriter\ReportTypes\XmlReport.cs" />
     <Compile Include="ReportWriter\ReportWriter.cs" />
     <Compile Include="Security\CertificateException.cs" />
