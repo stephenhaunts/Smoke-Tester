@@ -16,12 +16,39 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
 namespace CommonCode.ReportWriter.ReportTypes
 {
-    public class CsvReport : IReportType
+   public class CsvReport : IReportType
    {
-        public void WriteReport(string fileName, System.Collections.Generic.List<ReportEntry> reportEntries)
-        {            
+        public void WriteReport(string fileName, List<ReportEntry> reportEntries)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException("fileName");    
+            }
+
+            if (reportEntries.Count == 0)
+            {
+                throw new ArgumentNullException("reportEntries");
+            }
+
+            var csvReport = new StringBuilder();
+            csvReport.AppendLine("TestName, Result, Start Time, Finish Time, Error Message");
+
+            foreach (var entry in reportEntries)
+            {
+                csvReport.AppendLine(entry.TestName + "," + entry.Result + "," + entry.TestStartTime + "," + entry.TestStopTime + "," + entry.ErrorMessage);
+            }
+
+            var file = new StreamWriter(fileName);
+            file.WriteLine(csvReport.ToString());
+            file.Close();
         }
     }
 }
