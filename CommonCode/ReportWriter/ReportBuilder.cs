@@ -47,6 +47,11 @@ namespace CommonCode.ReportWriter
             _reportEntries.Clear();
         }
 
+        public int CountEnties
+        {
+            get { return _reportEntries.Count; }
+        }
+
         public void WriteReport(string fileName, ReportType reportType)
         {
             if (string.IsNullOrEmpty(fileName))
@@ -54,7 +59,7 @@ namespace CommonCode.ReportWriter
                 throw new ArgumentNullException("fileName");
             }
 
-            _reportWriter.WriterReport(fileName, reportType, _reportEntries);
+            _reportWriter.WriteReport(fileName, reportType, _reportEntries);
         }
     }
 }

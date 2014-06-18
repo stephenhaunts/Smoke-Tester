@@ -25,7 +25,7 @@ namespace CommonCode.ReportWriter
 {
     public sealed class ReportWriter
     {
-        public void WriterReport(string fileName, ReportType reportType, List<ReportEntry> entries)
+        public void WriteReport(string fileName, ReportType reportType, List<ReportEntry> entries)
         {
             if (string.IsNullOrEmpty(fileName))
             {
