@@ -25,6 +25,7 @@ using System.Text;
 using Common.Xml;
 using ConfigurationTests;
 using ConfigurationTests.Tests;
+using System.Globalization;
 
 namespace InstallationSmokeTest
 {
@@ -38,7 +39,6 @@ namespace InstallationSmokeTest
         private const string OverwritePrompt = "Overwrite {0}? [y/N] ";
         private const ConsoleKey OverwriteAffirmativeKey = ConsoleKey.Y;
         private const string SmokeTestFileExtension = ".xml";
-        private const string StandardDatetimeFormat = "dd/MM/yyyy HH:mm:ss";
         private const string StandardNumberFormat = "#,##0";
 
         private static string _outputFile;
@@ -191,13 +191,13 @@ namespace InstallationSmokeTest
                 return;
             }
 
-            WriteLine("Running Tests: " + DateTime.Now.ToString(StandardDatetimeFormat));
+            WriteLine("Running Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
             WriteLine();
 
             int successfulTests = info.Tests.Select(RunTest).Count(result => result);
 
             WriteLine();
-            WriteLine("Completed Tests: " + DateTime.Now.ToString(StandardDatetimeFormat));
+            WriteLine("Completed Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
             int totalTests = info.Tests.Count();
 
             string totalTestsString = totalTests.ToString(StandardNumberFormat);
@@ -243,7 +243,7 @@ namespace InstallationSmokeTest
         {
             ConsoleColor temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.White;
-            WriteLine("{0}, {1}, {2}", test.GetType().Name, test.TestName, DateTime.Now.ToString(StandardDatetimeFormat));
+            WriteLine("{0}, {1}, {2}", test.GetType().Name, test.TestName, DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
 
             try
             {
