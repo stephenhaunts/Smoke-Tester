@@ -23,6 +23,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Common.Xml;
+using CommonCode.ReportWriter;
 using ConfigurationTests;
 using ConfigurationTests.Tests;
 using System.Globalization;
@@ -43,16 +44,18 @@ namespace InstallationSmokeTest
 
         private static string _outputFile;
 
+        private static ReportBuilder _reportBuilder = new ReportBuilder();
+
         internal static bool SmokeTestsPassed { get; private set; }
 
         internal static void Main(string[] args)
         {
             SmokeTestsPassed = false;
-            bool runWithUi = true;
+            var runWithUi = true;
 
             try
             {
-                string operation = RunOperation;
+                var operation = RunOperation;
 
                 if (args.Length > 0)
                 {
@@ -60,7 +63,7 @@ namespace InstallationSmokeTest
                     operation = args[0];
                 }
 
-                string file = args.Length > 1 ? args[1] : SelectFile(operation == RunOperation);
+                var file = args.Length > 1 ? args[1] : SelectFile(operation == RunOperation);
 
                 _outputFile = args.Length > 2 ? args[2] : null;
 
@@ -112,7 +115,7 @@ namespace InstallationSmokeTest
 
         private static void DisplayUsageHelp()
         {
-            string exeName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
+            var exeName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
 
             Console.WriteLine("Usage:");
             Console.WriteLine();
@@ -129,7 +132,7 @@ namespace InstallationSmokeTest
 
         private static void CreateConfiguration(string file)
         {
-            ConsoleColor temp = Console.ForegroundColor;
+            var temp = Console.ForegroundColor;
 
             try
             {
@@ -138,7 +141,7 @@ namespace InstallationSmokeTest
                     Console.ForegroundColor = ConsoleColor.Red;
                     WriteLine(OverwritePrompt, file);
                     Console.ForegroundColor = ConsoleColor.White;
-                    ConsoleKeyInfo overwrite = Console.ReadKey(true);
+                    var overwrite = Console.ReadKey(true);
 
                     if (overwrite.Key != OverwriteAffirmativeKey)
                     {
@@ -151,7 +154,7 @@ namespace InstallationSmokeTest
                 WriteLine("Preparing example data...");
                 var configurationInformation = new ConfigurationTestSuite();
                 configurationInformation.CreateExampleData();
-                string xmlString = configurationInformation.ToXmlString();
+                var xmlString = configurationInformation.ToXmlString();
                 Console.Write("Writing file...");
                 File.WriteAllText(Path.Combine(".", file), xmlString, Encoding.Unicode);
                 WriteLine(" Done.");
@@ -175,7 +178,7 @@ namespace InstallationSmokeTest
 
             try
             {
-                string xml = File.ReadAllText(file, Encoding.Unicode);
+                var xml = File.ReadAllText(file, Encoding.Unicode);
                 info = xml.ToObject<ConfigurationTestSuite>();
             }
             catch (InvalidOperationException ex)
@@ -194,15 +197,16 @@ namespace InstallationSmokeTest
             WriteLine("Running Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
             WriteLine();
 
-            int successfulTests = info.Tests.Select(RunTest).Count(result => result);
+            _reportBuilder.ClearEntries();
+            var successfulTests = info.Tests.Select(RunTest).Count(result => result);
 
             WriteLine();
             WriteLine("Completed Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
-            int totalTests = info.Tests.Count();
+            var totalTests = info.Tests.Count();
 
-            string totalTestsString = totalTests.ToString(StandardNumberFormat);
-            int totalWidth = totalTestsString.Length;
-            int failedTests = totalTests - successfulTests;
+            var totalTestsString = totalTests.ToString(StandardNumberFormat);
+            var totalWidth = totalTestsString.Length;
+            var failedTests = totalTests - successfulTests;
 
             WriteLine("Tests Run:    {0}", totalTestsString);
             WriteLine("Tests Passed: {0}", successfulTests.ToString(StandardNumberFormat).PadLeft(totalWidth));
@@ -241,23 +245,51 @@ namespace InstallationSmokeTest
 
         private static bool RunTest(Test test)
         {
-            ConsoleColor temp = Console.ForegroundColor;
+            var temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.White;
             WriteLine("{0}, {1}, {2}", test.GetType().Name, test.TestName, DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
+
+            DateTime startTime = DateTime.Now;
+            DateTime stopTime;
 
             try
             {
                 test.Run();
+                stopTime = DateTime.Now;
+
+                var entry = new ReportEntry
+                {
+                    TestName = test.TestName,
+                    Result = true,
+                    TestStartTime = startTime,
+                    TestStopTime = stopTime
+                };
+
+                _reportBuilder.AddEntry(entry);
+
                 Console.ForegroundColor = ConsoleColor.Green;
                 WriteLine("\t\t{0}", TestPassedMessage);
-
+                
                 return true;
             }
             catch (Exception ex)
             {
+                stopTime = DateTime.Now;
+
                 Console.ForegroundColor = ConsoleColor.Red;
                 WriteLine("\tMessage: {0}", ex.Message);
                 WriteLine("\tStackTrace: {0}", ex.StackTrace);
+
+                var entry = new ReportEntry
+                {
+                    TestName = test.TestName,
+                    Result = false,
+                    ErrorMessage = ex.Message,
+                    TestStartTime = startTime,
+                    TestStopTime = stopTime
+                };
+
+                _reportBuilder.AddEntry(entry);
 
                 return false;
             }
@@ -329,14 +361,14 @@ namespace InstallationSmokeTest
 
         private static void PresentSelectionOptions(string[] suites, string abort)
         {
-            ConsoleColor temp = Console.ForegroundColor;
+            var temp = Console.ForegroundColor;
 
             Console.WriteLine();
             Console.WriteLine("Choose a suite or type its name, or type 0 to {0} or ? for CLI help:", abort);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("0: {0}", abort);
 
-            for (int i = 0; i < suites.Length; i++)
+            for (var i = 0; i < suites.Length; i++)
             {
                 Console.WriteLine("{0}: {1}", i + 1, suites[i]);
             }
@@ -346,7 +378,7 @@ namespace InstallationSmokeTest
 
         private static void DisplayError(string errorMessage)
         {
-            ConsoleColor temp = Console.ForegroundColor;
+            var temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
             WriteLine(errorMessage);
 
@@ -355,7 +387,7 @@ namespace InstallationSmokeTest
 
         private static void DisplaySuccess(string message)
         {
-            ConsoleColor temp = Console.ForegroundColor;
+            var temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
             WriteLine(message);
 
@@ -364,11 +396,11 @@ namespace InstallationSmokeTest
 
         private static string GetInput()
         {
-            ConsoleColor temp = Console.ForegroundColor;
+            var temp = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("> ");
             Console.ForegroundColor = ConsoleColor.White;
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
             Console.ForegroundColor = temp;
 
             return input;
