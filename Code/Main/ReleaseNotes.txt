@@ -3,8 +3,12 @@ Version 0.03
 
 [X] - Added a new TestCategoryAttribute to each test. This means in the UI, instead of getting a large list of tests to
       choose from, they are now displayed in a set of categorised folders. This is to aid usability.
-[ ] - Add a test report writer to the UI and Command line app. This allows you to automatically output a test report in
-      XML, CSV and HTML.
+
+[X] - Add test linking between the test editor view and the test result view. This means if you get a failing test in the 
+      results view you can double click on it to navigate to the failing test in the test editor view. 
+
+[X] - Add a test report writer to the UI. This allows you to automatically output a test report in
+      XML, CSV and Txt.
 
 Version 0.02
 -------------
