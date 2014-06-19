@@ -50,14 +50,33 @@ namespace TestConfiguration.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestEditor));
             this.pgTestConfiguration = new System.Windows.Forms.PropertyGrid();
             this.tspConfiguration = new System.Windows.Forms.ToolStrip();
+            this.tsbTests = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsbSave = new System.Windows.Forms.ToolStripSplitButton();
+            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuSaveAndRun = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbRunSelectedTest01 = new System.Windows.Forms.ToolStripButton();
+            this.tsbRunAllTests01 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbRemoveTest01 = new System.Windows.Forms.ToolStripButton();
+            this.tsbRemoveAllTests01 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbWriteTestReport = new System.Windows.Forms.ToolStripButton();
             this.lstListOfTests = new System.Windows.Forms.ListBox();
             this.cntxtMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuRemoveTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRemoveAllTests = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuRunSelectedTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRunAllTests = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnMoveUp = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTotalTestCount = new System.Windows.Forms.Label();
             this.lblListOfTest = new System.Windows.Forms.Label();
@@ -77,34 +96,17 @@ namespace TestConfiguration.Forms
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imgLstIcons = new System.Windows.Forms.ImageList(this.components);
             this.tspTestRun = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.stsStatus = new System.Windows.Forms.StatusStrip();
-            this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnMoveDown = new System.Windows.Forms.Button();
-            this.btnMoveUp = new System.Windows.Forms.Button();
-            this.mnuRemoveTest = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRemoveAllTests = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMoveUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMoveDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRunSelectedTest = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRunAllTests = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbTests = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsbSave = new System.Windows.Forms.ToolStripSplitButton();
-            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuSaveAndRun = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbRunSelectedTest01 = new System.Windows.Forms.ToolStripButton();
-            this.tsbRunAllTests01 = new System.Windows.Forms.ToolStripButton();
-            this.tsbRemoveTest01 = new System.Windows.Forms.ToolStripButton();
-            this.tsbRemoveAllTests01 = new System.Windows.Forms.ToolStripButton();
-            this.tsbWriteTestReport = new System.Windows.Forms.ToolStripButton();
             this.tsbRunSelectedTest02 = new System.Windows.Forms.ToolStripButton();
             this.tsbRunAllTests02 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.tsbWriteTestReport2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbWriteTestReport2 = new System.Windows.Forms.ToolStripButton();
+            this.stsStatus = new System.Windows.Forms.StatusStrip();
+            this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuShowTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tspConfiguration.SuspendLayout();
             this.cntxtMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -151,20 +153,120 @@ namespace TestConfiguration.Forms
             this.tspConfiguration.TabIndex = 1;
             this.tspConfiguration.Text = "toolStrip1";
             // 
+            // tsbTests
+            // 
+            this.tsbTests.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbTests.Image = global::TestConfiguration.Properties.Resources._04;
+            this.tsbTests.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbTests.Name = "tsbTests";
+            this.tsbTests.Size = new System.Drawing.Size(29, 22);
+            this.tsbTests.Text = "Create New Test";
+            // 
+            // tsbSave
+            // 
+            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSave.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSave,
+            this.mnuSaveAs,
+            this.toolStripSeparator1,
+            this.mnuSaveAndRun});
+            this.tsbSave.Image = global::TestConfiguration.Properties.Resources._06;
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(32, 22);
+            this.tsbSave.Text = "Save Test";
+            this.tsbSave.ButtonClick += new System.EventHandler(this.btnSave_Click);
+            // 
+            // mnuSave
+            // 
+            this.mnuSave.Name = "mnuSave";
+            this.mnuSave.Size = new System.Drawing.Size(154, 22);
+            this.mnuSave.Text = "Save...";
+            this.mnuSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // mnuSaveAs
+            // 
+            this.mnuSaveAs.Name = "mnuSaveAs";
+            this.mnuSaveAs.Size = new System.Drawing.Size(154, 22);
+            this.mnuSaveAs.Text = "Save As...";
+            this.mnuSaveAs.Click += new System.EventHandler(this.mnuSaveAs_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(151, 6);
+            // 
+            // mnuSaveAndRun
+            // 
+            this.mnuSaveAndRun.Name = "mnuSaveAndRun";
+            this.mnuSaveAndRun.Size = new System.Drawing.Size(154, 22);
+            this.mnuSaveAndRun.Text = "Save and Run...";
+            this.mnuSaveAndRun.Click += new System.EventHandler(this.mnuSaveAndRun_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbRunSelectedTest01
+            // 
+            this.tsbRunSelectedTest01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRunSelectedTest01.Image = global::TestConfiguration.Properties.Resources._07;
+            this.tsbRunSelectedTest01.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRunSelectedTest01.Name = "tsbRunSelectedTest01";
+            this.tsbRunSelectedTest01.Size = new System.Drawing.Size(23, 22);
+            this.tsbRunSelectedTest01.Text = "Run Selected Test";
+            this.tsbRunSelectedTest01.Click += new System.EventHandler(this.mnuRunSelectedTest_Click);
+            // 
+            // tsbRunAllTests01
+            // 
+            this.tsbRunAllTests01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRunAllTests01.Image = global::TestConfiguration.Properties.Resources._08;
+            this.tsbRunAllTests01.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRunAllTests01.Name = "tsbRunAllTests01";
+            this.tsbRunAllTests01.Size = new System.Drawing.Size(23, 22);
+            this.tsbRunAllTests01.Text = "Run All Tests";
+            this.tsbRunAllTests01.Click += new System.EventHandler(this.mnuRunAllTests_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbRemoveTest01
+            // 
+            this.tsbRemoveTest01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRemoveTest01.Image = global::TestConfiguration.Properties.Resources._14;
+            this.tsbRemoveTest01.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRemoveTest01.Name = "tsbRemoveTest01";
+            this.tsbRemoveTest01.Size = new System.Drawing.Size(23, 22);
+            this.tsbRemoveTest01.Text = "Remove Selected Test";
+            this.tsbRemoveTest01.Click += new System.EventHandler(this.mnuRemoveTest_Click);
+            // 
+            // tsbRemoveAllTests01
+            // 
+            this.tsbRemoveAllTests01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRemoveAllTests01.Image = global::TestConfiguration.Properties.Resources._13;
+            this.tsbRemoveAllTests01.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRemoveAllTests01.Name = "tsbRemoveAllTests01";
+            this.tsbRemoveAllTests01.Size = new System.Drawing.Size(23, 22);
+            this.tsbRemoveAllTests01.Text = "Remove All Tests";
+            this.tsbRemoveAllTests01.Click += new System.EventHandler(this.mnuRemoveAllTests_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbWriteTestReport
+            // 
+            this.tsbWriteTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbWriteTestReport.Image = ((System.Drawing.Image)(resources.GetObject("tsbWriteTestReport.Image")));
+            this.tsbWriteTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbWriteTestReport.Name = "tsbWriteTestReport";
+            this.tsbWriteTestReport.Size = new System.Drawing.Size(23, 22);
+            this.tsbWriteTestReport.Text = "Write Out Test Report";
+            this.tsbWriteTestReport.Click += new System.EventHandler(this.tsbWriteTestReport_Click);
             // 
             // lstListOfTests
             // 
@@ -179,10 +281,13 @@ namespace TestConfiguration.Forms
             this.lstListOfTests.Size = new System.Drawing.Size(315, 242);
             this.lstListOfTests.TabIndex = 2;
             this.lstListOfTests.SelectedIndexChanged += new System.EventHandler(this.lstListOfTests_SelectedIndexChanged);
+            this.lstListOfTests.DoubleClick += new System.EventHandler(this.SelectTestRunTestItem_Handler);
             // 
             // cntxtMain
             // 
             this.cntxtMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuShowTest,
+            this.toolStripSeparator7,
             this.mnuRemoveTest,
             this.mnuRemoveAllTests,
             this.toolStripMenuItem1,
@@ -192,17 +297,68 @@ namespace TestConfiguration.Forms
             this.mnuRunSelectedTest,
             this.mnuRunAllTests});
             this.cntxtMain.Name = "cntxtMain";
-            this.cntxtMain.Size = new System.Drawing.Size(165, 148);
+            this.cntxtMain.Size = new System.Drawing.Size(165, 198);
+            this.cntxtMain.Opening += new System.ComponentModel.CancelEventHandler(this.cntxtMain_Opening);
+            // 
+            // mnuRemoveTest
+            // 
+            this.mnuRemoveTest.Image = ((System.Drawing.Image)(resources.GetObject("mnuRemoveTest.Image")));
+            this.mnuRemoveTest.Name = "mnuRemoveTest";
+            this.mnuRemoveTest.Size = new System.Drawing.Size(164, 22);
+            this.mnuRemoveTest.Text = "Remove Test";
+            this.mnuRemoveTest.Click += new System.EventHandler(this.mnuRemoveTest_Click);
+            // 
+            // mnuRemoveAllTests
+            // 
+            this.mnuRemoveAllTests.Image = global::TestConfiguration.Properties.Resources._13;
+            this.mnuRemoveAllTests.Name = "mnuRemoveAllTests";
+            this.mnuRemoveAllTests.Size = new System.Drawing.Size(164, 22);
+            this.mnuRemoveAllTests.Text = "Remove All Tests";
+            this.mnuRemoveAllTests.Click += new System.EventHandler(this.mnuRemoveAllTests_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(161, 6);
             // 
+            // mnuMoveUp
+            // 
+            this.mnuMoveUp.Image = global::TestConfiguration.Properties.Resources._16;
+            this.mnuMoveUp.Name = "mnuMoveUp";
+            this.mnuMoveUp.Size = new System.Drawing.Size(164, 22);
+            this.mnuMoveUp.Tag = "up";
+            this.mnuMoveUp.Text = "Move Up";
+            this.mnuMoveUp.Click += new System.EventHandler(this.mnuMove_Click);
+            // 
+            // mnuMoveDown
+            // 
+            this.mnuMoveDown.Image = global::TestConfiguration.Properties.Resources._15;
+            this.mnuMoveDown.Name = "mnuMoveDown";
+            this.mnuMoveDown.Size = new System.Drawing.Size(164, 22);
+            this.mnuMoveDown.Tag = "down";
+            this.mnuMoveDown.Text = "Move Down";
+            this.mnuMoveDown.Click += new System.EventHandler(this.mnuMove_Click);
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(161, 6);
+            // 
+            // mnuRunSelectedTest
+            // 
+            this.mnuRunSelectedTest.Image = global::TestConfiguration.Properties.Resources._07;
+            this.mnuRunSelectedTest.Name = "mnuRunSelectedTest";
+            this.mnuRunSelectedTest.Size = new System.Drawing.Size(164, 22);
+            this.mnuRunSelectedTest.Text = "Run";
+            this.mnuRunSelectedTest.Click += new System.EventHandler(this.mnuRunSelectedTest_Click);
+            // 
+            // mnuRunAllTests
+            // 
+            this.mnuRunAllTests.Image = global::TestConfiguration.Properties.Resources._08;
+            this.mnuRunAllTests.Name = "mnuRunAllTests";
+            this.mnuRunAllTests.Size = new System.Drawing.Size(164, 22);
+            this.mnuRunAllTests.Text = "Run All";
+            this.mnuRunAllTests.Click += new System.EventHandler(this.mnuRunAllTests_Click);
             // 
             // splitContainer1
             // 
@@ -225,6 +381,34 @@ namespace TestConfiguration.Forms
             this.splitContainer1.Size = new System.Drawing.Size(858, 439);
             this.splitContainer1.SplitterDistance = 361;
             this.splitContainer1.TabIndex = 3;
+            // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnMoveDown.Image = global::TestConfiguration.Properties.Resources._15;
+            this.btnMoveDown.Location = new System.Drawing.Point(324, 127);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(24, 23);
+            this.btnMoveDown.TabIndex = 7;
+            this.btnMoveDown.Tag = "down";
+            this.btnMoveDown.Text = "q";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveItem_Click);
+            // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnMoveUp.Image = global::TestConfiguration.Properties.Resources._16;
+            this.btnMoveUp.Location = new System.Drawing.Point(324, 96);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(24, 23);
+            this.btnMoveUp.TabIndex = 6;
+            this.btnMoveUp.Tag = "up";
+            this.btnMoveUp.Text = "p";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveItem_Click);
             // 
             // panel3
             // 
@@ -383,6 +567,7 @@ namespace TestConfiguration.Forms
             this.lvwListOfTest.UseCompatibleStateImageBehavior = false;
             this.lvwListOfTest.View = System.Windows.Forms.View.Details;
             this.lvwListOfTest.SelectedIndexChanged += new System.EventHandler(this.lvwListOfTest_SelectedIndexChanged);
+            this.lvwListOfTest.DoubleClick += new System.EventHandler(this.SelectConfigurationTestItem_Handler);
             // 
             // columnHeader1
             // 
@@ -427,205 +612,6 @@ namespace TestConfiguration.Forms
             this.tspTestRun.TabIndex = 4;
             this.tspTestRun.Text = "toolStrip2";
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // stsStatus
-            // 
-            this.stsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslStatus});
-            this.stsStatus.Location = new System.Drawing.Point(0, 500);
-            this.stsStatus.Name = "stsStatus";
-            this.stsStatus.Size = new System.Drawing.Size(872, 22);
-            this.stsStatus.TabIndex = 5;
-            this.stsStatus.Text = "statusStrip1";
-            // 
-            // tslStatus
-            // 
-            this.tslStatus.Name = "tslStatus";
-            this.tslStatus.Size = new System.Drawing.Size(48, 17);
-            this.tslStatus.Text = "Ready...";
-            // 
-            // btnMoveDown
-            // 
-            this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnMoveDown.Image = global::TestConfiguration.Properties.Resources._15;
-            this.btnMoveDown.Location = new System.Drawing.Point(324, 127);
-            this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(24, 23);
-            this.btnMoveDown.TabIndex = 7;
-            this.btnMoveDown.Tag = "down";
-            this.btnMoveDown.Text = "q";
-            this.btnMoveDown.UseVisualStyleBackColor = true;
-            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveItem_Click);
-            // 
-            // btnMoveUp
-            // 
-            this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnMoveUp.Image = global::TestConfiguration.Properties.Resources._16;
-            this.btnMoveUp.Location = new System.Drawing.Point(324, 96);
-            this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(24, 23);
-            this.btnMoveUp.TabIndex = 6;
-            this.btnMoveUp.Tag = "up";
-            this.btnMoveUp.Text = "p";
-            this.btnMoveUp.UseVisualStyleBackColor = true;
-            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveItem_Click);
-            // 
-            // mnuRemoveTest
-            // 
-            this.mnuRemoveTest.Image = ((System.Drawing.Image)(resources.GetObject("mnuRemoveTest.Image")));
-            this.mnuRemoveTest.Name = "mnuRemoveTest";
-            this.mnuRemoveTest.Size = new System.Drawing.Size(164, 22);
-            this.mnuRemoveTest.Text = "Remove Test";
-            this.mnuRemoveTest.Click += new System.EventHandler(this.mnuRemoveTest_Click);
-            // 
-            // mnuRemoveAllTests
-            // 
-            this.mnuRemoveAllTests.Image = global::TestConfiguration.Properties.Resources._13;
-            this.mnuRemoveAllTests.Name = "mnuRemoveAllTests";
-            this.mnuRemoveAllTests.Size = new System.Drawing.Size(164, 22);
-            this.mnuRemoveAllTests.Text = "Remove All Tests";
-            this.mnuRemoveAllTests.Click += new System.EventHandler(this.mnuRemoveAllTests_Click);
-            // 
-            // mnuMoveUp
-            // 
-            this.mnuMoveUp.Image = global::TestConfiguration.Properties.Resources._16;
-            this.mnuMoveUp.Name = "mnuMoveUp";
-            this.mnuMoveUp.Size = new System.Drawing.Size(164, 22);
-            this.mnuMoveUp.Tag = "up";
-            this.mnuMoveUp.Text = "Move Up";
-            this.mnuMoveUp.Click += new System.EventHandler(this.mnuMove_Click);
-            // 
-            // mnuMoveDown
-            // 
-            this.mnuMoveDown.Image = global::TestConfiguration.Properties.Resources._15;
-            this.mnuMoveDown.Name = "mnuMoveDown";
-            this.mnuMoveDown.Size = new System.Drawing.Size(164, 22);
-            this.mnuMoveDown.Tag = "down";
-            this.mnuMoveDown.Text = "Move Down";
-            this.mnuMoveDown.Click += new System.EventHandler(this.mnuMove_Click);
-            // 
-            // mnuRunSelectedTest
-            // 
-            this.mnuRunSelectedTest.Image = global::TestConfiguration.Properties.Resources._07;
-            this.mnuRunSelectedTest.Name = "mnuRunSelectedTest";
-            this.mnuRunSelectedTest.Size = new System.Drawing.Size(164, 22);
-            this.mnuRunSelectedTest.Text = "Run";
-            this.mnuRunSelectedTest.Click += new System.EventHandler(this.mnuRunSelectedTest_Click);
-            // 
-            // mnuRunAllTests
-            // 
-            this.mnuRunAllTests.Image = global::TestConfiguration.Properties.Resources._08;
-            this.mnuRunAllTests.Name = "mnuRunAllTests";
-            this.mnuRunAllTests.Size = new System.Drawing.Size(164, 22);
-            this.mnuRunAllTests.Text = "Run All";
-            this.mnuRunAllTests.Click += new System.EventHandler(this.mnuRunAllTests_Click);
-            // 
-            // tsbTests
-            // 
-            this.tsbTests.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbTests.Image = global::TestConfiguration.Properties.Resources._04;
-            this.tsbTests.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbTests.Name = "tsbTests";
-            this.tsbTests.Size = new System.Drawing.Size(29, 22);
-            this.tsbTests.Text = "Create New Test";
-            // 
-            // tsbSave
-            // 
-            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSave.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSave,
-            this.mnuSaveAs,
-            this.toolStripSeparator1,
-            this.mnuSaveAndRun});
-            this.tsbSave.Image = global::TestConfiguration.Properties.Resources._06;
-            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(32, 22);
-            this.tsbSave.Text = "Save Test";
-            this.tsbSave.ButtonClick += new System.EventHandler(this.btnSave_Click);
-            // 
-            // mnuSave
-            // 
-            this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(154, 22);
-            this.mnuSave.Text = "Save...";
-            this.mnuSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // mnuSaveAs
-            // 
-            this.mnuSaveAs.Name = "mnuSaveAs";
-            this.mnuSaveAs.Size = new System.Drawing.Size(154, 22);
-            this.mnuSaveAs.Text = "Save As...";
-            this.mnuSaveAs.Click += new System.EventHandler(this.mnuSaveAs_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(151, 6);
-            // 
-            // mnuSaveAndRun
-            // 
-            this.mnuSaveAndRun.Name = "mnuSaveAndRun";
-            this.mnuSaveAndRun.Size = new System.Drawing.Size(154, 22);
-            this.mnuSaveAndRun.Text = "Save and Run...";
-            this.mnuSaveAndRun.Click += new System.EventHandler(this.mnuSaveAndRun_Click);
-            // 
-            // tsbRunSelectedTest01
-            // 
-            this.tsbRunSelectedTest01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRunSelectedTest01.Image = global::TestConfiguration.Properties.Resources._07;
-            this.tsbRunSelectedTest01.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRunSelectedTest01.Name = "tsbRunSelectedTest01";
-            this.tsbRunSelectedTest01.Size = new System.Drawing.Size(23, 22);
-            this.tsbRunSelectedTest01.Text = "Run Selected Test";
-            this.tsbRunSelectedTest01.Click += new System.EventHandler(this.mnuRunSelectedTest_Click);
-            // 
-            // tsbRunAllTests01
-            // 
-            this.tsbRunAllTests01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRunAllTests01.Image = global::TestConfiguration.Properties.Resources._08;
-            this.tsbRunAllTests01.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRunAllTests01.Name = "tsbRunAllTests01";
-            this.tsbRunAllTests01.Size = new System.Drawing.Size(23, 22);
-            this.tsbRunAllTests01.Text = "Run All Tests";
-            this.tsbRunAllTests01.Click += new System.EventHandler(this.mnuRunAllTests_Click);
-            // 
-            // tsbRemoveTest01
-            // 
-            this.tsbRemoveTest01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRemoveTest01.Image = global::TestConfiguration.Properties.Resources._14;
-            this.tsbRemoveTest01.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRemoveTest01.Name = "tsbRemoveTest01";
-            this.tsbRemoveTest01.Size = new System.Drawing.Size(23, 22);
-            this.tsbRemoveTest01.Text = "Remove Selected Test";
-            this.tsbRemoveTest01.Click += new System.EventHandler(this.mnuRemoveTest_Click);
-            // 
-            // tsbRemoveAllTests01
-            // 
-            this.tsbRemoveAllTests01.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRemoveAllTests01.Image = global::TestConfiguration.Properties.Resources._13;
-            this.tsbRemoveAllTests01.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRemoveAllTests01.Name = "tsbRemoveAllTests01";
-            this.tsbRemoveAllTests01.Size = new System.Drawing.Size(23, 22);
-            this.tsbRemoveAllTests01.Text = "Remove All Tests";
-            this.tsbRemoveAllTests01.Click += new System.EventHandler(this.mnuRemoveAllTests_Click);
-            // 
-            // tsbWriteTestReport
-            // 
-            this.tsbWriteTestReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbWriteTestReport.Image = ((System.Drawing.Image)(resources.GetObject("tsbWriteTestReport.Image")));
-            this.tsbWriteTestReport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbWriteTestReport.Name = "tsbWriteTestReport";
-            this.tsbWriteTestReport.Size = new System.Drawing.Size(23, 22);
-            this.tsbWriteTestReport.Text = "Write Out Test Report";
-            this.tsbWriteTestReport.Click += new System.EventHandler(this.tsbWriteTestReport_Click);
-            // 
             // tsbRunSelectedTest02
             // 
             this.tsbRunSelectedTest02.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -645,6 +631,11 @@ namespace TestConfiguration.Forms
             this.tsbRunAllTests02.Size = new System.Drawing.Size(23, 22);
             this.tsbRunAllTests02.Text = "Run All Tests";
             this.tsbRunAllTests02.Click += new System.EventHandler(this.mnuRunAllTests_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton1
             // 
@@ -666,6 +657,11 @@ namespace TestConfiguration.Forms
             this.toolStripButton2.Text = "Remove All Tests";
             this.toolStripButton2.Click += new System.EventHandler(this.mnuRemoveAllTests_Click);
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsbWriteTestReport2
             // 
             this.tsbWriteTestReport2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -676,10 +672,32 @@ namespace TestConfiguration.Forms
             this.tsbWriteTestReport2.Text = "Write Out Test Report";
             this.tsbWriteTestReport2.Click += new System.EventHandler(this.tsbWriteTestReport2_Click);
             // 
-            // toolStripSeparator6
+            // stsStatus
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            this.stsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslStatus});
+            this.stsStatus.Location = new System.Drawing.Point(0, 500);
+            this.stsStatus.Name = "stsStatus";
+            this.stsStatus.Size = new System.Drawing.Size(872, 22);
+            this.stsStatus.TabIndex = 5;
+            this.stsStatus.Text = "statusStrip1";
+            // 
+            // tslStatus
+            // 
+            this.tslStatus.Name = "tslStatus";
+            this.tslStatus.Size = new System.Drawing.Size(48, 17);
+            this.tslStatus.Text = "Ready...";
+            // 
+            // mnuShowTest
+            // 
+            this.mnuShowTest.Name = "mnuShowTest";
+            this.mnuShowTest.Size = new System.Drawing.Size(164, 22);
+            this.mnuShowTest.Text = "Show Test";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(161, 6);
             // 
             // TestEditor
             // 
@@ -781,5 +799,7 @@ namespace TestConfiguration.Forms
         private System.Windows.Forms.ToolStripButton tsbWriteTestReport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton tsbWriteTestReport2;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowTest;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }
