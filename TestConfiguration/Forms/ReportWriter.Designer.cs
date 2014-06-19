@@ -55,10 +55,11 @@
             // textReport
             // 
             this.textReport.AutoSize = true;
-            this.textReport.Location = new System.Drawing.Point(260, 19);
+            this.textReport.Checked = true;
+            this.textReport.Location = new System.Drawing.Point(22, 24);
             this.textReport.Name = "textReport";
             this.textReport.Size = new System.Drawing.Size(81, 17);
-            this.textReport.TabIndex = 2;
+            this.textReport.TabIndex = 0;
             this.textReport.TabStop = true;
             this.textReport.Text = "Text Report";
             this.textReport.UseVisualStyleBackColor = true;
@@ -66,22 +67,20 @@
             // xmlReport
             // 
             this.xmlReport.AutoSize = true;
-            this.xmlReport.Location = new System.Drawing.Point(135, 19);
+            this.xmlReport.Location = new System.Drawing.Point(260, 23);
             this.xmlReport.Name = "xmlReport";
             this.xmlReport.Size = new System.Drawing.Size(82, 17);
-            this.xmlReport.TabIndex = 1;
-            this.xmlReport.TabStop = true;
+            this.xmlReport.TabIndex = 2;
             this.xmlReport.Text = "XML Report";
             this.xmlReport.UseVisualStyleBackColor = true;
             // 
             // csvReport
             // 
             this.csvReport.AutoSize = true;
-            this.csvReport.Location = new System.Drawing.Point(15, 19);
+            this.csvReport.Location = new System.Drawing.Point(139, 24);
             this.csvReport.Name = "csvReport";
             this.csvReport.Size = new System.Drawing.Size(81, 17);
-            this.csvReport.TabIndex = 0;
-            this.csvReport.TabStop = true;
+            this.csvReport.TabIndex = 1;
             this.csvReport.Text = "CSV Report";
             this.csvReport.UseVisualStyleBackColor = true;
             // 
