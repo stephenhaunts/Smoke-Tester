@@ -21,6 +21,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,12 @@ namespace TestConfiguration.Forms
 {
     public partial class TestEditor : Form
     {
+        private enum MoveType
+        {
+            Up = -1,
+            Down = 1
+        }
+
         private static ReportBuilder _reportBuilder;
         private ConfigurationTestSuite _configurationTestSuite;
         private string _filename;
@@ -302,6 +309,12 @@ namespace TestConfiguration.Forms
         {
             tabMain.SelectedTab = tpgTestRun;
             tabMain.Refresh();
+        }
+
+        private void SwitchToConfigurationView()
+        {
+            tabMain.SelectedTab = tpgConfiguation;
+            tabMain.Refresh();
 
             ShowStatus("Running Tests...");
         }
@@ -458,6 +471,53 @@ namespace TestConfiguration.Forms
             }
         }
 
+        private void SelectListBoxTestItem()
+        {
+            if (lvwListOfTest.SelectedIndices.Count > 0)
+            {
+                lstListOfTests.SelectedItem = lstListOfTests.Items[lvwListOfTest.SelectedIndices[0]];
+            }
+        }
+
+        private void SelectListViewTestItem()
+        {
+            if (lstListOfTests.SelectedIndices.Count > 0)
+            {
+                lvwListOfTest.Select();
+                lvwListOfTest.SelectedItems.Clear();
+                lvwListOfTest.HideSelection = false;
+                lvwListOfTest.Items[lstListOfTests.SelectedIndex].Selected = true;
+                if(lvwListOfTest.SelectedItems.Count > 0)
+                    lvwListOfTest.SelectedItems[0].EnsureVisible();
+            }
+        }
+
+        private void GenerateReport()
+        {
+            if (lstListOfTests.Items.Count == 0)
+            {
+                MessageBox.Show(@"There are no tests to generate a report for.", @"Can not generate report.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            if (_reportBuilder.CountEnties == 0)
+            {
+                MessageBox.Show(@"You must run your test(s) before you can generate a report.", @"No test results to report.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            using (var reportWriter = new ReportWriter(_reportBuilder))
+            {
+                if (reportWriter.ShowDialog() == DialogResult.OK)
+                {
+                }
+            }
+        }
+
         private void TestEditor_Load(object sender, EventArgs e)
         {
             CreateTestMenus();
@@ -470,7 +530,7 @@ namespace TestConfiguration.Forms
 
         private void TestMenu_Click(object sender, EventArgs e)
         {
-            var senderType = ((ToolStripItem) sender).Tag as Type;
+            var senderType = ((ToolStripItem)sender).Tag as Type;
             var test = Activator.CreateInstance(senderType) as Test;
 
             AddTestToList(test);
@@ -522,10 +582,7 @@ namespace TestConfiguration.Forms
 
         private void lvwListOfTest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvwListOfTest.SelectedIndices.Count > 0)
-            {
-                lstListOfTests.SelectedItem = lstListOfTests.Items[lvwListOfTest.SelectedIndices[0]];
-            }
+            SelectListBoxTestItem();
         }
 
         private void pgTestConfiguration_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -592,36 +649,37 @@ namespace TestConfiguration.Forms
             GenerateReport();
         }
 
-        private void GenerateReport()
+        private void SelectConfigurationTestItem_Handler(object sender, EventArgs e)
         {
-            if (lstListOfTests.Items.Count == 0)
-            {
-                MessageBox.Show(@"There are no tests to generate a report for.", @"Can not generate report.",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                return;
-            }
-
-            if (_reportBuilder.CountEnties == 0)
-            {
-                MessageBox.Show(@"You must run your test(s) before you can generate a report.", @"No test results to report.",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                return;
-            }
-
-            using (var reportWriter = new ReportWriter(_reportBuilder))
-            {
-                if (reportWriter.ShowDialog() == DialogResult.OK)
-                {
-                }
-            }
+            SelectListBoxTestItem();
+            SwitchToConfigurationView();
         }
 
-        private enum MoveType
+        private void SelectTestRunTestItem_Handler(object sender, EventArgs e)
         {
-            Up = -1,
-            Down = 1
+            SelectListViewTestItem();
+            SwitchToTestRunView();
+        }
+
+        private void cntxtMain_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var x = sender as ContextMenuStrip;
+            var listBox = x.SourceControl as ListBox;
+            var listView = x.SourceControl as ListView;
+            if (listBox != null)
+            {
+                mnuShowTest.Text = "Show Test Run";
+                mnuShowTest.Click -= SelectConfigurationTestItem_Handler;
+                mnuShowTest.Click += SelectTestRunTestItem_Handler;
+            }
+
+            if (listView != null)
+            {
+                mnuShowTest.Text = "Show Test";
+                mnuShowTest.Click -= SelectTestRunTestItem_Handler;
+                mnuShowTest.Click += SelectConfigurationTestItem_Handler;
+            }
+
         }
     }
 }
