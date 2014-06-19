@@ -276,9 +276,9 @@ namespace TestConfiguration.Forms
             this.lstListOfTests.ContextMenuStrip = this.cntxtMain;
             this.lstListOfTests.FormattingEnabled = true;
             this.lstListOfTests.ItemHeight = 17;
-            this.lstListOfTests.Location = new System.Drawing.Point(0, 76);
+            this.lstListOfTests.Location = new System.Drawing.Point(0, 79);
             this.lstListOfTests.Name = "lstListOfTests";
-            this.lstListOfTests.Size = new System.Drawing.Size(315, 242);
+            this.lstListOfTests.Size = new System.Drawing.Size(313, 293);
             this.lstListOfTests.TabIndex = 2;
             this.lstListOfTests.SelectedIndexChanged += new System.EventHandler(this.lstListOfTests_SelectedIndexChanged);
             this.lstListOfTests.DoubleClick += new System.EventHandler(this.SelectTestRunTestItem_Handler);
@@ -297,7 +297,7 @@ namespace TestConfiguration.Forms
             this.mnuRunSelectedTest,
             this.mnuRunAllTests});
             this.cntxtMain.Name = "cntxtMain";
-            this.cntxtMain.Size = new System.Drawing.Size(165, 198);
+            this.cntxtMain.Size = new System.Drawing.Size(165, 176);
             this.cntxtMain.Opening += new System.ComponentModel.CancelEventHandler(this.cntxtMain_Opening);
             // 
             // mnuRemoveTest
@@ -385,28 +385,28 @@ namespace TestConfiguration.Forms
             // btnMoveDown
             // 
             this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnMoveDown.Image = global::TestConfiguration.Properties.Resources._15;
-            this.btnMoveDown.Location = new System.Drawing.Point(324, 127);
+            this.btnMoveDown.BackgroundImage = global::TestConfiguration.Properties.Resources._15;
+            this.btnMoveDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMoveDown.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnMoveDown.Location = new System.Drawing.Point(319, 167);
             this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(24, 23);
+            this.btnMoveDown.Size = new System.Drawing.Size(35, 32);
             this.btnMoveDown.TabIndex = 7;
             this.btnMoveDown.Tag = "down";
-            this.btnMoveDown.Text = "q";
             this.btnMoveDown.UseVisualStyleBackColor = true;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveItem_Click);
             // 
             // btnMoveUp
             // 
             this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnMoveUp.Image = global::TestConfiguration.Properties.Resources._16;
-            this.btnMoveUp.Location = new System.Drawing.Point(324, 96);
+            this.btnMoveUp.BackgroundImage = global::TestConfiguration.Properties.Resources._16;
+            this.btnMoveUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMoveUp.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnMoveUp.Location = new System.Drawing.Point(319, 129);
             this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(24, 23);
+            this.btnMoveUp.Size = new System.Drawing.Size(35, 32);
             this.btnMoveUp.TabIndex = 6;
             this.btnMoveUp.Tag = "up";
-            this.btnMoveUp.Text = "p";
             this.btnMoveUp.UseVisualStyleBackColor = true;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveItem_Click);
             // 
@@ -424,16 +424,17 @@ namespace TestConfiguration.Forms
             // 
             this.lblTotalTestCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalTestCount.AutoSize = true;
-            this.lblTotalTestCount.Location = new System.Drawing.Point(269, 6);
+            this.lblTotalTestCount.Location = new System.Drawing.Point(264, 6);
             this.lblTotalTestCount.Name = "lblTotalTestCount";
             this.lblTotalTestCount.Size = new System.Drawing.Size(49, 17);
             this.lblTotalTestCount.TabIndex = 2;
             this.lblTotalTestCount.Text = "0 Tests";
+            this.lblTotalTestCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblListOfTest
             // 
             this.lblListOfTest.AutoSize = true;
-            this.lblListOfTest.Location = new System.Drawing.Point(12, 6);
+            this.lblListOfTest.Location = new System.Drawing.Point(0, 6);
             this.lblListOfTest.Name = "lblListOfTest";
             this.lblListOfTest.Size = new System.Drawing.Size(77, 17);
             this.lblListOfTest.TabIndex = 1;
@@ -453,9 +454,9 @@ namespace TestConfiguration.Forms
             // btnSaveAs
             // 
             this.btnSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveAs.Location = new System.Drawing.Point(117, 11);
+            this.btnSaveAs.Location = new System.Drawing.Point(103, 11);
             this.btnSaveAs.Name = "btnSaveAs";
-            this.btnSaveAs.Size = new System.Drawing.Size(111, 38);
+            this.btnSaveAs.Size = new System.Drawing.Size(102, 38);
             this.btnSaveAs.TabIndex = 2;
             this.btnSaveAs.Text = "Save As";
             this.btnSaveAs.UseVisualStyleBackColor = true;
@@ -464,9 +465,9 @@ namespace TestConfiguration.Forms
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.Location = new System.Drawing.Point(234, 11);
+            this.btnCancel.Location = new System.Drawing.Point(211, 11);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(111, 38);
+            this.btnCancel.Size = new System.Drawing.Size(102, 38);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -478,7 +479,7 @@ namespace TestConfiguration.Forms
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(0, 11);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(111, 38);
+            this.btnSave.Size = new System.Drawing.Size(97, 38);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -497,7 +498,7 @@ namespace TestConfiguration.Forms
             // lblTestName
             // 
             this.lblTestName.AutoSize = true;
-            this.lblTestName.Location = new System.Drawing.Point(12, 15);
+            this.lblTestName.Location = new System.Drawing.Point(0, 15);
             this.lblTestName.Name = "lblTestName";
             this.lblTestName.Size = new System.Drawing.Size(71, 17);
             this.lblTestName.TabIndex = 0;
@@ -507,9 +508,9 @@ namespace TestConfiguration.Forms
             // 
             this.txtTestName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTestName.Location = new System.Drawing.Point(102, 12);
+            this.txtTestName.Location = new System.Drawing.Point(77, 12);
             this.txtTestName.Name = "txtTestName";
-            this.txtTestName.Size = new System.Drawing.Size(211, 25);
+            this.txtTestName.Size = new System.Drawing.Size(236, 25);
             this.txtTestName.TabIndex = 0;
             this.txtTestName.TextChanged += new System.EventHandler(this.txtTestName_TextChanged);
             // 
