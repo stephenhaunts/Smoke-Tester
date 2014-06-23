@@ -33,6 +33,10 @@ namespace InstallationSmokeTest
     internal class Program
     {
         private const string RunOperation = "Run";
+        private const string RunOperationWithXmlReport = "RunWithXmlReport";
+        private const string RunOperationWithCsvReport = "RunWithCsvReport";
+        private const string RunOperationWithTxtReport = "RunWithTxtReport";
+
         private const string CreateOperation = "Create";
         private const string AbortOperation = "Abort";
         private const string UnexpectedResponseMessage = "Unexpected response.";
@@ -41,6 +45,14 @@ namespace InstallationSmokeTest
         private const ConsoleKey OverwriteAffirmativeKey = ConsoleKey.Y;
         private const string SmokeTestFileExtension = ".xml";
         private const string StandardNumberFormat = "#,##0";
+
+        private enum RunMode
+        {
+            None = 0,            
+            RunWithXmlReport = 1,
+            RunWithCsvReport = 2,
+            RunWithTxtReport = 3
+        }
 
         private static string _outputFile;
 
@@ -83,11 +95,20 @@ namespace InstallationSmokeTest
                 switch (operation)
                 {
                     case CreateOperation:
-                        CreateConfiguration(file);
+                        CreateConfiguration(file, RunMode.None);
                         break;
                     case RunOperation:
-                        CheckConfiguration(file);
+                        CheckConfiguration(file, RunMode.None);
                         break;
+                    case RunOperationWithCsvReport:
+                        CheckConfiguration(file, RunMode.RunWithCsvReport);
+                        break;
+                    case RunOperationWithXmlReport:
+                        CheckConfiguration(file, RunMode.RunWithXmlReport);
+                        break;
+                    case RunOperationWithTxtReport:
+                        CheckConfiguration(file, RunMode.RunWithTxtReport);
+                        break;                        
                     default:
                         DisplayUsageHelp();
                         break;
@@ -130,7 +151,7 @@ namespace InstallationSmokeTest
             Console.WriteLine("\tIf the filename is omitted, you will be prompted for it.");
         }
 
-        private static void CreateConfiguration(string file)
+        private static void CreateConfiguration(string file, RunMode mode)
         {
             var temp = Console.ForegroundColor;
 
@@ -165,7 +186,7 @@ namespace InstallationSmokeTest
             }
         }
 
-        private static void CheckConfiguration(string file)
+        private static void CheckConfiguration(string file, RunMode mode)
         {
             if (!File.Exists(file))
             {
@@ -199,6 +220,23 @@ namespace InstallationSmokeTest
 
             _reportBuilder.ClearEntries();
             var successfulTests = info.Tests.Select(RunTest).Count(result => result);
+
+            var reportPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestReport";
+
+
+
+            switch (mode)
+            {
+                case RunMode.RunWithCsvReport:
+                    _reportBuilder.WriteReport("", ReportType.CsvReport);
+                    break;
+                case RunMode.RunWithXmlReport:
+                    _reportBuilder.WriteReport("", ReportType.XmlReport);
+                    break;
+                case RunMode.RunWithTxtReport:
+                    _reportBuilder.WriteReport("", ReportType.TextReport);
+                    break;
+            }
 
             WriteLine();
             WriteLine("Completed Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
