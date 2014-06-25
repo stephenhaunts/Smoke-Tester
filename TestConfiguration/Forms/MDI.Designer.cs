@@ -62,6 +62,8 @@ namespace TestConfiguration.Forms
             this.mnuOpenConfigurationFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateFileChecksumsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tspMainTools.SuspendLayout();
@@ -130,6 +132,7 @@ namespace TestConfiguration.Forms
             // 
             this.mnuMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
+            this.toolsToolStripMenuItem,
             this.mnuHelp});
             this.mnuMainMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMainMenu.Name = "mnuMainMenu";
@@ -196,6 +199,21 @@ namespace TestConfiguration.Forms
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generateFileChecksumsToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // generateFileChecksumsToolStripMenuItem
+            // 
+            this.generateFileChecksumsToolStripMenuItem.Name = "generateFileChecksumsToolStripMenuItem";
+            this.generateFileChecksumsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.generateFileChecksumsToolStripMenuItem.Text = "Generate File Checksums";
+            this.generateFileChecksumsToolStripMenuItem.Click += new System.EventHandler(this.generateFileChecksumsToolStripMenuItem_Click);
+            // 
             // mnuHelp
             // 
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -258,5 +276,7 @@ namespace TestConfiguration.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateFileChecksumsToolStripMenuItem;
     }
 }
