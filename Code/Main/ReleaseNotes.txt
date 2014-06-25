@@ -10,6 +10,9 @@ Version 0.03
 [X] - Add a test report writer to the UI. This allows you to automatically output a test report in
       XML, CSV and Txt.
 
+[X] - Add a test report writer to the Command Line test runner. This allows you to automatically output a test report in
+      XML, CSV and Txt.
+
 Version 0.02
 -------------
 

@@ -138,14 +138,23 @@ namespace InstallationSmokeTest
         {
             var exeName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
 
+            Console.WriteLine("Smoke Tester : Command Line Test Runner");
+            Console.WriteLine("http://smoketester.codeplex.com");
+            Console.WriteLine();
             Console.WriteLine("Usage:");
             Console.WriteLine();
             Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, RunOperation);
             Console.WriteLine("\tRun the tests contained in the given filename.");
             Console.WriteLine();
+            Console.WriteLine("\tThe available modes are :");
+            Console.WriteLine("\tRun - run a specified test script.");
+            Console.WriteLine("\tRunWithXmlReport - run a test script and write xml test report.");
+            Console.WriteLine("\tRunWithCsvReport - run a test script and write csv test report.");
+            Console.WriteLine("\tRunWithTxtReport - run a test script and write text test report.");
+            Console.WriteLine();
             Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, CreateOperation);
             Console.WriteLine("\tCreate a new XML file with examples of the usage.");
-            Console.WriteLine();
+            Console.WriteLine();           
             Console.WriteLine("\tThe default mode is Run.");
             Console.WriteLine("\tIf the filename does not end with .xml then .xml will be appended.");
             Console.WriteLine("\tIf the filename is omitted, you will be prompted for it.");
@@ -222,19 +231,31 @@ namespace InstallationSmokeTest
             var successfulTests = info.Tests.Select(RunTest).Count(result => result);
 
             var reportPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestReport";
+            if (!Directory.Exists(reportPath))
+            {
+                Directory.CreateDirectory(reportPath);
+            }
 
+            var fileFriendlyDate =
+                    DateTime.Now.ToString(CultureInfo.InvariantCulture)
+                        .Replace("/", "")
+                        .Replace(" ", "-")
+                        .Replace(":", "");
 
-
+            string fileName;
             switch (mode)
             {
                 case RunMode.RunWithCsvReport:
-                    _reportBuilder.WriteReport("", ReportType.CsvReport);
+                    fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".csv";
+                    _reportBuilder.WriteReport(fileName, ReportType.CsvReport);
                     break;
                 case RunMode.RunWithXmlReport:
-                    _reportBuilder.WriteReport("", ReportType.XmlReport);
+                    fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".xml";
+                    _reportBuilder.WriteReport(fileName, ReportType.XmlReport);
                     break;
                 case RunMode.RunWithTxtReport:
-                    _reportBuilder.WriteReport("", ReportType.TextReport);
+                    fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".txt";
+                    _reportBuilder.WriteReport(fileName, ReportType.TextReport);
                     break;
             }
 
