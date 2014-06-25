@@ -153,5 +153,13 @@ namespace TestConfiguration.Forms
                 about.ShowDialog();
             }
         }
+
+        private void generateFileChecksumsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var checksumGenerator = new ChecksumGenerator())
+            {
+                checksumGenerator.ShowDialog();
+            }
+        }
     }
 }
