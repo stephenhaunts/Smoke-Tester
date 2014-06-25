@@ -57,7 +57,7 @@ namespace ConfigurationTests.Tests
 
             try
             {                
-                var address = GetIpFromHost(ref host);             
+                var address = GetIpFromHost(host);             
                 var pingOptions = new PingOptions(128, true);                
                 var ping = new Ping();                
                 var buffer = new byte[32];
@@ -105,17 +105,15 @@ namespace ConfigurationTests.Tests
 
             return returnMessage;
         }
+        private static IPAddress GetIpFromHost(string host)
+        {
+            var address = Dns.GetHostEntry(host).AddressList[0];
+            return address;
+        }
 
         private static bool WasSuccessful(string reply)
         {
             return reply.Contains("Reply from");
-        }
-
-        private static IPAddress GetIpFromHost(ref string host)
-        {
-            var address = Dns.GetHostEntry(host).AddressList[0];
-            
-            return address;
         }
 
         public override List<Test> CreateExamples()
