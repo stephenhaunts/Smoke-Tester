@@ -226,7 +226,7 @@ namespace TestConfiguration.Forms
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuMainMenu;
             this.Name = "Mdi";
-            this.Text = "Test Configuration Tool";
+            this.Text = "Smoke Tester : Test Configuration Tool";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mdi_FormClosed);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MDI_DragDrop);

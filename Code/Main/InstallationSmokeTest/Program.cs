@@ -138,7 +138,7 @@ namespace InstallationSmokeTest
         {
             var exeName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
 
-            Console.WriteLine("Smoke Tester : Command Line Test Runner");
+            Console.WriteLine("Smoke Tester : Command Line Test Runner Version 0.03");
             Console.WriteLine("http://smoketester.codeplex.com");
             Console.WriteLine();
             Console.WriteLine("Usage:");

@@ -66,6 +66,8 @@ namespace TestConfiguration.Forms
             this.tsbWriteTestReport = new System.Windows.Forms.ToolStripButton();
             this.lstListOfTests = new System.Windows.Forms.ListBox();
             this.cntxtMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuShowTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuRemoveTest = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemoveAllTests = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -105,8 +107,6 @@ namespace TestConfiguration.Forms
             this.tsbWriteTestReport2 = new System.Windows.Forms.ToolStripButton();
             this.stsStatus = new System.Windows.Forms.StatusStrip();
             this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mnuShowTest = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tspConfiguration.SuspendLayout();
             this.cntxtMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -299,6 +299,17 @@ namespace TestConfiguration.Forms
             this.cntxtMain.Name = "cntxtMain";
             this.cntxtMain.Size = new System.Drawing.Size(165, 176);
             this.cntxtMain.Opening += new System.ComponentModel.CancelEventHandler(this.cntxtMain_Opening);
+            // 
+            // mnuShowTest
+            // 
+            this.mnuShowTest.Name = "mnuShowTest";
+            this.mnuShowTest.Size = new System.Drawing.Size(164, 22);
+            this.mnuShowTest.Text = "Show Test";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(161, 6);
             // 
             // mnuRemoveTest
             // 
@@ -689,17 +700,6 @@ namespace TestConfiguration.Forms
             this.tslStatus.Size = new System.Drawing.Size(48, 17);
             this.tslStatus.Text = "Ready...";
             // 
-            // mnuShowTest
-            // 
-            this.mnuShowTest.Name = "mnuShowTest";
-            this.mnuShowTest.Size = new System.Drawing.Size(164, 22);
-            this.mnuShowTest.Text = "Show Test";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(161, 6);
-            // 
             // TestEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -712,7 +712,7 @@ namespace TestConfiguration.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TestEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Test Configurations Editor ";
+            this.Text = "Smoke Tester : Test Configurations Editor ";
             this.Load += new System.EventHandler(this.TestEditor_Load);
             this.Shown += new System.EventHandler(this.TestEditor_Shown);
             this.tspConfiguration.ResumeLayout(false);
