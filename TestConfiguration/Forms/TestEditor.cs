@@ -47,11 +47,15 @@ namespace TestConfiguration.Forms
         private static ReportBuilder _reportBuilder;
         private ConfigurationTestSuite _configurationTestSuite;
         private string _filename;
+        private ListViewItemSorter _listViewItemSorter;
 
         public TestEditor()
         {
             InitializeComponent();
             _reportBuilder = new ReportBuilder();
+                    _listViewItemSorter = new ListViewItemSorter();
+                    lvwListOfTest.ListViewItemSorter = _listViewItemSorter;
+            
         }
 
         public TestEditor(ConfigurationTestSuite configurationTestSuite)
@@ -170,7 +174,9 @@ namespace TestConfiguration.Forms
 
             listViewItem.SubItems.Add(test.ToString());
             listViewItem.SubItems.Add("");
+            listViewItem.SubItems.Add(lstListOfTests.Items.IndexOf(test).ToString());
             lvwListOfTest.Items.Add(listViewItem);
+
 
             lstListOfTests.SelectedItem = test;
             pgTestConfiguration.SelectedObject = test;
@@ -474,7 +480,9 @@ namespace TestConfiguration.Forms
         {
             if (lvwListOfTest.SelectedIndices.Count > 0)
             {
-                lstListOfTests.SelectedItem = lstListOfTests.Items[lvwListOfTest.SelectedIndices[0]];
+                var selectedItem = lvwListOfTest.SelectedItems[0];
+                var index = Convert.ToInt32(selectedItem.SubItems[selectedItem.SubItems.Count - 1].Text);
+                lstListOfTests.SelectedItem = lstListOfTests.Items[index];
             }
         }
 
@@ -485,8 +493,16 @@ namespace TestConfiguration.Forms
                 lvwListOfTest.Select();
                 lvwListOfTest.SelectedItems.Clear();
                 lvwListOfTest.HideSelection = false;
-                lvwListOfTest.Items[lstListOfTests.SelectedIndex].Selected = true;
-                if(lvwListOfTest.SelectedItems.Count > 0)
+                foreach(ListViewItem item in lvwListOfTest.Items)
+                {
+                    var index = Convert.ToInt32(item.SubItems[item.SubItems.Count - 1].Text);
+                    if (index == lstListOfTests.SelectedIndex)
+                    {
+                        item.Selected = true;
+                        break;
+                    }
+                }
+                if (lvwListOfTest.SelectedItems.Count > 0)
                     lvwListOfTest.SelectedItems[0].EnsureVisible();
             }
         }
@@ -679,6 +695,23 @@ namespace TestConfiguration.Forms
                 mnuShowTest.Click += SelectConfigurationTestItem_Handler;
             }
 
+        }
+
+        private void lvwListOfTest_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column != _listViewItemSorter.SortColumn)
+            {
+                _listViewItemSorter.SortColumn = e.Column;
+                _listViewItemSorter.SortOrder = SortOrder.Ascending;
+            }
+            else
+            {
+                if (_listViewItemSorter.SortOrder == SortOrder.Ascending)
+                    _listViewItemSorter.SortOrder = SortOrder.Descending;
+                else
+                    _listViewItemSorter.SortOrder = SortOrder.Ascending;
+            }
+            lvwListOfTest.Sort();
         }
     }
 }
