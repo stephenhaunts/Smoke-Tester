@@ -17,6 +17,7 @@
 * Curator: Stephen Haunts
 */
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -160,6 +161,19 @@ namespace TestConfiguration.Forms
             {
                 checksumGenerator.ShowDialog();
             }
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("http://stephenhaunts.com/projects/post-deployment-smoke-tester/articles-about-the-smoke-tester/");            
+            }
+            catch
+            {
+                MessageBox.Show(@"There was a problem loading the help pages.", @"Failed to load help pages.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
     }
 }
