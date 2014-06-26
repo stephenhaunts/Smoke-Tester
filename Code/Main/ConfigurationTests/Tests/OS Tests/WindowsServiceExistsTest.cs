@@ -29,7 +29,7 @@ namespace ConfigurationTests.Tests
     public class WindowsServiceExistsTest : Test
     {
         [Description("Name of service")]
-        [Category("Windows Servicess Properties")]
+        [Category("Windows Services Properties")]
         [MandatoryField]
         public string ServiceName { get; set; }
 

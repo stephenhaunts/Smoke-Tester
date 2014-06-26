@@ -30,12 +30,12 @@ namespace ConfigurationTests.Tests
     {
         [Description("Name of service")]
         [MandatoryField]
-        [Category("Windows Servicess Properties")]
+        [Category("Windows Services Properties")]
         public string ServiceName { get; set; }
 
         [Description("Expected Service Status")]
         [MandatoryField]
-        [Category("Windows Servicess Properties")]
+        [Category("Windows Services Properties")]
         public ServiceControllerStatus ServiceStatus { get; set; }
 
         public override void Run()
