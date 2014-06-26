@@ -578,6 +578,7 @@ namespace TestConfiguration.Forms
             this.lvwListOfTest.TabIndex = 3;
             this.lvwListOfTest.UseCompatibleStateImageBehavior = false;
             this.lvwListOfTest.View = System.Windows.Forms.View.Details;
+            this.lvwListOfTest.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwListOfTest_ColumnClick);
             this.lvwListOfTest.SelectedIndexChanged += new System.EventHandler(this.lvwListOfTest_SelectedIndexChanged);
             this.lvwListOfTest.DoubleClick += new System.EventHandler(this.SelectConfigurationTestItem_Handler);
             // 

@@ -121,6 +121,7 @@
     <Compile Include="Forms\ViewChecksum.Designer.cs">
       <DependentUpon>ViewChecksum.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AboutDialog.resx">

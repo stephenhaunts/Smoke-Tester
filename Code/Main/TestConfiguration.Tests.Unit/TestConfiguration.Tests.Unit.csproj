@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEditorTest.cs" />
+    <Compile Include="ListViewColumnSorterTests.cs" />
     <Compile Include="Utils\TestUtil.cs" />
   </ItemGroup>
   <ItemGroup>
