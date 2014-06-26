@@ -26,25 +26,53 @@ namespace TestConfiguration
     {
         private int _sortColumn;
         private SortOrder _sortOrder;
+
         public ListViewItemSorter()
         {
             _sortColumn = 0;
             _sortOrder = SortOrder.Ascending;
         }
+
         public ListViewItemSorter(int column, SortOrder order)
         {
             _sortColumn = column;
             _sortOrder = order;
         }
+
         public int Compare(object x, object y)
         {
-            int returnValue = String.Compare(((ListViewItem)x).SubItems[_sortColumn].Text, ((ListViewItem)y).SubItems[_sortColumn].Text);
+            var returnValue = String.CompareOrdinal(((ListViewItem)x).SubItems[_sortColumn].Text, ((ListViewItem)y).SubItems[_sortColumn].Text);
 
             if (_sortOrder == SortOrder.Descending)
+            {
                 returnValue *= -1;
+            }
+
             return returnValue;
         }
-        public int SortColumn { get { return _sortColumn; } set { _sortColumn = value; } }
-        public SortOrder SortOrder { get { return _sortOrder; } set { _sortOrder = value; } }
+
+        public int SortColumn
+        {
+            get
+            {
+                return _sortColumn;
+            }
+            set
+            {
+                _sortColumn = value;
+            }
+        }
+
+        public SortOrder SortOrder 
+        {
+            get
+            {
+                return _sortOrder;
+            }
+            set
+            {
+                _sortOrder = value;
+            } 
+        }
     }
 }
