@@ -30,14 +30,14 @@ namespace TestConfiguration.Tests.Unit
     [TestClass]
     public class TestEditorTest
     {
-        private TestEditor_Accessor _TestEditorAccessor;
+        private TestEditor_Accessor _testEditorAccessor;
 
         public TestContext TestContext { private get; set; }
 
         [TestInitialize]
         public void MyTestInitialize()
         {
-            _TestEditorAccessor = new TestEditor_Accessor();
+            _testEditorAccessor = new TestEditor_Accessor();
         }
 
         [TestMethod]
@@ -50,11 +50,11 @@ namespace TestConfiguration.Tests.Unit
         [TestMethod]
         public void ConstructorToCreateTestFromTemplateTest()
         {
-            bool fromTemplate = true;
+            const bool fromTemplate = true;
 
-            _TestEditorAccessor = new TestEditor_Accessor(fromTemplate);
+            _testEditorAccessor = new TestEditor_Accessor(fromTemplate);
 
-            Assert.IsNotNull(_TestEditorAccessor._configurationTestSuite);
+            Assert.IsNotNull(_testEditorAccessor._configurationTestSuite);
         }
 
         [TestMethod]
@@ -62,16 +62,16 @@ namespace TestConfiguration.Tests.Unit
         {
             bool fromTemplate = false;
 
-            _TestEditorAccessor = new TestEditor_Accessor(fromTemplate);
+            _testEditorAccessor = new TestEditor_Accessor(fromTemplate);
 
-            Assert.IsNull(_TestEditorAccessor._configurationTestSuite);
+            Assert.IsNull(_testEditorAccessor._configurationTestSuite);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void CreateTestMenusTest()
         {
-            _TestEditorAccessor.CreateTestMenus();
+            _testEditorAccessor.CreateTestMenus();
         }
 
         [TestMethod]
@@ -80,9 +80,9 @@ namespace TestConfiguration.Tests.Unit
         {
             Test test = new FileExistsTest();
 
-            _TestEditorAccessor.AddTestToList(test);
+            _testEditorAccessor.AddTestToList(test);
 
-            Assert.AreEqual(1, _TestEditorAccessor.lstListOfTests.Items.Count);
+            Assert.AreEqual(1, _testEditorAccessor.lstListOfTests.Items.Count);
         }
 
         [TestMethod]
@@ -112,10 +112,10 @@ namespace TestConfiguration.Tests.Unit
         [DeploymentItem("TestConfiguration.exe")]
         public void GetSelectedIndicesTest()
         {
-            _TestEditorAccessor.lstListOfTests = TestUtil.ListBoxWithThreeItems;
-            _TestEditorAccessor.lstListOfTests.SelectedItem = _TestEditorAccessor.lstListOfTests.Items[2];
+            _testEditorAccessor.lstListOfTests = TestUtil.ListBoxWithThreeItems;
+            _testEditorAccessor.lstListOfTests.SelectedItem = _testEditorAccessor.lstListOfTests.Items[2];
             int[] expected = new int[] { 2 }; ;
-            int[] actual = _TestEditorAccessor.GetSelectedIndices();
+            int[] actual = _testEditorAccessor.GetSelectedIndices();
             Assert.AreEqual(expected.Length, actual.Length);
             Assert.AreEqual(expected[0], actual[0]);
         }      
@@ -134,66 +134,66 @@ namespace TestConfiguration.Tests.Unit
         [DeploymentItem("TestConfiguration.exe")]
         public void InitializeTestSuiteTest()
         {
-            _TestEditorAccessor.InitializeTestSuite();
-            Assert.IsNotNull(_TestEditorAccessor._configurationTestSuite);
+            _testEditorAccessor.InitializeTestSuite();
+            Assert.IsNotNull(_testEditorAccessor._configurationTestSuite);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void LoadTestsFromExamplesTest()
         {
-            _TestEditorAccessor.LoadTestsFromExamples();
-            Assert.IsNotNull(_TestEditorAccessor._configurationTestSuite);
-            Assert.IsNotNull(_TestEditorAccessor._configurationTestSuite.Tests);
+            _testEditorAccessor.LoadTestsFromExamples();
+            Assert.IsNotNull(_testEditorAccessor._configurationTestSuite);
+            Assert.IsNotNull(_testEditorAccessor._configurationTestSuite.Tests);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void MoveListItemsTest()
         {
-            _TestEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            _TestEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
-            _TestEditorAccessor.lstListOfTests.SelectedItem = _TestEditorAccessor.lstListOfTests.Items[1];
-            _TestEditorAccessor.MoveListItems("up");
-            Assert.AreEqual("FolderExistTest", (_TestEditorAccessor.lstListOfTests.Items[0] as Test).TestName);
-            Assert.AreEqual("FileExistTest", (_TestEditorAccessor.lstListOfTests.Items[1] as Test).TestName);
+            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
+            _testEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
+            _testEditorAccessor.lstListOfTests.SelectedItem = _testEditorAccessor.lstListOfTests.Items[1];
+            _testEditorAccessor.MoveListItems("up");
+            Assert.AreEqual("FolderExistTest", (_testEditorAccessor.lstListOfTests.Items[0] as Test).TestName);
+            Assert.AreEqual("FileExistTest", (_testEditorAccessor.lstListOfTests.Items[1] as Test).TestName);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void MoveSelectedItemsTest()
         {
-            _TestEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            _TestEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
+            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
+            _testEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
             int[] selectedIndices = new int[] { 1 };
             var moveType = TestEditor_Accessor.MoveType.Up;
-            _TestEditorAccessor.MoveSelectedItems(selectedIndices, moveType);
-            Assert.AreEqual("FolderExistTest", (_TestEditorAccessor.lstListOfTests.Items[0] as Test).TestName);
-            Assert.AreEqual("FileExistTest", (_TestEditorAccessor.lstListOfTests.Items[1] as Test).TestName);
+            _testEditorAccessor.MoveSelectedItems(selectedIndices, moveType);
+            Assert.AreEqual("FolderExistTest", (_testEditorAccessor.lstListOfTests.Items[0] as Test).TestName);
+            Assert.AreEqual("FileExistTest", (_testEditorAccessor.lstListOfTests.Items[1] as Test).TestName);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void RemoveAllTestsFromListTest()
         {
-            _TestEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            _TestEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
-            _TestEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
-            _TestEditorAccessor.RemoveAllTestsFromList();
-            Assert.AreEqual(0, _TestEditorAccessor.lvwListOfTest.Items.Count);
-            Assert.AreEqual(0, _TestEditorAccessor.lstListOfTests.Items.Count);
+            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
+            _testEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
+            _testEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
+            _testEditorAccessor.RemoveAllTestsFromList();
+            Assert.AreEqual(0, _testEditorAccessor.lvwListOfTest.Items.Count);
+            Assert.AreEqual(0, _testEditorAccessor.lstListOfTests.Items.Count);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void RemoveTestsFromListTest()
         {
-            _TestEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            _TestEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
+            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
+            _testEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
             int[] selectedIndices = new int[] { 1 };
-            _TestEditorAccessor.RemoveTestsFromList(selectedIndices);
-            Assert.AreEqual(2, _TestEditorAccessor.lvwListOfTest.Items.Count);
-            Assert.AreEqual(2, _TestEditorAccessor.lstListOfTests.Items.Count);
+            _testEditorAccessor.RemoveTestsFromList(selectedIndices);
+            Assert.AreEqual(2, _testEditorAccessor.lvwListOfTest.Items.Count);
+            Assert.AreEqual(2, _testEditorAccessor.lstListOfTests.Items.Count);
         }
 
 
@@ -201,28 +201,28 @@ namespace TestConfiguration.Tests.Unit
         [DeploymentItem("TestConfiguration.exe")]
         public void RunSelectedTestsTest()
         {
-            _TestEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
+            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
             int[] selectedIndices = new int[]{1};
-            _TestEditorAccessor.RunSelectedTests(selectedIndices);
-            Assert.IsTrue(_TestEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
+            _testEditorAccessor.RunSelectedTests(selectedIndices);
+            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void RunTestTest()
         {
-            _TestEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            _TestEditorAccessor.RunTest();
-            Assert.IsTrue(_TestEditorAccessor.lvwListOfTest.Items[0].Text != string.Empty);
-            Assert.IsTrue(_TestEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
-            Assert.IsTrue(_TestEditorAccessor.lvwListOfTest.Items[2].Text != string.Empty);
+            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
+            _testEditorAccessor.RunTest();
+            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[0].Text != string.Empty);
+            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
+            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[2].Text != string.Empty);
         }
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void ShowIdleStatusTest()
         {
-            _TestEditorAccessor.ShowIdleStatus();
-            Assert.AreEqual("Ready...", _TestEditorAccessor.tslStatus.Text);
+            _testEditorAccessor.ShowIdleStatus();
+            Assert.AreEqual("Ready...", _testEditorAccessor.tslStatus.Text);
         }
     
         [TestMethod]
@@ -230,8 +230,8 @@ namespace TestConfiguration.Tests.Unit
         public void ShowStatusTest()
         {
             const string status = "Counting...";
-            _TestEditorAccessor.ShowStatus(status);
-            Assert.AreEqual(status, _TestEditorAccessor.tslStatus.Text);
+            _testEditorAccessor.ShowStatus(status);
+            Assert.AreEqual(status, _testEditorAccessor.tslStatus.Text);
         }
 
         [TestMethod]
@@ -250,18 +250,18 @@ namespace TestConfiguration.Tests.Unit
         {
             object sender = TestUtil.FileExistTestMenuItem;
             var e = new EventArgs();
-            _TestEditorAccessor.TestMenu_Click(sender, e);
-            Assert.AreEqual(1, _TestEditorAccessor.lstListOfTests.Items.Count);
+            _testEditorAccessor.TestMenu_Click(sender, e);
+            Assert.AreEqual(1, _testEditorAccessor.lstListOfTests.Items.Count);
         }
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void WriteFileTest()
         {
-            _TestEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
+            _testEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
             string fileName = Path.Combine(TestContext.DeploymentDirectory,string.Format("FILE{0:ddMMyyyyhhmmss}.xml",DateTime.Now));
 
-            _TestEditorAccessor.WriteXmlFile(fileName);
+            _testEditorAccessor.WriteXmlFile(fileName);
             
             Assert.IsTrue(File.Exists(fileName));
         }
@@ -270,17 +270,17 @@ namespace TestConfiguration.Tests.Unit
         [DeploymentItem("TestConfiguration.exe")]
         public void LoadTestsIfNotNullConfigNotInitializedTest()
         {
-            _TestEditorAccessor.LoadTestsToList();
-            Assert.AreEqual(0, _TestEditorAccessor.lstListOfTests.Items.Count);
+            _testEditorAccessor.LoadTestsToList();
+            Assert.AreEqual(0, _testEditorAccessor.lstListOfTests.Items.Count);
         }
 
         [TestMethod()]
         [DeploymentItem("TestConfiguration.exe")]
         public void LoadTestsIfNotNullConfigInitializedTest()
         {
-            _TestEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
-            _TestEditorAccessor.LoadTestsToList();
-            Assert.AreEqual(3, _TestEditorAccessor.lstListOfTests.Items.Count);
+            _testEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
+            _testEditorAccessor.LoadTestsToList();
+            Assert.AreEqual(3, _testEditorAccessor.lstListOfTests.Items.Count);
         }
     }
 }
