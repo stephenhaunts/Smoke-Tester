@@ -29,17 +29,17 @@ namespace ConfigurationTests.Tests
     public class WindowsRemoteServiceStatusTest : Test
     {
         [Description("Name of service")]
-        [Category("Windows Servicess Properties")]
+        [Category("Windows Services Properties")]
         [MandatoryField]
         public string ServiceName { get; set; }
 
         [Description("Machine name of remote windows service.")]
-        [Category("Windows Servicess Properties")]
+        [Category("Windows Services Properties")]
         [MandatoryField]
         public string MachineName { get; set; }
 
         [Description("Expected Service Status")]
-        [Category("Windows Servicess Properties")]
+        [Category("Windows Services Properties")]
         [MandatoryField]
         public ServiceControllerStatus ServiceStatus { get; set; }
 
