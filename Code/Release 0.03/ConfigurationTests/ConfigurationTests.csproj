@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DE5F999F-72C5-446F-9AC0-A48D26E391B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConfigurationTests</RootNamespace>
+    <AssemblyName>ConfigurationTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssertionException.cs" />
+    <Compile Include="Attributes\HiddenFromUiAttribute.cs" />
+    <Compile Include="Attributes\MandatoryFieldAttribute.cs" />
+    <Compile Include="Attributes\TestCategoryAttribute.cs" />
+    <Compile Include="ConfigurationTestSuite.cs" />
+    <Compile Include="Enums\TestCategory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Assembly\AppSettingTest.cs" />
+    <Compile Include="Tests\Assembly\AssemblyVersionTest.cs" />
+    <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
+    <Compile Include="Tests\AssertState.cs" />
+    <Compile Include="Tests\Networking\IISDoesWebsiteExist.cs" />
+    <Compile Include="Tests\Networking\PingTest.cs" />
+    <Compile Include="Tests\Networking\IISVersionTest.cs" />
+    <Compile Include="Tests\Networking\IISInstalledTest.cs" />
+    <Compile Include="Tests\File System\SHA256Checksum.cs" />
+    <Compile Include="Tests\File System\SHA1Checksum.cs" />
+    <Compile Include="Tests\File System\MD5Checksum.cs" />
+    <Compile Include="Tests\Networking\IISServiceStatus.cs" />
+    <Compile Include="Tests\OS Tests\CallExecutableCheckOutputTextTest.cs" />
+    <Compile Include="Tests\OS Tests\WindowsRemoteServiceExistsTest.cs" />
+    <Compile Include="Tests\OS Tests\WindowsRemoteServiceStatusTest.cs" />
+    <Compile Include="Tests\OS Tests\UserInActiveDirectoryTest.cs" />
+    <Compile Include="Tests\OS Tests\CallExecutableCheckReturnCodeTest.cs" />
+    <Compile Include="Tests\OS Tests\WindowsServiceStatusTest.cs" />
+    <Compile Include="Tests\Web Services\BaseAddressTest.cs" />
+    <Compile Include="Tests\OS Tests\CertificateExistsTest.cs" />
+    <Compile Include="Tests\ConfigurationTest.cs" />
+    <Compile Include="Tests\Database\ConnectionStringTest.cs" />
+    <Compile Include="Tests\Web Services\ASMXServiceSoapTest.cs" />
+    <Compile Include="Tests\Database\ConnectionStringTestBase.cs" />
+    <Compile Include="Tests\Message Queues\MSMQLocalQueueInstaled.cs" />
+    <Compile Include="Tests\Message Queues\MSMQInstalledTest.cs" />
+    <Compile Include="Tests\Database\SqlConnectionStringTest.cs" />
+    <Compile Include="Tests\Web Services\SoapTest.cs" />
+    <Compile Include="Tests\Web Services\WCFServiceSoapTest.cs" />
+    <Compile Include="Tests\Web Services\EndpointTest.cs" />
+    <Compile Include="Tests\OS Tests\EnvironmentVariableContainsTest.cs" />
+    <Compile Include="Tests\OS Tests\EnvironmentVariableEqualsTest.cs" />
+    <Compile Include="Tests\OS Tests\EnvironmentVariableTest.cs" />
+    <Compile Include="Tests\File System\FileExistsTest.cs" />
+    <Compile Include="Tests\File System\FileTest.cs" />
+    <Compile Include="Tests\File System\FolderExistsTest.cs" />
+    <Compile Include="Tests\Web Services\ClientEndpointTest.cs" />
+    <Compile Include="Tests\Internet\HttpConnectionTest.cs" />
+    <Compile Include="Tests\File System\MinimumDiskSpaceTest.cs" />
+    <Compile Include="Tests\OS Tests\PlatformTest.cs" />
+    <Compile Include="Tests\OS Tests\COMClassTest.cs" />
+    <Compile Include="Tests\OS Tests\RegistryKeyTest.cs" />
+    <Compile Include="Tests\Web Services\ServiceBaseAddressTest.cs" />
+    <Compile Include="Tests\Web Services\ServiceEndpointTest.cs" />
+    <Compile Include="Tests\OS Tests\WindowsServiceExistsTest.cs" />
+    <Compile Include="Tests\Assembly\SettingsClassTest.cs" />
+    <Compile Include="Tests\Test.cs" />
+    <Compile Include="Tests\Xml\XMLElementContentTest.cs" />
+    <Compile Include="Tests\Xml\XMLElementTest.cs" />
+    <Compile Include="Tests\Xml\XMLElementTestBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonCode\CommonCode.csproj">
+      <Project>{de40878e-cd0e-4a31-9b92-9e61bde5066c}</Project>
+      <Name>CommonCode</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

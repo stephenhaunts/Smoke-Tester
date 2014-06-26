@@ -1,0 +1,53 @@
+Version 0.03
+-------------
+
+[X] - Added a new TestCategoryAttribute to each test. This means in the UI, instead of getting a large list of tests to
+      choose from, they are now displayed in a set of categorised folders. This is to aid usability.
+
+[X] - Add test linking between the test editor view and the test result view. This means if you get a failing test in the 
+      results view you can double click on it to navigate to the failing test in the test editor view. 
+
+[X] - Add a test report writer to the UI. This allows you to automatically output a test report in
+      XML, CSV and Plain Text.
+
+[X] - Add a test report writer to the Command Line test runner. This allows you to automatically output a test report in
+      XML, CSV and Plain Text.
+
+[X] - Added a tool to the test builder that allows you to calculate MD5, SHA1, SHA256 checksums of selected files. This makes
+      it easier to calculate file checksums when using the checksum tests.
+
+[X] - Ordering Tests In The Test Run View. You can now click on the column headings in the Test Run view of the test editor to 
+      sort the test results based on test outcome, ie pass/fail.
+
+[X] - Added new test called CallExecutableCheckReturnCodeTest. This allows you to call an external tool or batch file and test
+      the return code.
+
+[X] - Added new test called CallExecutableCheckOutputTextTest. This allows you to call an external tool or batch file and test
+      that text in the standard out contains specific values.
+
+
+Version 0.02
+-------------
+
+[X] - Added MSMQInstalled Test
+[X] - Added MSMQLocalQueueExists Test
+[X] - Added MD5Checksum Test
+[X] - Added SHA1Checksum Test
+[X] - Added SHA256Checksum Test
+[X] - Added WindowsServiceExists Test
+[X] - Added WindowsServiceStatus Test
+[X] - Added WindowsRemoteServiceExists Test
+[X] - Added WindowsRemoteServiceStatus Test
+[X] - Added IISInstalled Test
+[X] - Added IISRunning Test
+[X] - Added IISVersion Test
+[X] - Added IISDoesWebsiteExist Test
+[X] - Added UserInActiveDirectory Test
+[X] - Added a network Ping Test
+[X] - Assembly version number Test
+[X] - Change HTTPConnection Test now uses an enumerated set of return codes.
+
+Version 0.01
+-------------
+
+[X] - Initial release of Post Deployment Smoke Tester

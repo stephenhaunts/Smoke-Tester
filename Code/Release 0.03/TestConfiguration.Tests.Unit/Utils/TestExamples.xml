@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ConfigurationTestSuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Test Configuration</Name>
+  <Description />
+  <Tests>
+    <Test xsi:type="FolderExistsTest">
+      <ShouldExist>false</ShouldExist>
+    </Test>
+    <Test xsi:type="FileExistsTest">
+      <ShouldExist>false</ShouldExist>
+    </Test>
+    <Test xsi:type="RegistryKeyTest">
+      <BaseKey>HKEY_CLASSES_ROOT</BaseKey>
+    </Test>
+  </Tests>
+</ConfigurationTestSuite>
