@@ -56,7 +56,7 @@ namespace InstallationSmokeTest
 
         private static string _outputFile;
 
-        private static ReportBuilder _reportBuilder = new ReportBuilder();
+        private static readonly ReportBuilder ReportBuilder = new ReportBuilder();
 
         internal static bool SmokeTestsPassed { get; private set; }
 
@@ -95,7 +95,7 @@ namespace InstallationSmokeTest
                 switch (operation)
                 {
                     case CreateOperation:
-                        CreateConfiguration(file, RunMode.None);
+                        CreateConfiguration(file);
                         break;
                     case RunOperation:
                         CheckConfiguration(file, RunMode.None);
@@ -160,7 +160,7 @@ namespace InstallationSmokeTest
             Console.WriteLine("\tIf the filename is omitted, you will be prompted for it.");
         }
 
-        private static void CreateConfiguration(string file, RunMode mode)
+        private static void CreateConfiguration(string file)
         {
             var temp = Console.ForegroundColor;
 
@@ -227,7 +227,7 @@ namespace InstallationSmokeTest
             WriteLine("Running Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
             WriteLine();
 
-            _reportBuilder.ClearEntries();
+            ReportBuilder.ClearEntries();
             var successfulTests = info.Tests.Select(RunTest).Count(result => result);
 
             var reportPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestReport";
@@ -247,15 +247,15 @@ namespace InstallationSmokeTest
             {
                 case RunMode.RunWithCsvReport:
                     fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".csv";
-                    _reportBuilder.WriteReport(fileName, ReportType.CsvReport);
+                    ReportBuilder.WriteReport(fileName, ReportType.CsvReport);
                     break;
                 case RunMode.RunWithXmlReport:
                     fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".xml";
-                    _reportBuilder.WriteReport(fileName, ReportType.XmlReport);
+                    ReportBuilder.WriteReport(fileName, ReportType.XmlReport);
                     break;
                 case RunMode.RunWithTxtReport:
                     fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".txt";
-                    _reportBuilder.WriteReport(fileName, ReportType.TextReport);
+                    ReportBuilder.WriteReport(fileName, ReportType.TextReport);
                     break;
             }
 
@@ -324,7 +324,7 @@ namespace InstallationSmokeTest
                     TestStopTime = stopTime
                 };
 
-                _reportBuilder.AddEntry(entry);
+                ReportBuilder.AddEntry(entry);
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 WriteLine("\t\t{0}", TestPassedMessage);
@@ -348,7 +348,7 @@ namespace InstallationSmokeTest
                     TestStopTime = stopTime
                 };
 
-                _reportBuilder.AddEntry(entry);
+                ReportBuilder.AddEntry(entry);
 
                 return false;
             }
