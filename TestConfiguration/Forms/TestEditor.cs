@@ -20,6 +20,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
@@ -48,6 +49,7 @@ namespace TestConfiguration.Forms
         private ConfigurationTestSuite _configurationTestSuite;
         private string _filename;
         private ListViewItemSorter _listViewItemSorter;
+        private bool _formClosing;
 
         public TestEditor()
         {
@@ -177,7 +179,6 @@ namespace TestConfiguration.Forms
             listViewItem.SubItems.Add(lstListOfTests.Items.IndexOf(test).ToString());
             lvwListOfTest.Items.Add(listViewItem);
 
-
             lstListOfTests.SelectedItem = test;
             pgTestConfiguration.SelectedObject = test;
 
@@ -288,26 +289,67 @@ namespace TestConfiguration.Forms
         {
             SwitchToTestRunView();
             _reportBuilder.ClearEntries();
-
+            var count = lvwListOfTest.Items.Count;
+            EnableOrDisableTestMenus(false);
             foreach (ListViewItem item in lvwListOfTest.Items)
             {
-                RunTestFromListItem(item);
+                RunTestAsync(count, item);                     
             }
+        }
 
-            ShowIdleStatus();
+        private void RunTestAsync(int count, ListViewItem item)
+        {
+            using (var testRunnerWorker = new BackgroundWorker())
+            {
+                testRunnerWorker.DoWork += TestRunWorker_DoWork;
+                testRunnerWorker.ProgressChanged += TestRunWorker_ProgressChanged;
+                testRunnerWorker.RunWorkerCompleted += TestRunWorker_RunWorkerCompleted;
+                testRunnerWorker.WorkerReportsProgress = true;
+                SetupProgressCounter(count);
+                testRunnerWorker.RunWorkerAsync(item);
+            }
+        }
+
+        private void EnableOrDisableTestMenus(bool enable)
+        {
+            tsbRemoveAllTests01.Enabled = enable;
+            tsbRemoveAllTests02.Enabled = enable;
+            tsbRemoveTest01.Enabled = enable;
+            tsbRemoveTest02.Enabled = enable;
+            tsbRunAllTests01.Enabled = enable;
+            tsbRunAllTests02.Enabled = enable;
+            tsbRunSelectedTest01.Enabled = enable;
+            tsbRunSelectedTest02.Enabled = enable;
+            mnuRemoveAllTests.Enabled = enable;
+            mnuRemoveTest.Enabled = enable;
+        }
+
+        private void SetupProgressCounter(int maximum)
+        {
+            ResetProgressCounter();
+            tspProgress.Style = ProgressBarStyle.Blocks;
+            tspProgress.Maximum = maximum * 2;
+            tspProgress.Step = 1;
+            tspProgress.Visible = true;
+        }
+
+        private void ResetProgressCounter()
+        {
+            tspProgress.Visible = false;
+            tspProgress.Value = tspProgress.Minimum;
         }
 
         private void RunSelectedTests(int[] selectedIndices)
         {
             SwitchToTestRunView();
             _reportBuilder.ClearEntries();
-
+            var count = selectedIndices.Length;
+            EnableOrDisableTestMenus(false);
             for (var i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
             {
-                RunTestFromListItem(lvwListOfTest.Items[selectedIndices[i]]);
+                var item = lvwListOfTest.Items[selectedIndices[i]];
+                RunTestAsync(count, item);          
             }
-
-            ShowIdleStatus();
         }
 
         private void SwitchToTestRunView()
@@ -322,49 +364,6 @@ namespace TestConfiguration.Forms
             tabMain.Refresh();
 
             ShowStatus("Running Tests...");
-        }
-
-        private static void RunTestFromListItem(ListViewItem item)
-        {
-            var test = item.Tag as Test;
-            DateTime startTime = DateTime.Now;
-            DateTime stopTime;
-
-            try
-            {
-                if (test != null) test.Run();
-                stopTime = DateTime.Now;
-                item.Text = @"Pass";
-                item.ImageIndex = 0;
-                item.SubItems[2].Text = string.Empty;
-
-                var entry = new ReportEntry
-                {
-                    TestName = test.TestName,
-                    Result = true,
-                    TestStartTime = startTime,
-                    TestStopTime = stopTime
-                };
-
-                _reportBuilder.AddEntry(entry);
-            }
-            catch (Exception e)
-            {
-                stopTime = DateTime.Now;
-                item.Text = @"Fail";
-                item.ImageIndex = 1;
-                item.SubItems[2].Text = string.Format(CultureInfo.CurrentUICulture, "{0} - {1}", e.Source, e.Message);
-
-                var entry = new ReportEntry
-                {
-                    TestName = test.TestName,
-                    Result = false,
-                    ErrorMessage = e.Message,
-                    TestStartTime = startTime,
-                    TestStopTime = stopTime
-                };
-                _reportBuilder.AddEntry(entry);
-            }
         }
 
         private void MoveSelectedItems(int[] selectedIndices, MoveType moveType)
@@ -543,12 +542,97 @@ namespace TestConfiguration.Forms
             LoadTestsToList();
         }
 
+        private void TestEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _formClosing = true;
+        }
+
         private void TestMenu_Click(object sender, EventArgs e)
         {
             var senderType = ((ToolStripItem)sender).Tag as Type;
             var test = Activator.CreateInstance(senderType) as Test;
 
             AddTestToList(test);
+        }
+
+        private void TestRunWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (_formClosing)
+                return;
+            var worker = sender as BackgroundWorker;
+            var testRunHelper = e.Result as TestRunHelper;
+            var item = testRunHelper.ListViewItem;
+            var test = item.Tag as Test;
+            var testPassed = (testRunHelper.Exception == null);
+            if (testPassed)
+            {
+                item.Text = @"Pass";
+                item.ImageIndex = 0;
+                item.SubItems[2].Text = string.Empty;
+            }
+            else
+            {
+                var ex = testRunHelper.Exception;
+                item.Text = @"Fail";
+                item.ImageIndex = 1;
+                item.SubItems[2].Text = string.Format(CultureInfo.CurrentUICulture, "{0} - {1}", ex.Source, ex.Message);
+            }
+            var entry = new ReportEntry
+            {
+                TestName = test.TestName,
+                Result = testPassed,
+                TestStartTime = testRunHelper.StartTime,
+                TestStopTime = testRunHelper.StopTime
+            };
+            _reportBuilder.AddEntry(entry);
+
+            if (tspProgress.Value == tspProgress.Maximum)
+            {
+                ShowIdleStatus();
+                ResetProgressCounter();
+                EnableOrDisableTestMenus(true);
+            }
+        }
+
+        private void TestRunWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (_formClosing)
+                return;
+            if (tspProgress.Value < tspProgress.Maximum)
+                tspProgress.Increment(e.ProgressPercentage);
+            else
+                tspProgress.Value = tspProgress.Minimum;
+            tslStatus.Text = string.Format( "Running Test {0} of {1} ...",(int)(tspProgress.Value/2),(int)(tspProgress.Maximum/2));
+
+        }
+
+        private void TestRunWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var worker = sender as BackgroundWorker;
+            var listViewItem = e.Argument as ListViewItem;
+            TestRunHelper testRunHelper = null;
+            if (listViewItem != null)
+            {
+                var test = listViewItem.Tag as Test;
+                testRunHelper = new TestRunHelper { ListViewItem = listViewItem };
+                worker.ReportProgress(1, test.TestName);
+                if (_formClosing)
+                    return;
+
+                try
+                {
+                    testRunHelper.StartTime = DateTime.Now;
+                    if (test != null) 
+                        test.Run();
+                }
+                catch (Exception exception)
+                {
+                    testRunHelper.StopTime = DateTime.Now;
+                    testRunHelper.Exception = exception;
+                }
+                worker.ReportProgress(1, test.TestName);
+            }
+            e.Result = testRunHelper;
         }
 
         private void txtTestName_TextChanged(object sender, EventArgs e)
@@ -712,6 +796,14 @@ namespace TestConfiguration.Forms
                     _listViewItemSorter.SortOrder = SortOrder.Ascending;
             }
             lvwListOfTest.Sort();
+        }
+
+        public class TestRunHelper
+        {
+            public ListViewItem ListViewItem { get; set; }
+            public DateTime StartTime { get; set; }
+            public DateTime StopTime { get; set; }
+            public Exception Exception { get; set; }
         }
     }
 }
