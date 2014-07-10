@@ -82,7 +82,7 @@ namespace TestConfiguration.Forms
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(158, 29);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Version 0.03";
+            this.label2.Text = "Version 0.04";
             // 
             // OkButton
             // 
