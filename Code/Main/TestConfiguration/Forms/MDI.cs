@@ -59,9 +59,19 @@ namespace TestConfiguration.Forms
             editor.Show();
         }  
       
-        private void LaunchNewTestEditor(ConfigurationTestSuite testSuite)
+        private void LaunchNewTestEditor(ConfigurationTestSuite testSuite, string fileName)
         {
             if (testSuite == null) return;
+
+            testSuite.FileName = fileName;
+
+            var editor = new TestEditor(testSuite) { MdiParent = this };
+            editor.Show();
+        }
+
+        private void LaunchNewTestEditor(ConfigurationTestSuite testSuite)
+        {
+            if (testSuite == null) return;            
 
             var editor = new TestEditor(testSuite) { MdiParent = this };
             editor.Show();
@@ -79,7 +89,7 @@ namespace TestConfiguration.Forms
                     }
 
                     var testSuite = GetConfigurationSuiteFromFile(dialog.FileName);
-                    LaunchNewTestEditor(testSuite);
+                    LaunchNewTestEditor(testSuite, dialog.FileName);
                 };
 
                 dialog.ShowDialog();

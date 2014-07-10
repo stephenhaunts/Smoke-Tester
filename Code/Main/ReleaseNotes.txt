@@ -6,6 +6,7 @@ Version 0.04
 [X] - Console app test runner now return a correct exit code. 0 for success and 1 for failure.
 [X] - Add an Enabled flag to the test base class.
 [X] - Wire in the enabled flag to the test runner in the UI and Command Line App. 
+[X] - Fixed bug where the save button on the TestEditor would always ask for a filename when it should just overwrite the existing file.
 
 
 Version 0.03

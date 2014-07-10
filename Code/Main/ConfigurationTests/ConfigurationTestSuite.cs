@@ -29,6 +29,8 @@ namespace ConfigurationTests
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public string FileName { get; set; }
+
         private List<Test> tests;
         public List<Test> Tests
         {

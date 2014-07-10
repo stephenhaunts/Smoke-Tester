@@ -64,6 +64,7 @@ namespace TestConfiguration.Forms
             : this()
         {
             _configurationTestSuite = configurationTestSuite;
+            _filename = configurationTestSuite.FileName;
         }
 
         public TestEditor(bool fromTemplate)
