@@ -25,7 +25,9 @@ namespace ConfigurationTests.Tests
     [DefaultProperty("TestName")]   
     public abstract class Test
     {
+        
         public abstract void Run();
+        private bool _enabled = true;
 
         public abstract List<Test> CreateExamples();
 
@@ -34,6 +36,13 @@ namespace ConfigurationTests.Tests
         [Category("Common Test Properties")]
         public string TestName { get; set; }
 
+        [MandatoryField]
+        [Description("Name of test")]
+        [Category("Common Test Properties")]
+        public bool Enabled {
+            get { return _enabled; }
+            set { _enabled = value;  }
+        }
         public override string ToString()
         {
             return string.Format("{0}: {1}", GetType().Name, TestName);
