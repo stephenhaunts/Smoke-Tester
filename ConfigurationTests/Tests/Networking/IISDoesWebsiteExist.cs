@@ -26,6 +26,10 @@ using ConfigurationTests.Attributes;
 
 namespace ConfigurationTests.Tests
 {
+    //
+    // For this test to work you need the ADSI provider and IIS6 metabase compatibility.
+    // See http://www.activexperts.com/support/activmonitor/online/ii6metabase/
+    //
     [TestCategory(Enums.TestCategory.Networking)]
     public class IISDoesWebsiteExist : Test
     {

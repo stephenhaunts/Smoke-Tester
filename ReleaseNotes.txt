@@ -4,6 +4,7 @@ Version 0.04
 [X] - Tests now run in a separate thread in the test runner, so that the UI thread is not blocked.
 [X] - Fixed bug were if you click the remove all tests button you were not prompted first.
 [X] - Console app test runner now return a correct exit code. 0 for success and 1 for failure.
+[X] - Add an Enabled flag to the test base class. 
 
 
 Version 0.03
