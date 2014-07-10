@@ -123,6 +123,7 @@ namespace ConfigurationTests.Tests
             foreach (XmlNode n in doc.ChildNodes)
             {
                 var nodePath = string.Format("{0}/{1}", path, n.Name);
+
                 if (nodePath.EndsWith(xmlPath))
                 {
                     result.Add(n);
@@ -139,14 +140,20 @@ namespace ConfigurationTests.Tests
 
         private int GetMatchingAttributesCount(XmlNode node)
         {
+            int count = 0;
+
             if (node.Attributes != null)
             {
-                return
-                    ExpectedValues.Count(
-                        expectedValue => node.Attributes.GetNamedItem(expectedValue.Name).Value == expectedValue.Value);
+                foreach (var expectedValue in ExpectedValues)
+                {
+                    var attribute = node.Attributes.GetNamedItem(expectedValue.Name);
+
+                    if (attribute != null && attribute.Value == expectedValue.Value)
+                        count++;
+                }
             }
 
-            return 0;
+            return count;
         }
                 
         [DefaultProperty("Name")]
