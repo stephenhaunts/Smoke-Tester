@@ -50,6 +50,19 @@ namespace ConfigurationTestUnitTests
         }
 
         [TestMethod]
+        public void XmlElementTestReadValueFromElementsWithDifferentAttributesTest()
+        {
+            string location = Assembly.GetExecutingAssembly().Location;
+
+            _XMLElementTest.Path = Path.GetDirectoryName(location);
+            _XMLElementTest.Filename = string.Format("{0}.config", Path.GetFileName(location));
+            _XMLElementTest.XmlPath = "/system.serviceModel/bindings/basicHttpBinding/binding";
+            _XMLElementTest.ExpectedValues.Add(new XMLElementTest.Attribute { Name = "name", Value = "BasicHttpBinding_ILoggingService" });
+            _XMLElementTest.ExpectedValues.Add(new XMLElementTest.Attribute { Name = "closeTimeout", Value = "00:01:00" });
+            _XMLElementTest.Run();
+        }
+
+        [TestMethod]
         public void XmlElementTestOneInstanceTest()
         {
             string location = Assembly.GetExecutingAssembly().Location;
