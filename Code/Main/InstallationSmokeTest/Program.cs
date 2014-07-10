@@ -314,7 +314,11 @@ namespace InstallationSmokeTest
 
             try
             {
-                test.Run();
+                if (test.Enabled)
+                {
+                    test.Run();
+                }
+
                 stopTime = DateTime.Now;
 
                 var entry = new ReportEntry

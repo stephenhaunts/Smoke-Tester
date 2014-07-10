@@ -300,7 +300,7 @@ namespace TestConfiguration.Forms
             var count = lvwListOfTest.Items.Count;
             EnableOrDisableTestMenus(false);
             foreach (ListViewItem item in lvwListOfTest.Items)
-            {
+            {                
                 RunTestAsync(count, item);                     
             }
         }
@@ -579,6 +579,7 @@ namespace TestConfiguration.Forms
             var testRunHelper = e.Result as TestRunHelper;
             var item = testRunHelper.ListViewItem;
             var test = item.Tag as Test;
+            
             var testPassed = (testRunHelper.Exception == null);
             if (testPassed)
             {
@@ -593,6 +594,13 @@ namespace TestConfiguration.Forms
                 item.ImageIndex = 1;
                 item.SubItems[2].Text = string.Format(CultureInfo.CurrentUICulture, "{0} - {1}", ex.Source, ex.Message);
             }
+            if (!test.Enabled)
+            {
+                item.Text = @"Disabled";
+                item.ImageIndex = 2;
+                item.SubItems[2].Text = string.Empty;
+            }
+
             var entry = new ReportEntry
             {
                 TestName = test.TestName,
@@ -638,8 +646,11 @@ namespace TestConfiguration.Forms
                 try
                 {
                     testRunHelper.StartTime = DateTime.Now;
-                    if (test != null) 
+                    if (test.Enabled)
+                    {
+                        Console.WriteLine(@"Test Executed : " + test.TestName);
                         test.Run();
+                    }
                 }
                 catch (Exception exception)
                 {
