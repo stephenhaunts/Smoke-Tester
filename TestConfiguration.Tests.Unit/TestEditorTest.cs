@@ -234,15 +234,15 @@ namespace TestConfiguration.Tests.Unit
             Assert.AreEqual(status, _testEditorAccessor.tslStatus.Text);
         }
 
-        [TestMethod]
-        [DeploymentItem("TestConfiguration.exe")]
-        public void RunTestFromListItemTest()
-        {
-            var item = TestUtil.ThreeListViewItems[0];
-            TestEditor_Accessor.RunTestFromListItem(item);
-            Assert.IsTrue(item.Text != string.Empty);
-            Assert.IsTrue(item.SubItems[2].Text != string.Empty);
-        }
+        //[TestMethod]
+        //[DeploymentItem("TestConfiguration.exe")]
+        //public void RunTestFromListItemTest()
+        //{
+        //    var item = TestUtil.ThreeListViewItems[0];
+        //    TestEditor_Accessor.RunTestFromListItem(item);
+        //    Assert.IsTrue(item.Text != string.Empty);
+        //    Assert.IsTrue(item.SubItems[2].Text != string.Empty);
+        //}
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]

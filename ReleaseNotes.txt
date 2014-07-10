@@ -1,3 +1,10 @@
+Version 0.04
+-------------
+
+[X] - Tests now run in a separate thread in the test runner, so that the UI thread is not blocked.
+[X] - Fixed bug were if you click the remove all tests button you were not prompted first.
+
+
 Version 0.03
 -------------
 
