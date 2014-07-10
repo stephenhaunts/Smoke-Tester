@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
-[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("0.4.0.0")]
+[assembly: AssemblyVersion("0.4.0.0")]
 [assembly: ComVisible(false)]
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ConfigurationTests.Tests.Unit")]
