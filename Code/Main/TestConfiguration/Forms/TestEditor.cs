@@ -218,6 +218,12 @@ namespace TestConfiguration.Forms
 
         private void RemoveAllTestsFromList()
         {
+            if (MessageBox.Show(@"Are you sure you want to remove all your tests?", @"Are you sure?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
             if (_configurationTestSuite == null)
             {
                 return;
