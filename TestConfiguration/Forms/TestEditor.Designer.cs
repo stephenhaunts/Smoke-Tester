@@ -586,7 +586,7 @@ namespace TestConfiguration.Forms
             // columnHeader1
             // 
             this.columnHeader1.Text = "Result";
-            this.columnHeader1.Width = 74;
+            this.columnHeader1.Width = 140;
             // 
             // columnHeader2
             // 
