@@ -281,13 +281,14 @@ namespace InstallationSmokeTest
                 DisplaySuccess("Smoke test passed successfully");
             }
 
-            Environment.ExitCode = failedTests;
-
-            if (Environment.UserInteractive && _outputFile == null)
+            if (failedTests > 0)
             {
-                Console.WriteLine("Press any key to continue . . .");
-                Console.ReadKey(true);
+                Environment.ExitCode = 1;
             }
+            else
+            {
+                Environment.ExitCode = 0;
+            }            
         }
 
         private static void WriteLine(string text = "", params object[] parameters)
