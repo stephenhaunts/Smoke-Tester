@@ -107,6 +107,7 @@
     <Compile Include="Tests\OS Tests\WindowsServiceExistsTest.cs" />
     <Compile Include="Tests\Assembly\SettingsClassTest.cs" />
     <Compile Include="Tests\Test.cs" />
+    <Compile Include="Tests\Xml\XMLDocumentTest.cs" />
     <Compile Include="Tests\Xml\XMLElementContentTest.cs" />
     <Compile Include="Tests\Xml\XMLElementTest.cs" />
     <Compile Include="Tests\Xml\XMLElementTestBase.cs" />
