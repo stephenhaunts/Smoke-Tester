@@ -214,6 +214,8 @@ namespace TestConfiguration.Forms
                 lstListOfTests.Items.RemoveAt(selectedIndices[i]);
                 lvwListOfTest.Items.RemoveAt(selectedIndices[i]);
             }
+
+            lvwListOfTest.SelectedItems.Clear();
         }
 
         private void RemoveAllTestsFromList()
@@ -485,9 +487,17 @@ namespace TestConfiguration.Forms
         {
             if (lvwListOfTest.SelectedIndices.Count > 0)
             {
-                var selectedItem = lvwListOfTest.SelectedItems[0];
-                var index = Convert.ToInt32(selectedItem.SubItems[selectedItem.SubItems.Count - 1].Text);
-                lstListOfTests.SelectedItem = lstListOfTests.Items[index];
+                try
+                {
+                    var selectedItem = lvwListOfTest.SelectedItems[0];
+                    var index = Convert.ToInt32(selectedItem.SubItems[selectedItem.SubItems.Count - 1].Text);
+
+                    lstListOfTests.SelectedItem = lstListOfTests.Items[index];
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    lstListOfTests.SelectedItem = lstListOfTests.Items[lstListOfTests.Items.Count-1];
+                }
             }
         }
 
