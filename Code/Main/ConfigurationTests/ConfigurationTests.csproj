@@ -64,6 +64,7 @@
     <Compile Include="Tests\Assembly\AssemblyVersionTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
     <Compile Include="Tests\AssertState.cs" />
+    <Compile Include="Tests\File System\FileListExistsTest.cs" />
     <Compile Include="Tests\Networking\IISDoesWebsiteExist.cs" />
     <Compile Include="Tests\Networking\PingTest.cs" />
     <Compile Include="Tests\Networking\IISVersionTest.cs" />
