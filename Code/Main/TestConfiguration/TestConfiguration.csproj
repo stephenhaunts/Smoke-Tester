@@ -98,6 +98,12 @@
     <Compile Include="Forms\ChecksumGenerator.Designer.cs">
       <DependentUpon>ChecksumGenerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FileListGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FileListGenerator.Designer.cs">
+      <DependentUpon>FileListGenerator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MDI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChecksumGenerator.resx">
       <DependentUpon>ChecksumGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FileListGenerator.resx">
+      <DependentUpon>FileListGenerator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Mdi.resx">
       <DependentUpon>MDI.cs</DependentUpon>

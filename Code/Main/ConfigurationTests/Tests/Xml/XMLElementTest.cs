@@ -39,48 +39,16 @@ namespace ConfigurationTests.Tests
             set { expectedValues = value; }
         }
 
-        public override List<Test> CreateExamples()
+        [DefaultProperty("Name")]
+        public class Attribute
         {
-            return new List<Test>
-                           {
-                               new XMLElementTest
-                                   {
-                                       TestName = "Example config expected value",
-                                       Path = @".",
-                                       Filename = "InstallationSmokeTest.exe.config",
-                                       XmlPath = "/appSettings/add",
-                                       ExpectedValues =
-                                           new List<Attribute>
-                                               {
-                                                   new Attribute {Name = "key", Value = "Setting"},
-                                                   new Attribute
-                                                       {
-                                                           Name = "value",
-                                                           Value = "SettingValue"
-                                                       }
-                                               }
-                                   },
-                               new XMLElementTest
-                                   {
-                                       TestName = "Example web.config expected value",
-                                       Path = @".",
-                                       Filename = "web.config",
-                                       XmlPath = "/appSettings/add",
-                                       ExpectedValues =
-                                           new List<Attribute>
-                                               {
-                                                   new Attribute {Name = "key", Value = "Setting"},
-                                                   new Attribute
-                                                       {
-                                                           Name = "value",
-                                                           Value = "SettingValue"
-                                                       }
-                                               },
-                                               MinimumOccurrences = 3
-                                   },
-                           };
-
-        }
+            public string Name { get; set; }
+            public string Value { get; set; }
+            public override string ToString()
+            {
+                return Name;
+            }
+        }    
 
         public override void Run()
         {
@@ -155,16 +123,49 @@ namespace ConfigurationTests.Tests
 
             return count;
         }
-                
-        [DefaultProperty("Name")]
-        public class Attribute
+
+        public override List<Test> CreateExamples()
         {
-            public string Name { get; set; }
-            public string Value { get; set; }
-            public override string ToString()
-            {
-                return Name;
-            }
-        }        
+            return new List<Test>
+                           {
+                               new XMLElementTest
+                                   {
+                                       TestName = "Example config expected value",
+                                       Path = @".",
+                                       Filename = "InstallationSmokeTest.exe.config",
+                                       XmlPath = "/appSettings/add",
+                                       ExpectedValues =
+                                           new List<Attribute>
+                                               {
+                                                   new Attribute {Name = "key", Value = "Setting"},
+                                                   new Attribute
+                                                       {
+                                                           Name = "value",
+                                                           Value = "SettingValue"
+                                                       }
+                                               }
+                                   },
+                               new XMLElementTest
+                                   {
+                                       TestName = "Example web.config expected value",
+                                       Path = @".",
+                                       Filename = "web.config",
+                                       XmlPath = "/appSettings/add",
+                                       ExpectedValues =
+                                           new List<Attribute>
+                                               {
+                                                   new Attribute {Name = "key", Value = "Setting"},
+                                                   new Attribute
+                                                       {
+                                                           Name = "value",
+                                                           Value = "SettingValue"
+                                                       }
+                                               },
+                                               MinimumOccurrences = 3
+                                   },
+                           };
+
+        }
+        
     }
 }
