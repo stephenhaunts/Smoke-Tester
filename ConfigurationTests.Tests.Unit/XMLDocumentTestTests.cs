@@ -1,7 +1,4 @@
-﻿using ConfigurationTests;
-using ConfigurationTests.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-/**
+﻿/**
 * Smoke Tester Tool : Post deployment smoke testing tool.
 * 
 * http://www.stephenhaunts.com
@@ -21,6 +18,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 */
 using System.IO;
 using System.Reflection;
+using ConfigurationTests;
+using ConfigurationTests.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ConfigurationTestUnitTests

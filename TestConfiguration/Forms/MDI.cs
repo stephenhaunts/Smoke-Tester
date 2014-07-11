@@ -185,5 +185,13 @@ namespace TestConfiguration.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
         }
+
+        private void generateFileListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var generateFileList = new FileListGenerator())
+            {
+                generateFileList.ShowDialog();
+            }
+        }
     }
 }
