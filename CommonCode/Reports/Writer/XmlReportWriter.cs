@@ -17,13 +17,11 @@
 * Curator: Stephen Haunts
 */
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Xml;
 using System.Xml.Linq;
 
-namespace CommonCode.ReportWriter.ReportTypes
+namespace CommonCode.Reports.Writer
 {
-    public class XmlReport : IReportType
+    public class XmlReportWriter : IReportWriter
    {
         public void WriteReport(string fileName, List<ReportEntry> reportEntries)
         {
@@ -31,25 +29,29 @@ namespace CommonCode.ReportWriter.ReportTypes
 
             var tests = new XElement("Tests");
 
-            root.Add(tests);            
+            root.Add(tests);
 
-            foreach (var entry in reportEntries)
+            foreach (var reportEntry in reportEntries)
             {
-                var test = new XElement("Test1");
-                var attribute = new XAttribute("TestName", entry.TestName);
-                var attribute2 = new XAttribute("Result", entry.Result);
-                var attribute3 = new XAttribute("StartTime", entry.TestStartTime);
-                var attribute4 = new XAttribute("StopTime", entry.TestStopTime);
-
+                var test = new XElement("Test");
+                var attribute = new XAttribute("TestName", reportEntry.TestName ?? string.Empty);
+                var attribute2 = new XAttribute("Result", reportEntry.Result);
+                var attribute3 = new XAttribute("StartTime", reportEntry.TestStartTime);
+                var attribute4 = new XAttribute("StopTime", reportEntry.TestStopTime);
                 test.Add(attribute);
                 test.Add(attribute2);
                 test.Add(attribute3);
                 test.Add(attribute4);
-
                 tests.Add(test);
-            }                        
-           
+            }
+
             root.Save(fileName);
+        }
+        public string Extension { get { return "xml"; } }
+        public string Code { get { return "RunWithXmlReport"; } }
+        public override string ToString()
+        {
+            return "Xml Report";
         }
     }
 }
