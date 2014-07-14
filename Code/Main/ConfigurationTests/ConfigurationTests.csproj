@@ -61,6 +61,7 @@
     <Compile Include="Enums\TestCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Assembly\AppSettingTest.cs" />
+    <Compile Include="Tests\Assembly\AssemblyListVersionTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyVersionTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyRegistrationTest.cs" />
     <Compile Include="Tests\AssertState.cs" />

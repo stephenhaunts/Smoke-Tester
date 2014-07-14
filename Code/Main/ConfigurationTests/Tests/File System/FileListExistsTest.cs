@@ -43,7 +43,6 @@ namespace ConfigurationTests.Tests
 
         private string FullFilePath(string file)
         {
-
             return System.IO.Path.Combine(Path, file);            
         }
 
