@@ -9,7 +9,8 @@ Version 0.04
 [X] - Fixed bug where the save button on the TestEditor would always ask for a filename when it should just overwrite the existing file.
 [X] - Added an XmlDocumentTest which allows you to do an XPath query over an XML Document.
 [X] - Add tool to the User Interface to allow you to generate a list of files to be used in a FileListExistsTest.
-[X] - Added a new test that allows you to check for the existence of a list of file.
+[X] - Added a new test that allows you to check for the existence of a list of files.
+[X] - Added a new test that allows you to check the assemblies file numbers for a list of assemblies.
 
 Version 0.03
 -------------
