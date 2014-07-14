@@ -23,20 +23,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Common.Xml;
-using CommonCode.ReportWriter;
+using CommonCode.Reports;
 using ConfigurationTests;
 using ConfigurationTests.Tests;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace InstallationSmokeTest
 {
     internal class Program
     {
         private const string RunOperation = "Run";
-        private const string RunOperationWithXmlReport = "RunWithXmlReport";
-        private const string RunOperationWithCsvReport = "RunWithCsvReport";
-        private const string RunOperationWithTxtReport = "RunWithTxtReport";
-
         private const string CreateOperation = "Create";
         private const string AbortOperation = "Abort";
         private const string UnexpectedResponseMessage = "Unexpected response.";
@@ -46,23 +43,19 @@ namespace InstallationSmokeTest
         private const string SmokeTestFileExtension = ".xml";
         private const string StandardNumberFormat = "#,##0";
 
-        private enum RunMode
-        {
-            None = 0,            
-            RunWithXmlReport = 1,
-            RunWithCsvReport = 2,
-            RunWithTxtReport = 3
-        }
 
         private static string _outputFile;
 
-        private static readonly ReportBuilder ReportBuilder = new ReportBuilder();
+        private static List<ReportEntry> _reportEntries;
 
         internal static bool SmokeTestsPassed { get; private set; }
 
         internal static void Main(string[] args)
         {
             SmokeTestsPassed = false;
+            _reportEntries = new List<ReportEntry>();
+            var reportWriters = ReportHelper.GetReportWriters();
+            var reportWriterConsoleCodes = reportWriters.Select(r => r.Code);
             var runWithUi = true;
 
             try
@@ -91,27 +84,18 @@ namespace InstallationSmokeTest
                 {
                     file += SmokeTestFileExtension;
                 }
-
-                switch (operation)
+                if (operation == CreateOperation)
                 {
-                    case CreateOperation:
-                        CreateConfiguration(file);
-                        break;
-                    case RunOperation:
-                        CheckConfiguration(file, RunMode.None);
-                        break;
-                    case RunOperationWithCsvReport:
-                        CheckConfiguration(file, RunMode.RunWithCsvReport);
-                        break;
-                    case RunOperationWithXmlReport:
-                        CheckConfiguration(file, RunMode.RunWithXmlReport);
-                        break;
-                    case RunOperationWithTxtReport:
-                        CheckConfiguration(file, RunMode.RunWithTxtReport);
-                        break;                        
-                    default:
-                        DisplayUsageHelp();
-                        break;
+                    CreateConfiguration(file);
+                }
+                else if (reportWriterConsoleCodes.Contains(operation))
+                {
+                    var reportWriter = reportWriters.Where(r => r.Code == operation).First();
+                    CheckConfiguration(file, reportWriter);
+                }
+                else
+                {
+                    DisplayUsageHelp();
                 }
             }
             catch (Exception ex)
@@ -154,7 +138,7 @@ namespace InstallationSmokeTest
             Console.WriteLine();
             Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, CreateOperation);
             Console.WriteLine("\tCreate a new XML file with examples of the usage.");
-            Console.WriteLine();           
+            Console.WriteLine();
             Console.WriteLine("\tThe default mode is Run.");
             Console.WriteLine("\tIf the filename does not end with .xml then .xml will be appended.");
             Console.WriteLine("\tIf the filename is omitted, you will be prompted for it.");
@@ -195,7 +179,7 @@ namespace InstallationSmokeTest
             }
         }
 
-        private static void CheckConfiguration(string file, RunMode mode)
+        private static void CheckConfiguration(string file, IReportWriter reportWriter)
         {
             if (!File.Exists(file))
             {
@@ -227,7 +211,7 @@ namespace InstallationSmokeTest
             WriteLine("Running Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
             WriteLine();
 
-            ReportBuilder.ClearEntries();
+            _reportEntries.Clear();
             var successfulTests = info.Tests.Select(RunTest).Count(result => result);
 
             var reportPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestReport";
@@ -236,28 +220,11 @@ namespace InstallationSmokeTest
                 Directory.CreateDirectory(reportPath);
             }
 
-            var fileFriendlyDate =
-                    DateTime.Now.ToString(CultureInfo.InvariantCulture)
-                        .Replace("/", "")
-                        .Replace(" ", "-")
-                        .Replace(":", "");
+            var fileFriendlyDate = DateTime.Now.ToString("ddMMyyyy-hhmm", CultureInfo.InvariantCulture);
 
-            string fileName;
-            switch (mode)
-            {
-                case RunMode.RunWithCsvReport:
-                    fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".csv";
-                    ReportBuilder.WriteReport(fileName, ReportType.CsvReport);
-                    break;
-                case RunMode.RunWithXmlReport:
-                    fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".xml";
-                    ReportBuilder.WriteReport(fileName, ReportType.XmlReport);
-                    break;
-                case RunMode.RunWithTxtReport:
-                    fileName = Path.GetFullPath(reportPath + @"\" + fileFriendlyDate) + ".txt";
-                    ReportBuilder.WriteReport(fileName, ReportType.TextReport);
-                    break;
-            }
+            var path = Path.Combine(reportPath, ReportHelper.GetReportFileName(reportWriter.Extension));
+            reportWriter.WriteReport(path, _reportEntries.ToList());
+
 
             WriteLine();
             WriteLine("Completed Tests: " + DateTime.Now.ToString("G", CultureInfo.CurrentCulture));
@@ -288,7 +255,7 @@ namespace InstallationSmokeTest
             else
             {
                 Environment.ExitCode = 0;
-            }            
+            }
         }
 
         private static void WriteLine(string text = "", params object[] parameters)
@@ -299,7 +266,7 @@ namespace InstallationSmokeTest
             }
             else
             {
-                File.AppendAllLines(_outputFile, new[] {string.Format(text, parameters)});
+                File.AppendAllLines(_outputFile, new[] { string.Format(text, parameters) });
             }
         }
 
@@ -329,11 +296,11 @@ namespace InstallationSmokeTest
                     TestStopTime = stopTime
                 };
 
-                ReportBuilder.AddEntry(entry);
+                _reportEntries.Add(entry);
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 WriteLine("\t\t{0}", TestPassedMessage);
-                
+
                 return true;
             }
             catch (Exception ex)
@@ -353,7 +320,7 @@ namespace InstallationSmokeTest
                     TestStopTime = stopTime
                 };
 
-                ReportBuilder.AddEntry(entry);
+                _reportEntries.Add(entry);
 
                 return false;
             }
@@ -374,7 +341,7 @@ namespace InstallationSmokeTest
                 })
                     .Where(f => f.ToUpper() != AbortOperation.ToUpper())
                     .ToArray();
-            ChooseFile:
+        ChooseFile:
 
             PresentSelectionOptions(suites, AbortOperation);
             var input = GetInput().Trim();

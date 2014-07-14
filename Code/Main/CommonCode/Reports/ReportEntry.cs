@@ -18,7 +18,7 @@
 */
 using System;
 
-namespace CommonCode.ReportWriter
+namespace CommonCode.Reports
 {
     public sealed class ReportEntry
     {

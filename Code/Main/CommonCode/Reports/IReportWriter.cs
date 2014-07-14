@@ -16,13 +16,16 @@
 * 
 * Curator: Stephen Haunts
 */
-
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace CommonCode.ReportWriter.ReportTypes
+namespace CommonCode.Reports
 {
-    public interface IReportType
+    public interface IReportWriter
     {
         void WriteReport(string fileName, List<ReportEntry> reportEntries);
+        string Extension { get; }
+        string Code { get; }
     }
 }

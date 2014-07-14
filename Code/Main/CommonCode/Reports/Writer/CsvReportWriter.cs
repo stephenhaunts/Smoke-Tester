@@ -16,15 +16,14 @@
 * 
 * Curator: Stephen Haunts
 */
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CommonCode.ReportWriter.ReportTypes
+namespace CommonCode.Reports.Writer
 {
-   public class CsvReport : IReportType
+   public class CsvReportWriter : IReportWriter
    {
         public void WriteReport(string fileName, List<ReportEntry> reportEntries)
         {
@@ -43,12 +42,20 @@ namespace CommonCode.ReportWriter.ReportTypes
 
             foreach (var entry in reportEntries)
             {
-                csvReport.AppendLine(entry.TestName + "," + entry.Result + "," + entry.TestStartTime + "," + entry.TestStopTime + "," + entry.ErrorMessage);
+                csvReport.AppendLine(string.Format("{0},{1},{2},{3},{4}", entry.TestName, entry.Result, entry.TestStartTime, entry.TestStopTime, entry.ErrorMessage));
             }
 
-            var file = new StreamWriter(fileName);
-            file.WriteLine(csvReport.ToString());
-            file.Close();
+            using (var file = new StreamWriter(fileName))
+            {
+                file.WriteLine(csvReport.ToString());
+                file.Close();
+            }
+        }
+        public string Extension { get { return "csv"; } }
+        public string Code { get { return "RunWithCsvReport"; } }
+        public override string ToString()
+        {
+            return "Csv Report";
         }
     }
 }

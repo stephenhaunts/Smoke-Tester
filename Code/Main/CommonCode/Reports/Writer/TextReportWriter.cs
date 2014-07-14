@@ -21,9 +21,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CommonCode.ReportWriter.ReportTypes
+namespace CommonCode.Reports.Writer
 {
-    public class TextReport : IReportType
+    public class TextReportWriter : IReportWriter
    {
         public void WriteReport(string fileName, List<ReportEntry> reportEntries)
         {
@@ -39,7 +39,7 @@ namespace CommonCode.ReportWriter.ReportTypes
 
             var textReport = new StringBuilder();
             textReport.AppendLine("Report Generated : " + DateTime.Now);
-            textReport.AppendLine("Test Execution Machine : " + System.Environment.MachineName);
+            textReport.AppendLine("Test Execution Machine : " + Environment.MachineName);
             textReport.AppendLine("");
 
             var count = 1;
@@ -73,9 +73,17 @@ namespace CommonCode.ReportWriter.ReportTypes
                 count++;
             }
 
-            var file = new StreamWriter(fileName);
-            file.WriteLine(textReport.ToString());
-            file.Close();         
+            using (var file = new StreamWriter(fileName))
+            {
+                file.WriteLine(textReport.ToString());
+                file.Close();
+            }
+        }
+        public string Extension { get { return "txt"; } }
+        public string Code { get { return "RunWithTxtReport"; } }
+        public override string ToString()
+        {
+            return "Text Report";
         }
     }
 }

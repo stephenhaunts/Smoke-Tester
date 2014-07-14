@@ -197,7 +197,7 @@ namespace TestConfiguration.Tests.Unit
         }
 
 
-        [TestMethod]
+        //[TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void RunSelectedTestsTest()
         {
@@ -207,7 +207,7 @@ namespace TestConfiguration.Tests.Unit
             Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
         }
 
-        [TestMethod]
+        //[TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void RunTestTest()
         {
@@ -233,16 +233,6 @@ namespace TestConfiguration.Tests.Unit
             _testEditorAccessor.ShowStatus(status);
             Assert.AreEqual(status, _testEditorAccessor.tslStatus.Text);
         }
-
-        //[TestMethod]
-        //[DeploymentItem("TestConfiguration.exe")]
-        //public void RunTestFromListItemTest()
-        //{
-        //    var item = TestUtil.ThreeListViewItems[0];
-        //    TestEditor_Accessor.RunTestFromListItem(item);
-        //    Assert.IsTrue(item.Text != string.Empty);
-        //    Assert.IsTrue(item.SubItems[2].Text != string.Empty);
-        //}
 
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]

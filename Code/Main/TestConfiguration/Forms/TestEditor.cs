@@ -29,7 +29,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Common.Xml;
-using CommonCode.ReportWriter;
+using CommonCode.Reports;
 using ConfigurationTests;
 using ConfigurationTests.Attributes;
 using ConfigurationTests.Enums;
@@ -45,7 +45,7 @@ namespace TestConfiguration.Forms
             Down = 1
         }
 
-        private static ReportBuilder _reportBuilder;
+        private List<ReportEntry> _reportEntries;
         private ConfigurationTestSuite _configurationTestSuite;
         private string _filename;
         private ListViewItemSorter _listViewItemSorter;
@@ -54,7 +54,7 @@ namespace TestConfiguration.Forms
         public TestEditor()
         {
             InitializeComponent();
-            _reportBuilder = new ReportBuilder();
+            _reportEntries = new List<ReportEntry>();
                     _listViewItemSorter = new ListViewItemSorter();
                     lvwListOfTest.ListViewItemSorter = _listViewItemSorter;
             
@@ -297,7 +297,7 @@ namespace TestConfiguration.Forms
         private void RunTest()
         {
             SwitchToTestRunView();
-            _reportBuilder.ClearEntries();
+            _reportEntries.Clear();
             var count = lvwListOfTest.Items.Count;
             EnableOrDisableTestMenus(false);
             foreach (ListViewItem item in lvwListOfTest.Items)
@@ -351,7 +351,7 @@ namespace TestConfiguration.Forms
         private void RunSelectedTests(int[] selectedIndices)
         {
             SwitchToTestRunView();
-            _reportBuilder.ClearEntries();
+            _reportEntries.Clear();
             var count = selectedIndices.Length;
             EnableOrDisableTestMenus(false);
             for (var i = selectedIndices.GetLowerBound(0); i <= selectedIndices.GetUpperBound(0); i++)
@@ -533,7 +533,7 @@ namespace TestConfiguration.Forms
                 return;
             }
 
-            if (_reportBuilder.CountEnties == 0)
+            if (_reportEntries.Count() == 0)
             {
                 MessageBox.Show(@"You must run your test(s) before you can generate a report.", @"No test results to report.",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -541,7 +541,7 @@ namespace TestConfiguration.Forms
                 return;
             }
 
-            using (var reportWriter = new ReportWriter(_reportBuilder))
+            using (var reportWriter = new ReportWriter(_reportEntries))
             {
                 if (reportWriter.ShowDialog() == DialogResult.OK)
                 {
@@ -576,7 +576,6 @@ namespace TestConfiguration.Forms
         {
             if (_formClosing)
                 return;
-            var worker = sender as BackgroundWorker;
             var testRunHelper = e.Result as TestRunHelper;
             var item = testRunHelper.ListViewItem;
             var test = item.Tag as Test;
@@ -607,9 +606,10 @@ namespace TestConfiguration.Forms
                 TestName = test.TestName,
                 Result = testPassed,
                 TestStartTime = testRunHelper.StartTime,
-                TestStopTime = testRunHelper.StopTime
+                TestStopTime = testRunHelper.StopTime,
+                ErrorMessage = testPassed ? string.Empty : testRunHelper.Exception.Message
             };
-            _reportBuilder.AddEntry(entry);
+            _reportEntries.Add(entry);
 
             if (tspProgress.Value == tspProgress.Maximum)
             {
@@ -651,6 +651,7 @@ namespace TestConfiguration.Forms
                     {
                         Console.WriteLine(@"Test Executed : " + test.TestName);
                         test.Run();
+                        testRunHelper.StopTime = DateTime.Now;
                     }
                 }
                 catch (Exception exception)

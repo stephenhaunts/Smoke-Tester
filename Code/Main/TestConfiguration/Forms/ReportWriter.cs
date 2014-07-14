@@ -16,27 +16,22 @@
 * 
 * Curator: Stephen Haunts
 */
+
+using CommonCode.Reports;
 using System;
-using System.Globalization;
-using System.IO;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using CommonCode.ReportWriter;
+using System.Linq;
+using System.IO;
 
 namespace TestConfiguration.Forms
 {
     public partial class ReportWriter : Form
     {
-        private readonly ReportBuilder _builder;
-
-        public ReportWriter(ReportBuilder builder)
+        IEnumerable<ReportEntry> _reportEntries;
+        public ReportWriter(IEnumerable<ReportEntry> reportEntries)
         {
-            if (builder == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            _builder = builder;
-
+            _reportEntries = reportEntries ?? new List<ReportEntry>();
             InitializeComponent();
             okButton.Enabled = false;
         }
@@ -45,29 +40,9 @@ namespace TestConfiguration.Forms
         {
             try
             {
-                var fileFriendlyDate =
-                    DateTime.Now.ToString(CultureInfo.InvariantCulture)
-                        .Replace("/", "")
-                        .Replace(" ", "-")
-                        .Replace(":", "");
-
-                var fullFileName = Path.GetFullPath(fileName.Text + @"\" + fileFriendlyDate);
-
-                if (csvReport.Checked)
-                {
-                    fullFileName = Path.GetFullPath(fullFileName + ".csv");
-                    _builder.WriteReport(fullFileName, ReportType.CsvReport);
-                }
-                else if (xmlReport.Checked)
-                {
-                    fullFileName = Path.GetFullPath(fullFileName + ".xml");
-                    _builder.WriteReport(fullFileName, ReportType.XmlReport);
-                }
-                else if (textReport.Checked)
-                {
-                    fullFileName = Path.GetFullPath(fullFileName + ".txt");
-                    _builder.WriteReport(fullFileName, ReportType.TextReport);
-                }
+                var reportWriter = (IReportWriter)cmbReportWriters.SelectedItem;
+                var path = Path.Combine(fileName.Text, ReportHelper.GetReportFileName(reportWriter.Extension));
+                reportWriter.WriteReport(path, _reportEntries.ToList());
             }
             catch
             {
@@ -91,6 +66,16 @@ namespace TestConfiguration.Forms
         private void fileName_TextChanged(object sender, EventArgs e)
         {
             okButton.Enabled = !string.IsNullOrEmpty(fileName.Text);
+        }
+
+        private void ReportWriter_Load(object sender, EventArgs e)
+        {
+            var writerTypes = ReportHelper.GetReportWriters();
+            foreach (var writer in writerTypes)
+            {
+                cmbReportWriters.Items.Add(writer);
+            }
+            cmbReportWriters.SelectedIndex = 0;
         }
     }
 }
