@@ -100,18 +100,12 @@ namespace InstallationSmokeTest
             }
             catch (Exception ex)
             {
-                Environment.ExitCode = int.MaxValue;
+                Environment.ExitCode = 1;
 
                 if (Environment.UserInteractive)
                 {
                     WriteLine("Message:" + ex.Message);
-                    WriteLine("StackTrace: " + ex.StackTrace);
-
-                    if (runWithUi && _outputFile != null)
-                    {
-                        Console.Write("Press any key to end . . .");
-                        Console.ReadKey(true);
-                    }
+                    WriteLine("StackTrace: " + ex.StackTrace);                  
                 }
 
                 else throw;
@@ -135,6 +129,7 @@ namespace InstallationSmokeTest
             Console.WriteLine("\tRunWithXmlReport - run a test script and write xml test report.");
             Console.WriteLine("\tRunWithCsvReport - run a test script and write csv test report.");
             Console.WriteLine("\tRunWithTxtReport - run a test script and write text test report.");
+            Console.WriteLine("\tRunWithHtmReport - run a test script and write Html test report.");
             Console.WriteLine();
             Console.WriteLine("{0} {1} <filename> <outputfilename>", exeName, CreateOperation);
             Console.WriteLine("\tCreate a new XML file with examples of the usage.");
@@ -218,9 +213,7 @@ namespace InstallationSmokeTest
             if (!Directory.Exists(reportPath))
             {
                 Directory.CreateDirectory(reportPath);
-            }
-
-            var fileFriendlyDate = DateTime.Now.ToString("ddMMyyyy-hhmm", CultureInfo.InvariantCulture);
+            }            
 
             var path = Path.Combine(reportPath, ReportHelper.GetReportFileName(reportWriter.Extension));
             reportWriter.WriteReport(path, _reportEntries.ToList());

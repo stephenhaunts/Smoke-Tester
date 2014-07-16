@@ -16,10 +16,8 @@
 * 
 * Curator: Stephen Haunts
 */
-using CommonCode.Reports.Writer;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Globalization;
 
@@ -35,14 +33,14 @@ namespace CommonCode.Reports
 
         public static IEnumerable<IReportWriter> GetReportWriters()
         {
-            List<IReportWriter> writerTypes = new List<IReportWriter>();
+            var writerTypes = new List<IReportWriter>();
+
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                if (type.GetInterface("CommonCode.Reports.IReportWriter") != null)
-                {
-                    var reportWriter =(IReportWriter) Activator.CreateInstance(type);
-                    writerTypes.Add(reportWriter);
-                }
+                if (type.GetInterface("CommonCode.Reports.IReportWriter") == null) continue;
+
+                var reportWriter =(IReportWriter) Activator.CreateInstance(type);
+                writerTypes.Add(reportWriter);
             }
             return writerTypes;
         }
