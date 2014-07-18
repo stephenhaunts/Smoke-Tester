@@ -76,6 +76,9 @@ namespace TestConfiguration.Forms
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuRunSelectedTest = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRunAllTests = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCopyTest = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPasteTest = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
@@ -279,6 +282,7 @@ namespace TestConfiguration.Forms
             this.lstListOfTests.ItemHeight = 17;
             this.lstListOfTests.Location = new System.Drawing.Point(0, 79);
             this.lstListOfTests.Name = "lstListOfTests";
+            this.lstListOfTests.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstListOfTests.Size = new System.Drawing.Size(313, 293);
             this.lstListOfTests.TabIndex = 2;
             this.lstListOfTests.SelectedIndexChanged += new System.EventHandler(this.lstListOfTests_SelectedIndexChanged);
@@ -296,9 +300,12 @@ namespace TestConfiguration.Forms
             this.mnuMoveDown,
             this.toolStripMenuItem2,
             this.mnuRunSelectedTest,
-            this.mnuRunAllTests});
+            this.mnuRunAllTests,
+            this.toolStripMenuItem3,
+            this.mnuCopyTest,
+            this.mnuPasteTest});
             this.cntxtMain.Name = "cntxtMain";
-            this.cntxtMain.Size = new System.Drawing.Size(165, 176);
+            this.cntxtMain.Size = new System.Drawing.Size(165, 226);
             this.cntxtMain.Opening += new System.ComponentModel.CancelEventHandler(this.cntxtMain_Opening);
             // 
             // mnuShowTest
@@ -372,6 +379,25 @@ namespace TestConfiguration.Forms
             this.mnuRunAllTests.Text = "Run All";
             this.mnuRunAllTests.Click += new System.EventHandler(this.mnuRunAllTests_Click);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(161, 6);
+            // 
+            // mnuCopyTest
+            // 
+            this.mnuCopyTest.Name = "mnuCopyTest";
+            this.mnuCopyTest.Size = new System.Drawing.Size(164, 22);
+            this.mnuCopyTest.Text = "Copy Test";
+            this.mnuCopyTest.Click += new System.EventHandler(this.mnuCopyTest_Click);
+            // 
+            // mnuPasteTest
+            // 
+            this.mnuPasteTest.Name = "mnuPasteTest";
+            this.mnuPasteTest.Size = new System.Drawing.Size(164, 22);
+            this.mnuPasteTest.Text = "Paste Test";
+            this.mnuPasteTest.Click += new System.EventHandler(this.mnuPasteTest_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -400,7 +426,7 @@ namespace TestConfiguration.Forms
             this.btnMoveDown.BackgroundImage = global::TestConfiguration.Properties.Resources._15;
             this.btnMoveDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnMoveDown.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnMoveDown.Location = new System.Drawing.Point(319, 167);
+            this.btnMoveDown.Location = new System.Drawing.Point(319, 166);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(35, 32);
             this.btnMoveDown.TabIndex = 7;
@@ -815,5 +841,8 @@ namespace TestConfiguration.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuShowTest;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripProgressBar tspProgress;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopyTest;
+        private System.Windows.Forms.ToolStripMenuItem mnuPasteTest;
     }
 }
