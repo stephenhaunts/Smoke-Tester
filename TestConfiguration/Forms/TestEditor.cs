@@ -34,6 +34,7 @@ using ConfigurationTests;
 using ConfigurationTests.Attributes;
 using ConfigurationTests.Enums;
 using ConfigurationTests.Tests;
+using CommonCode;
 
 namespace TestConfiguration.Forms
 {
@@ -50,6 +51,7 @@ namespace TestConfiguration.Forms
         private string _filename;
         private ListViewItemSorter _listViewItemSorter;
         private bool _formClosing;
+        private static List<Test> _copiedTests;
 
         public TestEditor()
         {
@@ -76,8 +78,8 @@ namespace TestConfiguration.Forms
 
         private static IEnumerable<Type> GetTestTypes()
         {
-            IEnumerable<Type> testsTypes = typeof (Test).Assembly.GetTypes()
-                .Where(type => type.IsSubclassOf(typeof (Test)) && !type.IsAbstract);
+            IEnumerable<Type> testsTypes = typeof(Test).Assembly.GetTypes()
+                .Where(type => type.IsSubclassOf(typeof(Test)) && !type.IsAbstract);
 
             return testsTypes;
         }
@@ -180,6 +182,7 @@ namespace TestConfiguration.Forms
             listViewItem.SubItems.Add(lstListOfTests.Items.IndexOf(test).ToString());
             lvwListOfTest.Items.Add(listViewItem);
 
+            lstListOfTests.SelectedItem = null;
             lstListOfTests.SelectedItem = test;
             pgTestConfiguration.SelectedObject = test;
 
@@ -568,7 +571,6 @@ namespace TestConfiguration.Forms
         {
             var senderType = ((ToolStripItem)sender).Tag as Type;
             var test = Activator.CreateInstance(senderType) as Test;
-
             AddTestToList(test);
         }
 
@@ -767,6 +769,34 @@ namespace TestConfiguration.Forms
             SaveNewTestFile();
         }
 
+        private void mnuCopyTest_Click(object sender, EventArgs e)
+        {
+            if (_copiedTests == null)
+                _copiedTests = new List<Test>();
+            else
+                _copiedTests.Clear();
+
+            var caller = (sender as ToolStripMenuItem).Owner as ContextMenuStrip;
+            var listBox = caller.SourceControl as ListBox;
+            var listView = caller.SourceControl as ListView;
+            if (listBox != null)
+                foreach (var item in listBox.SelectedItems)
+                    _copiedTests.Add((item as Test).Copy());
+
+            if (listView != null)
+                foreach (ListViewItem item in lvwListOfTest.SelectedItems)
+                    _copiedTests.Add((item.Tag as Test).Copy());
+
+        }
+
+        private void mnuPasteTest_Click(object sender, EventArgs e)
+        {
+            if (_copiedTests == null)
+                return;
+            foreach (var test in _copiedTests)
+                AddTestToList(test);
+        }
+
         private void tsbWriteTestReport2_Click(object sender, EventArgs e)
         {
             GenerateReport();
@@ -791,9 +821,9 @@ namespace TestConfiguration.Forms
 
         private void cntxtMain_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var x = sender as ContextMenuStrip;
-            var listBox = x.SourceControl as ListBox;
-            var listView = x.SourceControl as ListView;
+            var caller = sender as ContextMenuStrip;
+            var listBox = caller.SourceControl as ListBox;
+            var listView = caller.SourceControl as ListView;
             if (listBox != null)
             {
                 mnuShowTest.Text = "Show Test Run";
@@ -834,5 +864,7 @@ namespace TestConfiguration.Forms
             public DateTime StopTime { get; set; }
             public Exception Exception { get; set; }
         }
+
+
     }
 }

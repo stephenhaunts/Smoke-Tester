@@ -172,51 +172,6 @@ namespace TestConfiguration.Tests.Unit
             Assert.AreEqual("FileExistTest", (_testEditorAccessor.lstListOfTests.Items[1] as Test).TestName);
         }
 
-        //[TestMethod]
-        //[DeploymentItem("TestConfiguration.exe")]
-        //public void RemoveAllTestsFromListTest()
-        //{
-        //    _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-        //    _testEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
-        //    _testEditorAccessor._configurationTestSuite = TestUtil.ConfigurationTestSuiteWithThreeTests;
-        //    _testEditorAccessor.RemoveAllTestsFromList();
-        //    Assert.AreEqual(0, _testEditorAccessor.lvwListOfTest.Items.Count);
-        //    Assert.AreEqual(0, _testEditorAccessor.lstListOfTests.Items.Count);
-        //}
-
-        //[TestMethod]
-        //[DeploymentItem("TestConfiguration.exe")]
-        //public void RemoveTestsFromListTest()
-        //{
-        //    _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-        //    _testEditorAccessor.lstListOfTests.Items.AddRange(TestUtil.ThreeTestObjects);
-        //    int[] selectedIndices = new int[] { 1 };
-        //    _testEditorAccessor.RemoveTestsFromList(selectedIndices);
-        //    Assert.AreEqual(2, _testEditorAccessor.lvwListOfTest.Items.Count);
-        //    Assert.AreEqual(2, _testEditorAccessor.lstListOfTests.Items.Count);
-        //}
-
-
-        //[TestMethod]
-        [DeploymentItem("TestConfiguration.exe")]
-        public void RunSelectedTestsTest()
-        {
-            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            int[] selectedIndices = new int[]{1};
-            _testEditorAccessor.RunSelectedTests(selectedIndices);
-            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
-        }
-
-        //[TestMethod]
-        [DeploymentItem("TestConfiguration.exe")]
-        public void RunTestTest()
-        {
-            _testEditorAccessor.lvwListOfTest.Items.AddRange(TestUtil.ThreeListViewItems);
-            _testEditorAccessor.RunTest();
-            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[0].Text != string.Empty);
-            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[1].Text != string.Empty);
-            Assert.IsTrue(_testEditorAccessor.lvwListOfTest.Items[2].Text != string.Empty);
-        }
         [TestMethod]
         [DeploymentItem("TestConfiguration.exe")]
         public void ShowIdleStatusTest()

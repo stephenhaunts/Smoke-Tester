@@ -62,6 +62,7 @@
     <Compile Include="AppSettingTestTests.cs" />
     <Compile Include="AssemblyRegistrationTestTests.cs" />
     <Compile Include="CertificateExistsTestTests.cs" />
+    <Compile Include="ExensionsTest.cs" />
     <Compile Include="XMLDocumentTestTests.cs" />
     <Compile Include="CreateAndLoadExamplesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

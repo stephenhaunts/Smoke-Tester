@@ -121,7 +121,7 @@
   <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAH
-        ygAAB8oBq+s8uQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAcdEVYdFNvdXJj
+        xwAAB8cBottRKgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAcdEVYdFNvdXJj
         ZQBPcGVuIENsaXAgQXJ0IExpYnJhcnmYx0j3AAAMpklEQVR4XuWbCXRU1RnHZ0ky2ci+kI1JZpKQIRug
         yCZuiAVBCxWXWqEoUUGlFbRarZ56FBVFRcStQaFarYqIC4uCS7W1PdqjrbX2dLPaxS4uJCEsIZDk6/9/
         5w7kzrw3WYiQxHvOD+a8udt3v+/9373zvjgOZ9me6yWxYCp4BnwMPgJPgpNADNC1B1mhYdrA+eDvoAOI
@@ -178,5 +178,19 @@
         48nnXIDId/xfHd7jAjwAIjO8Bj/MN1zGBTga/E5f/CpB8a/kAnAjxL/R+xMwMz4GJ7TxfcCXPU4uAGGS
         Ed+k8C82/wu4U2Ji8mCCNv0b8G+TxwPX9lyv4/9o46ZOgkEcvgAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>OPEN SOURCE RELEASE -                   
+    Stephen Haunts  
+                              
+ORIGINAL AUTHOR - 
+    Hugh Phoenix-Hulme
+
+CONTRIBUTERS -
+    Stephen Haunts             
+    Jon-Paul Flood
+    Daniel Steele                 
+    Oliver Sintim-Aboagye
+    Mark Jones</value>
   </data>
 </root>

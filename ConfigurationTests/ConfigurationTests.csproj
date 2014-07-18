@@ -59,6 +59,7 @@
     <Compile Include="Attributes\TestCategoryAttribute.cs" />
     <Compile Include="ConfigurationTestSuite.cs" />
     <Compile Include="Enums\TestCategory.cs" />
+    <Compile Include="Exensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Assembly\AppSettingTest.cs" />
     <Compile Include="Tests\Assembly\AssemblyListVersionTest.cs" />
