@@ -70,6 +70,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Traffic Lights.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -232,6 +235,7 @@
     <None Include="Resources\07.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Traffic Lights.ico" />
     <None Include="Icons\Report.png" />
     <Content Include="Icons\Traffic Lights 16x16.ico" />
     <Content Include="Icons\Traffic Lights.ico" />

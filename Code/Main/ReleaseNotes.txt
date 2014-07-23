@@ -12,6 +12,8 @@ Version 0.04
 [X] - Add tool to the User Interface to allow you to generate a list of files to be used in a FileListExistsTest.
 [X] - Added a new test that allows you to check for the existence of a list of files.
 [X] - Added a new test that allows you to check the assemblies file numbers for a list of assemblies.
+[X] - Added Copy & Paste feature; copy and paste test within and across TestEditor windows.
+[X] - Minor layout adjustment on About dialog
 
 Version 0.03
 -------------
