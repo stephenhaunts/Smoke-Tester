@@ -14,6 +14,7 @@ Version 0.04
 [X] - Added a new test that allows you to check the assemblies file numbers for a list of assemblies.
 [X] - Added Copy & Paste feature; copy and paste test within and across TestEditor windows.
 [X] - Minor layout adjustment on About dialog
+[X] - Added a new HTML report type.
 
 Version 0.03
 -------------
