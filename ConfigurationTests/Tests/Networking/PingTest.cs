@@ -120,7 +120,7 @@ namespace ConfigurationTests.Tests
         {
            return new List<Test>
             {
-                new IISInstalledTest(){ShouldExist = true, TestName = "Check that the IIS Webserver is intalled."}
+                new PingTest(){ShouldExist = true, HostName = "remoteserver1", TestName = "Check that the remote server is reachable."}
             };
         }
     }
